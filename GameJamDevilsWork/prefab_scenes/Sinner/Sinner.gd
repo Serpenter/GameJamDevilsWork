@@ -123,18 +123,23 @@ func _process(delta):
         return
         
     var target_vector = path[0] - get_global_position()
-    var move_vector = min (target_vector.normalized() * move_speed * delta, target_vector)
-    move_and_collide(move_vector)
+        
+    if target_vector.length() < needed_point_proximity:
+        path.remove(0)
     
-    
-
-    if move_vector.length_squared() > 0:
-        move_and_collide(move_vector * move_speed * delta)
+    if path.empty():
+        return
         
     target_vector = path[0] - get_global_position()
     
-    if target_vector.length() < needed_point_proximity:
-        path.pop_front()
+    var move_vector = target_vector.normalized() * move_speed * delta
+    
+    if move_vector.length_squared() < target_vector.length_squared():
+        move_and_collide(move_vector)
+    else:
+         move_and_collide(target_vector)   
+    
+
 #
 #    if move_speed > min_move_speed:
 #        move_speed = max(move_speed - delta * speed_deacceleration, min_move_speed)
