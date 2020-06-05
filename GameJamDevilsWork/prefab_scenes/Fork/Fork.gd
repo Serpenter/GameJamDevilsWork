@@ -5,6 +5,7 @@ onready var animation_tree = $ForkAnimationTree
 var animation_state_machine
 onready var animation_player = $ForkAnimationPlayer
 onready var fork_area = $ForkArea
+onready var audio_player = $AudioStreamPlayer2D
 
 
 const push_start_time = 0.0
@@ -25,6 +26,7 @@ func on_fork_animation_finished(placeholder):
     
     
 func push():
+    audio_player.play()
     animation_player.play("push")
     fork_area.monitoring = true
     

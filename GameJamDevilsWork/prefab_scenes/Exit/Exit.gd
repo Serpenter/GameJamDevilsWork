@@ -6,6 +6,7 @@ extends Node2D
 # var b = "text"
 
 onready var exit_area = $ExitArea
+onready var audio_stream_player = $AudioStreamPlayer2D
 var sinners_exited = 0
 
 
@@ -22,3 +23,4 @@ func _process(delta):
         if colBody.has_method("exit_hell"):
             if colBody.exit_hell():
                 sinners_exited += 1
+                audio_stream_player.play()

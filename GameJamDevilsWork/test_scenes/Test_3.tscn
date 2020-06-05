@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://test_scenes/Test_2.gd" type="Script" id=1]
 [ext_resource path="res://resources/dungeon_tileset.tres" type="TileSet" id=2]
@@ -7,11 +7,12 @@
 [ext_resource path="res://prefab_scenes/Sinner/Sinner.tscn" type="PackedScene" id=5]
 [ext_resource path="res://prefab_scenes/Pot/Pot.tscn" type="PackedScene" id=6]
 [ext_resource path="res://prefab_scenes/Exit/Exit.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assets/sounds/Computer_Music_All-stars_-_Club_Translyvania.wav" type="AudioStream" id=8]
 
 [sub_resource type="NavigationPolygon" id=1]
-vertices = PoolVector2Array( 726.468, 197.458, 1392.22, 112.151, 59.8741, 768.131, 560.846, 284.934, 223.77, 263.94, 466.371, 227.783, 115.299, 311.76, 1741.95, -445.243, 2020.48, -433.907, 1672.56, -257.73, 1620.4, -376.489, 1786.15, -595.027, 1735.81, -587.661, 1601.49, -673.435, 1603.21, -665.008, 923.522, -127.185, 1004.41, -95.0515, 624.996, 157.801, 1465.32, -354.238, 1492.71, -440.332, 1408.46, -377.703, 1229.34, -471.581, 1440.98, -583.492, 1485.35, -599.938, -783.9, 349.433, 23.1566, 263.94, 546.401, -317.448, 125.796, 217.286, 1475.53, -612.216, 1454.66, -602.394 )
-polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 4, 5, 3, 2, 6 ), PoolIntArray( 7, 8, 9, 10 ), PoolIntArray( 11, 8, 7, 12 ), PoolIntArray( 13, 11, 12, 14 ), PoolIntArray( 15, 16, 1, 0, 17 ), PoolIntArray( 10, 9, 18, 19 ), PoolIntArray( 20, 21, 22, 23, 19, 18 ), PoolIntArray( 6, 2, 24, 25 ), PoolIntArray( 25, 24, 26, 27 ), PoolIntArray( 28, 13, 14, 23 ), PoolIntArray( 17, 5, 4, 27, 26, 15 ), PoolIntArray( 16, 15, 20, 18 ), PoolIntArray( 23, 22, 29, 28 ) ]
-outlines = [ PoolVector2Array( 59.8741, 768.131, -783.9, 349.433, 546.401, -317.448, 923.522, -127.185, 1408.46, -377.703, 1229.34, -471.581, 1440.98, -583.492, 1454.66, -602.394, 1475.53, -612.216, 1601.49, -673.435, 1786.15, -595.027, 2020.48, -433.907, 1672.56, -257.73, 1465.32, -354.238, 1004.41, -95.0515, 1392.22, 112.151 ), PoolVector2Array( 466.371, 227.783, 624.996, 157.801, 726.468, 197.458, 560.846, 284.934 ), PoolVector2Array( 115.299, 311.76, 223.77, 263.94, 125.796, 217.286, 23.1566, 263.94 ), PoolVector2Array( 1620.4, -376.489, 1492.71, -440.332, 1485.35, -599.938, 1603.21, -665.008, 1735.81, -587.661, 1741.95, -445.243 ) ]
+vertices = PoolVector2Array( 726.468, 197.458, 1392.22, 112.151, 59.8741, 768.131, 560.846, 284.934, 223.77, 263.94, 466.371, 227.783, 115.299, 311.76, 923.522, -127.185, 1004.41, -95.0515, 624.996, 157.801, 1408.46, -377.703, 1229.34, -471.581, 1440.98, -583.492, 1465.32, -354.238, 1601.49, -673.435, 1734.53, -620.584, 1750.68, -613.934, 1786.15, -595.027, 2020.48, -433.907, 1672.56, -257.73, 1475.53, -612.216, -783.9, 349.433, 23.1566, 263.94, 546.401, -317.448, 125.796, 217.286, 1454.66, -602.394 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 4, 5, 3, 2, 6 ), PoolIntArray( 7, 8, 1, 0, 9 ), PoolIntArray( 10, 11, 12, 13 ), PoolIntArray( 14, 15, 16, 17, 18, 19, 13, 20 ), PoolIntArray( 6, 2, 21, 22 ), PoolIntArray( 22, 21, 23, 24 ), PoolIntArray( 9, 5, 4, 24, 23, 7 ), PoolIntArray( 8, 7, 10, 13 ), PoolIntArray( 25, 20, 13, 12 ) ]
+outlines = [ PoolVector2Array( 59.8741, 768.131, -783.9, 349.433, 546.401, -317.448, 923.522, -127.185, 1408.46, -377.703, 1229.34, -471.581, 1440.98, -583.492, 1454.66, -602.394, 1475.53, -612.216, 1601.49, -673.435, 1734.53, -620.584, 1750.68, -613.934, 1786.15, -595.027, 2020.48, -433.907, 1672.56, -257.73, 1465.32, -354.238, 1004.41, -95.0515, 1392.22, 112.151 ), PoolVector2Array( 466.371, 227.783, 624.996, 157.801, 726.468, 197.458, 560.846, 284.934 ), PoolVector2Array( 115.299, 311.76, 223.77, 263.94, 125.796, 217.286, 23.1566, 263.94 ) ]
 
 [node name="MainGame" type="Node2D"]
 script = ExtResource( 1 )
@@ -64,7 +65,7 @@ position = Vector2( 543.315, -278.027 )
 [node name="Navigation2D" type="Navigation2D" parent="world"]
 
 [node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="world/Navigation2D"]
-position = Vector2( -6.82385, 8.63391 )
+position = Vector2( -6.82385, 9.40771 )
 navpoly = SubResource( 1 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -108,4 +109,9 @@ position = Vector2( -32.9528, 236.69 )
 
 [node name="SInner4" parent="Sinners" instance=ExtResource( 5 )]
 position = Vector2( 385.69, -107.047 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+volume_db = -11.077
+autoplay = true
 [connection signal="pressed" from="CanvasLayer/GoToMainMenu" to="." method="_on_GoToMainMenu_pressed"]

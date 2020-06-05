@@ -4,7 +4,8 @@ extends Node2D
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-
+onready var scream_audio_player = $ScreamAudioStreamPlayer
+onready var splash_audio_player = $SplashAudioStreamPlayer
 onready var pot_area = $PotArea
 var sinners_inside = 0
 
@@ -22,3 +23,5 @@ func _process(delta):
         if colBody.has_method("get_in_pot"):
             if colBody.get_in_pot():
                 sinners_inside += 1
+                scream_audio_player.play()
+                splash_audio_player.play()

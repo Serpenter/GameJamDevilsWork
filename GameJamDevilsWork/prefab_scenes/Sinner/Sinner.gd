@@ -4,9 +4,9 @@ extends KinematicBody2D
 #var is_moving = false
 
 
-#var max_move_speed = 50.0
-#var speed_deacceleration = 5.0
-#var min_move_speed = 10.0
+var max_move_speed = 100.0
+var speed_deacceleration = 10.0
+var min_move_speed = 20.0
 
 # FOR OLD MOVING END
 
@@ -22,7 +22,8 @@ onready var debug_line = get_tree().get_root().get_node("MainGame/world/DebugLin
 var path = []
 
 onready var animation_player = $AnimationPlayer
-
+onready var audio_player_1 = $AudioStreamPlayer1
+onready var audio_player_2 = $AudioStreamPlayer2
 
 
 var state_change_time = 10.0
@@ -69,21 +70,31 @@ func get_in_pot():
     if current_state == "go_to_pot":
         print("SINNER ENTERS THE POT")
         queue_free()
+        return true
     else:
         print("SINNER WON'T GO IN THE POT")
+        return false
         
 func exit_hell():
     if current_state == "go_to_exit":
         print("SINNER EXITED HELL")
         queue_free()
+        return true
     else:
         print("SINNER WON'T EXIT HELL")
+        return false
     
     
 func push_sinner(direction):
 #    move_vector = Vector2(1,0).rotated(direction)
 #    move_vector = move_vector.normalized()
+    if randi() % 2:
+        audio_player_1.play()
+    else:
+        audio_player_2.play()
     downgrade_state()
+    if current_state == "go_to_pot":
+        move_speed = max_move_speed
     
         
 func go_to_node_in_group(group_name):
@@ -154,6 +165,9 @@ func resolve_path_completion():
     
 
 func _process(delta):
+    
+    if move_speed > min_move_speed:
+        move_speed = max(move_speed - delta * speed_deacceleration, min_move_speed)
     
     update_state(delta)
     
