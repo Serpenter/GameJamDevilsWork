@@ -1,26 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://main_scenes/MainGame/MainGame.gd" type="Script" id=1]
-
-[sub_resource type="ParticlesMaterial" id=1]
-flag_disable_z = true
-direction = Vector3( 0, 0, 0 )
-spread = 180.0
-gravity = Vector3( 0, 0, 0 )
-initial_velocity = 120.0
-initial_velocity_random = 1.0
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-
-[sub_resource type="OpenSimplexNoise" id=2]
-octaves = 5
-period = 6.5
-
-[sub_resource type="NoiseTexture" id=3]
-width = 64
-height = 64
-seamless = true
-noise = SubResource( 2 )
+[ext_resource path="res://resources/dungeon_tileset.tres" type="TileSet" id=2]
 
 [node name="MainGame" type="Node2D"]
 script = ExtResource( 1 )
@@ -44,8 +25,25 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Particles2D" type="Particles2D" parent="."]
-position = Vector2( 496.891, 293.399 )
-process_material = SubResource( 1 )
-texture = SubResource( 3 )
+[node name="world" type="Node2D" parent="."]
+
+[node name="Navigation2D" type="Navigation2D" parent="world"]
+
+[node name="floor" type="TileMap" parent="world/Navigation2D"]
+mode = 1
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 123, 61 )
+cell_y_sort = true
+centered_textures = true
+format = 1
+tile_data = PoolIntArray( -65528, 35, 0, 7, 35, 0, 8, 35, 0, 9, 35, 0, 65544, 35, 0 )
+
+[node name="walls" type="TileMap" parent="world/Navigation2D"]
+mode = 1
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 123, 61 )
+cell_y_sort = true
+centered_textures = true
+format = 1
+tile_data = PoolIntArray( -196602, 60, 0, -196601, 60, 0, -196600, 60, 0, -196599, 60, 0, -196598, 60, 0, -196597, 60, 0, -131067, 63, 0, -65531, 63, 0, 5, 63, 0, 65541, 63, 0, 131077, 63, 0 )
 [connection signal="pressed" from="CanvasLayer/GoToMainMenu" to="." method="_on_GoToMainMenu_pressed"]
