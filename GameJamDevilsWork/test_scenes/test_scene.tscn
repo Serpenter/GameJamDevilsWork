@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://prefab_scenes/Imp/Imp.tscn" type="PackedScene" id=1]
+[ext_resource path="res://prefab_scenes/Sinner/Sinner.tscn" type="PackedScene" id=2]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Imp" parent="." instance=ExtResource( 1 )]
+position = Vector2( 479.417, 285.148 )
+
+[node name="SInner" parent="." instance=ExtResource( 2 )]
+position = Vector2( 332.9, 390.75 )
+
+[node name="SInner2" parent="." instance=ExtResource( 2 )]
+position = Vector2( 630.25, 431.6 )
+
+[node name="SInner3" parent="." instance=ExtResource( 2 )]
+position = Vector2( 491.55, 126.65 )
