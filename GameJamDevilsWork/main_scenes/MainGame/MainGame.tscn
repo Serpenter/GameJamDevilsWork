@@ -1,0 +1,51 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://main_scenes/MainGame/MainGame.gd" type="Script" id=1]
+
+[sub_resource type="ParticlesMaterial" id=1]
+flag_disable_z = true
+direction = Vector3( 0, 0, 0 )
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 120.0
+initial_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+
+[sub_resource type="OpenSimplexNoise" id=2]
+octaves = 5
+period = 6.5
+
+[sub_resource type="NoiseTexture" id=3]
+width = 64
+height = 64
+seamless = true
+noise = SubResource( 2 )
+
+[node name="MainGame" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="GoToMainMenu" type="Button" parent="CanvasLayer"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -150.886
+margin_top = 20.7922
+margin_right = -26.8865
+margin_bottom = 40.7922
+grow_horizontal = 2
+grow_vertical = 2
+rect_pivot_offset = Vector2( 124, 0 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Go to main menu"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Particles2D" type="Particles2D" parent="."]
+position = Vector2( 496.891, 293.399 )
+process_material = SubResource( 1 )
+texture = SubResource( 3 )
+[connection signal="pressed" from="CanvasLayer/GoToMainMenu" to="." method="_on_GoToMainMenu_pressed"]
