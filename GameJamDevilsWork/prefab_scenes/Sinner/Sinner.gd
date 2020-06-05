@@ -21,7 +21,7 @@ onready var debug_line = get_tree().get_root().get_node("MainGame/world/DebugLin
 
 var path = []
 
-
+onready var animation_player = $AnimationPlayer
 
 
 
@@ -62,6 +62,7 @@ var pot_time_min = 5.0
 # Called when the node enters the scene tree for the first time.
 func _ready():
     set_state("idle")
+    animation_player.play("idle")
     pass # Replace with function body.
     
 func get_in_pot():

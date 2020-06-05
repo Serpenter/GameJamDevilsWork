@@ -29,7 +29,7 @@ start_node = "idle"
 
 [sub_resource type="Animation" id=8]
 resource_name = "idle"
-length = 1.2
+length = 0.6
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("ForkArea:position")
@@ -38,7 +38,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.6, 1.2 ),
+"times": PoolRealArray( 0, 0.3, 0.6 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( 0, 0 ), Vector2( 3, 0 ), Vector2( 0, 0 ) ]
@@ -64,6 +64,7 @@ tracks/0/keys = {
 script = ExtResource( 2 )
 
 [node name="ForkArea" type="Area2D" parent="."]
+position = Vector2( 0.276187, 0 )
 
 [node name="ForkShape" type="CollisionShape2D" parent="ForkArea"]
 position = Vector2( 8, 0 )

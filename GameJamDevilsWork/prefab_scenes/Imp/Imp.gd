@@ -1,14 +1,15 @@
 extends KinematicBody2D
 
-var move_speed = 0
+var move_speed = 200
 var move_vector = Vector2()
 var look_vector = Vector2()
 
-onready var fork= $Fork
+onready var fork = $Fork
+onready var animation_player = $AnimationPlayer
 
 
 func _ready():
-    move_speed = 100
+    animation_player.play("idle")
 
     
 func rotate_fork():   
