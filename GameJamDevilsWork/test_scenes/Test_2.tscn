@@ -10,9 +10,9 @@
 [ext_resource path="res://test_scenes/test_water_tileset.tres" type="TileSet" id=8]
 
 [sub_resource type="NavigationPolygon" id=1]
-vertices = PoolVector2Array( 726.398, -58.4144, 902.868, 10.5815, 603.664, 173.783, 374.12, 109.431, 957.269, 366.839, 796.72, 447.777, 525.578, 274.697, 365.144, 282.631, 187.579, 205.304, -90.2244, 47.7867, 54.4053, -32.404, 440.741, 284.963, 57.2692, 444.444, -84.4965, 354.23 )
-polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 2, 4, 5, 6, 3 ), PoolIntArray( 7, 8, 9, 10, 3, 6, 11 ), PoolIntArray( 12, 13, 8, 7 ) ]
-outlines = [ PoolVector2Array( 440.741, 284.963, 525.578, 274.697, 796.72, 447.777, 957.269, 366.839, 603.664, 173.783, 902.868, 10.5815, 726.398, -58.4144, 374.12, 109.431, 54.4053, -32.404, -90.2244, 47.7867, 187.579, 205.304, -84.4965, 354.23, 57.2692, 444.444, 365.144, 282.631 ) ]
+vertices = PoolVector2Array( 726.398, -58.4144, 902.868, 10.5815, 603.664, 173.783, 374.12, 109.431, 957.269, 366.839, 796.72, 447.777, 525.578, 274.697, 187.579, 205.304, -90.2244, 47.7867, 54.4053, -32.404, 172.862, 110.424, 365.144, 282.631, 57.2692, 444.444, -84.4965, 354.23, 440.741, 284.963, 207, 110.912, 172.375, 77.7501, 206.512, 77.7501 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 2, 4, 5, 6, 3 ), PoolIntArray( 7, 8, 9, 10 ), PoolIntArray( 11, 12, 13, 7, 3 ), PoolIntArray( 3, 6, 14, 11 ), PoolIntArray( 15, 3, 7 ), PoolIntArray( 10, 15, 7 ), PoolIntArray( 16, 10, 9 ), PoolIntArray( 3, 15, 17 ), PoolIntArray( 9, 3, 17 ), PoolIntArray( 16, 9, 17 ) ]
+outlines = [ PoolVector2Array( 440.741, 284.963, 525.578, 274.697, 796.72, 447.777, 957.269, 366.839, 603.664, 173.783, 902.868, 10.5815, 726.398, -58.4144, 374.12, 109.431, 54.4053, -32.404, -90.2244, 47.7867, 187.579, 205.304, -84.4965, 354.23, 57.2692, 444.444, 365.144, 282.631 ), PoolVector2Array( 172.862, 110.424, 172.375, 77.7501, 206.512, 77.7501, 207, 110.912 ) ]
 
 [node name="MainGame" type="Node2D"]
 script = ExtResource( 1 )
@@ -73,6 +73,7 @@ position = Vector2( 685.005, 40.0223 )
 [node name="Navigation2D" type="Navigation2D" parent="world"]
 
 [node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="world/Navigation2D"]
+position = Vector2( -1.38474, 5.384 )
 navpoly = SubResource( 1 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -96,6 +97,9 @@ __meta__ = {
 
 [node name="Imp" parent="." instance=ExtResource( 4 )]
 position = Vector2( 409.227, 151.54 )
+
+[node name="Camera2D" type="Camera2D" parent="Imp"]
+current = true
 
 [node name="Sinners" type="Node2D" parent="."]
 __meta__ = {

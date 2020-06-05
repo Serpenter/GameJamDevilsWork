@@ -38,11 +38,45 @@ var state_downgrades = {
     "idle":"go_to_pot",
     "go_to_exit":"idle"}
 
-var current_state = "idle"
+var current_state
+
+
+var state_min_time = {
+    "idle":5,
+    "go_to_pot":5,
+    "go_to_exit": 1 # not_used since not upgradable
+}
+
+var state_range_time = {
+    "idle":10,
+    "go_to_pot":10,
+    "go_to_exit": 1 # not_used since not upgradable
+}
+
+var idle_time_max = 15.0
+var idle_time_min = 5.0
+
+var pot_time_max = 15.0
+var pot_time_min = 5.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+    set_state("idle")
     pass # Replace with function body.
+    
+func get_in_pot():
+    if current_state == "go_to_pot":
+        print("SINNER ENTERS THE POT")
+        queue_free()
+    else:
+        print("SINNER WON'T GO IN THE POT")
+        
+func exit_hell():
+    if current_state == "go_to_exit":
+        print("SINNER EXITED HELL")
+        queue_free()
+    else:
+        print("SINNER WON'T EXIT HELL")
     
     
 func push_sinner(direction):
@@ -108,7 +142,14 @@ func set_state(new_state):
         go_to_node_in_group("exits")
     elif current_state == "go_to_pot":
         go_to_node_in_group("pots")
+        
+    state_change_timeout = randf()*state_range_time[current_state] + state_min_time[current_state]
 
+
+func resolve_path_completion():
+    if current_state == "idle":
+        print("ERROR idle path completion")
+        return
     
 
 func _process(delta):
@@ -123,12 +164,11 @@ func _process(delta):
         return
         
     var target_vector = path[0] - get_global_position()
-        
-    if target_vector.length() < needed_point_proximity:
-        path.remove(0)
     
-    if path.empty():
-        return
+    var global_pos = get_global_position()
+        
+    if target_vector.length() < needed_point_proximity and len(path) > 1:
+        path.remove(0)
         
     target_vector = path[0] - get_global_position()
     
