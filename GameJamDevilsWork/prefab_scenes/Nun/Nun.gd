@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-var max_move_speed = 20.0
+var max_move_speed = 100.0
 var speed_deacceleration = 25.0
 var min_move_speed = 20.0
 
@@ -13,6 +13,9 @@ var DEBUG = true
 
 onready var nav_2d = get_tree().get_root().get_node("MainGame/world/Navigation2D")
 onready var debug_line = get_tree().get_root().get_node("MainGame/world/DebugLine")
+onready var halo = $Halo
+
+
 
 var path = []
 
@@ -63,10 +66,12 @@ var stun_time = 0.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	set_state("idle")
-	animation_player.play("idle")
-	$Sprite/AscensionParticles.emitting = false
-	
+    set_state("idle")
+    animation_player.play("idle")
+    $Sprite/AscensionParticles.emitting = false
+    halo.visible = false
+    
+
 func get_in_pot():
 	if current_state == "go_to_pot":
 		print("SINNER ENTERS THE POT")
@@ -91,15 +96,19 @@ func exit_hell():
 func push_sinner(direction):
 #    move_vector = Vector2(1,0).rotated(direction)
 #    move_vector = move_vector.normalized()
-	if randi() % 2:
-		audio_player_1.play()
-	else:
-		audio_player_2.play()
-	downgrade_state()
-	if current_state == "go_to_pot":
-		move_speed = max_move_speed
-	
-		
+
+    if randi() % 2:
+        audio_player_1.play()
+    else:
+        audio_player_2.play()
+    downgrade_state()
+    if current_state == "go_to_pot":
+        move_speed = max_move_speed
+    
+    # for Nun and Cardinal, sinners won't do it because for them it's upgradable state
+    if current_state =="go_to_exit":
+        move_speed = max_move_speed
+    
 func go_to_node_in_group(group_name):
 	var group_objects = get_tree().get_nodes_in_group(group_name)
 	var chosen_object = group_objects[randi() % group_objects.size()]
@@ -153,16 +162,17 @@ func set_state(new_state):
 	
 	path = []
 
-	if current_state == "go_to_exit":
-		go_to_node_in_group("exits")
-	elif current_state == "go_to_pot":
-		go_to_node_in_group("pots")
-		
-	state_change_timeout = randf()*state_range_time[current_state] + state_min_time[current_state]
-	
-	if is_angel_present():
-		state_change_timeout *= angel_timeout_modifier
-		
+    if current_state == "go_to_exit":
+        go_to_node_in_group("exits")
+    elif current_state == "go_to_pot":
+        go_to_node_in_group("pots")
+        
+    halo.visible = current_state == "pray"
+        
+    state_change_timeout = randf()*state_range_time[current_state] + state_min_time[current_state]
+    
+    if is_angel_present():
+        state_change_timeout *= angel_timeout_modifier
 
 
 func is_angel_present():
@@ -203,57 +213,62 @@ func update_idle():
 			animation_player.play("idle")
 	
 func update_prayer(delta):
-	if animation_player.current_animation != "pray":
-			animation_player.play("pray")
-			
-	pray_time += delta
-	
-	if pray_time > pray_point_time:
-		pray_time -= pray_point_time
-		emit_signal("prayer_point", 1)
+
+    if animation_player.current_animation != "pray":
+            animation_player.play("pray")
+            halo.visible = true
+            
+    pray_time += delta
+    
+    if pray_time > pray_point_time:
+        pray_time -= pray_point_time
+        emit_signal("prayer_point", 1)
 
 func _process(delta):
-	
-	if stun_time > 0:
+    
+    if current_state == "ascension":
+        return
+    
+    if stun_time > 0:
 
-		stun_time -= delta
-		
-		if stun_time <= 0:
-			disable_stun()
+        stun_time -= delta
+        
+        if stun_time <= 0:
+            disable_stun()
 
-		return
-	
-	update_move_speed(delta)
-	update_state(delta)
-	
-	if current_state == "idle":
-		update_idle()
-		return
-		
-	if current_state == "pray":
-		update_prayer(delta)
-		return
-	
-	if path.empty():
-		print("ERROR empty non-idle path")
-		return
-		
-	var target_vector = path[0] - get_global_position()
-	
-	var global_pos = get_global_position()
-		
-	if target_vector.length() < needed_point_proximity and len(path) > 1:
-		path.remove(0)
-		
-	target_vector = path[0] - get_global_position()
-	
-	var move_vector = target_vector.normalized() * move_speed * delta
-	
-	if move_vector.length_squared() < target_vector.length_squared():
-		move_and_collide(move_vector)
-	else:
-		 move_and_collide(target_vector)   
-	
+        return
+    
+    update_move_speed(delta)
+    update_state(delta)
+    
+    if current_state == "idle":
+        update_idle()
+        return
+        
+    if current_state == "pray":
+        update_prayer(delta)
+        return
+    
+    if path.empty():
+        print("ERROR empty non-idle path")
+        return
+        
+    var target_vector = path[0] - get_global_position()
+    
+    var global_pos = get_global_position()
+        
+    if target_vector.length() < needed_point_proximity and len(path) > 1:
+        path.remove(0)
+        
+    target_vector = path[0] - get_global_position()
+    
+    var move_vector = target_vector.normalized() * move_speed * delta
+    
+    if move_vector.length_squared() < target_vector.length_squared():
+        move_and_collide(move_vector)
+    else:
+         move_and_collide(target_vector)   
+    
 
 #
 #    if move_speed > min_move_speed:
