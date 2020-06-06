@@ -4,8 +4,8 @@ extends KinematicBody2D
 #var is_moving = false
 
 
-var max_move_speed = 100.0
-var speed_deacceleration = 10.0
+var max_move_speed = 150.0
+var speed_deacceleration = 15.0
 var min_move_speed = 20.0
 
 # FOR OLD MOVING END
@@ -28,6 +28,7 @@ onready var audio_player_2 = $AudioStreamPlayer2
 
 var state_change_time = 10.0
 var state_change_timeout = state_change_time
+var angel_timeout_modifier = 0.5
 
 var states = ["idle", "go_to_pot", "go_to_exit"]
 
@@ -156,19 +157,29 @@ func set_state(new_state):
         go_to_node_in_group("pots")
         
     state_change_timeout = randf()*state_range_time[current_state] + state_min_time[current_state]
+    
+    if is_angel_present():
+        state_change_timeout *= angel_timeout_modifier
+        
 
+
+func is_angel_present():
+    return len(get_tree().get_nodes_in_group("angels")) > 0
 
 func resolve_path_completion():
     if current_state == "idle":
         print("ERROR idle path completion")
         return
+        
+        
+func update_move_speed(delta):
+    if move_speed > min_move_speed:
+        move_speed = max(move_speed - delta * speed_deacceleration, min_move_speed)
     
 
 func _process(delta):
     
-    if move_speed > min_move_speed:
-        move_speed = max(move_speed - delta * speed_deacceleration, min_move_speed)
-    
+    update_move_speed(delta)
     update_state(delta)
     
     if current_state == "idle":

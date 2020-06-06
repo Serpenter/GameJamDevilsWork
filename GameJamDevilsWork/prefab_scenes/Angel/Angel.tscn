@@ -1,0 +1,139 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://assets/images/angel_01.png" type="Texture" id=1]
+[ext_resource path="res://prefab_scenes/Angel/Angel.gd" type="Script" id=2]
+[ext_resource path="res://assets/sounds/Disapear.ogg" type="AudioStream" id=3]
+[ext_resource path="res://assets/images/halo.png" type="Texture" id=4]
+[ext_resource path="res://assets/images/wing.png" type="Texture" id=5]
+[ext_resource path="res://assets/sounds/bell_1.wav" type="AudioStream" id=6]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 64.0
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 24.0
+height = 0.0
+
+[sub_resource type="Animation" id=3]
+resource_name = "idle"
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 8 ), Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Body/LeftWingRotation:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 25.0, -25.0, 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Body/RightWingRotation:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -25.0, 25.0, 0.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Body/Halo:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -40 ), Vector2( 0, -44 ), Vector2( 0, -40 ) ]
+}
+
+[node name="Angel" type="KinematicBody2D" groups=[
+"angels",
+"exits",
+]]
+script = ExtResource( 2 )
+
+[node name="Body" type="Sprite" parent="."]
+position = Vector2( 0, 5.516 )
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Halo" type="Sprite" parent="Body"]
+position = Vector2( 0, -42.758 )
+scale = Vector2( 0.322727, 0.25 )
+z_index = 1
+texture = ExtResource( 4 )
+
+[node name="LeftWingRotation" type="Node2D" parent="Body"]
+position = Vector2( -17.1979, 9.94009 )
+rotation = 0.416406
+
+[node name="LeftWing" type="Sprite" parent="Body/LeftWingRotation"]
+position = Vector2( -14.8021, -1.94009 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 5 )
+
+[node name="RightWingRotation" type="Node2D" parent="Body"]
+position = Vector2( 15.0825, 9.75115 )
+rotation = -0.416406
+
+[node name="RightWing" type="Sprite" parent="Body/RightWingRotation"]
+position = Vector2( 16.9175, -1.75115 )
+rotation = -3.14159
+scale = Vector2( 0.5, -0.5 )
+texture = ExtResource( 5 )
+
+[node name="ExitArea" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExitArea"]
+visible = false
+position = Vector2( 0, 24 )
+shape = SubResource( 1 )
+
+[node name="DissapearAudioPlayer" type="AudioStreamPlayer2D" parent="."]
+visible = false
+stream = ExtResource( 3 )
+volume_db = -2.019
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="SinnerExitAudioPlayer" type="AudioStreamPlayer2D" parent="."]
+visible = false
+stream = ExtResource( 6 )
+volume_db = 17.165
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( 0, 24 )
+shape = SubResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/idle = SubResource( 3 )
+[connection signal="body_entered" from="ExitArea" to="." method="_on_ExitArea_body_entered"]
