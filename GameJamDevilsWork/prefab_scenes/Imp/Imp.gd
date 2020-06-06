@@ -64,7 +64,7 @@ func _process(delta):
     
     rotate_fork()
     
-    if Input.is_action_just_pressed("main_action"):
+    if Input.is_action_pressed("main_action") and fork.animation_player.current_animation == "idle":
         fork.push()
         
     if Input.is_action_just_pressed("secondary_action"):
