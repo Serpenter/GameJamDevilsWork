@@ -1,27 +1,27 @@
 [gd_scene load_steps=25 format=2]
 
-[ext_resource path="res://prefab_scenes/levels/LevelMap_00.tscn" type="PackedScene" id=1]
+[ext_resource path="res://prefab_scenes/SinnerRespawn/SinnerRespawn.tscn" type="PackedScene" id=1]
 [ext_resource path="res://prefab_scenes/Background/Background.tscn" type="PackedScene" id=2]
-[ext_resource path="res://prefab_scenes/Pot/Pot.tscn" type="PackedScene" id=3]
-[ext_resource path="res://prefab_scenes/Exit/Exit.tscn" type="PackedScene" id=4]
-[ext_resource path="res://prefab_scenes/HUD/HUD.tscn" type="PackedScene" id=5]
-[ext_resource path="res://prefab_scenes/Imp/Imp.tscn" type="PackedScene" id=6]
-[ext_resource path="res://prefab_scenes/Sinner/Sinner.tscn" type="PackedScene" id=7]
+[ext_resource path="res://prefab_scenes/Exit/Exit.tscn" type="PackedScene" id=3]
+[ext_resource path="res://prefab_scenes/Imp/Imp.tscn" type="PackedScene" id=4]
+[ext_resource path="res://prefab_scenes/ObstacleTwo/ObstacleTwo.tscn" type="PackedScene" id=5]
+[ext_resource path="res://prefab_scenes/Pot/Pot.tscn" type="PackedScene" id=6]
+[ext_resource path="res://prefab_scenes/HUD/HUD.tscn" type="PackedScene" id=7]
 [ext_resource path="res://prefab_scenes/GameAudio/AudioStreamPlayer.tscn" type="PackedScene" id=8]
-[ext_resource path="res://main_scenes/Tutorial/Tutorial.gd" type="Script" id=9]
-[ext_resource path="res://resources/main_ui_theme.tres" type="Theme" id=10]
-[ext_resource path="res://prefab_scenes/SinnerRespawn/SinnerRespawn.tscn" type="PackedScene" id=11]
-[ext_resource path="res://assets/images/white.png" type="Texture" id=12]
-[ext_resource path="res://resources/shaders/color_distortion_material.tres" type="Material" id=13]
-[ext_resource path="res://assets/sounds/clang.wav" type="AudioStream" id=14]
-[ext_resource path="res://resources/fonts/chomsky_22.tres" type="DynamicFont" id=15]
-[ext_resource path="res://main_scenes/Tutorial/DoJob.gd" type="Script" id=16]
-[ext_resource path="res://prefab_scenes/ObstacleOne/ObstacleOne.tscn" type="PackedScene" id=17]
+[ext_resource path="res://prefab_scenes/Sinner/Sinner.tscn" type="PackedScene" id=9]
+[ext_resource path="res://assets/images/white.png" type="Texture" id=10]
+[ext_resource path="res://assets/sounds/clang.wav" type="AudioStream" id=11]
+[ext_resource path="res://resources/shaders/color_distortion_material.tres" type="Material" id=12]
+[ext_resource path="res://resources/main_ui_theme.tres" type="Theme" id=13]
+[ext_resource path="res://resources/fonts/chomsky_22.tres" type="DynamicFont" id=14]
+[ext_resource path="res://main_scenes/Level_01/Level_01.gd" type="Script" id=15]
+[ext_resource path="res://main_scenes/Tutorial/NextLevel.gd" type="Script" id=16]
+[ext_resource path="res://main_scenes/Tutorial/ToMainMenu.gd" type="Script" id=17]
 [ext_resource path="res://main_scenes/Tutorial/Retry.gd" type="Script" id=18]
 [ext_resource path="res://main_scenes/Tutorial/MoveOn.gd" type="Script" id=19]
-[ext_resource path="res://main_scenes/Tutorial/NextLevel.gd" type="Script" id=20]
-[ext_resource path="res://main_scenes/Tutorial/ToMainMenu.gd" type="Script" id=21]
-[ext_resource path="res://resources/fonts/chomsky_36.tres" type="DynamicFont" id=22]
+[ext_resource path="res://main_scenes/Tutorial/DoJob.gd" type="Script" id=20]
+[ext_resource path="res://resources/fonts/chomsky_36.tres" type="DynamicFont" id=21]
+[ext_resource path="res://prefab_scenes/levels/LevelMap_02.tscn" type="PackedScene" id=22]
 
 [sub_resource type="Environment" id=1]
 background_mode = 4
@@ -58,13 +58,18 @@ tracks/1/keys = {
 "clips": [ {
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource( 14 )
+"stream": ExtResource( 11 )
 } ],
 "times": PoolRealArray( 0 )
 }
 
 [node name="MainGame" type="Node2D"]
-script = ExtResource( 9 )
+script = ExtResource( 15 )
+
+[node name="SecondStage" type="Timer" parent="."]
+wait_time = 15.0
+one_shot = true
+autostart = true
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -72,13 +77,14 @@ script = ExtResource( 9 )
 motion_scale = Vector2( 0.1, 0.1 )
 
 [node name="Background" parent="ParallaxBackground/ParallaxLayer" instance=ExtResource( 2 )]
-position = Vector2( -53.4366, -396.047 )
+position = Vector2( 22.2039, -448.386 )
 
 [node name="world" type="Node2D" parent="."]
 
 [node name="Navigation2D" type="Navigation2D" parent="world"]
 
-[node name="LevelMap_00" parent="world/Navigation2D" instance=ExtResource( 1 )]
+[node name="LevelMap_02" parent="world/Navigation2D" instance=ExtResource( 22 )]
+position = Vector2( 0, 0 )
 
 [node name="DebugLine" type="Line2D" parent="world"]
 
@@ -87,37 +93,35 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Pot" parent="world/pots" instance=ExtResource( 3 )]
-position = Vector2( 248.132, 68.4948 )
+[node name="Pot" parent="world/pots" instance=ExtResource( 6 )]
+position = Vector2( -432.244, -349.002 )
 
-[node name="second" parent="world/pots" instance=ExtResource( 3 )]
-position = Vector2( 498.549, -701.22 )
-is_working = false
+[node name="second" parent="world/pots" instance=ExtResource( 6 )]
+position = Vector2( -122.304, 260.674 )
 
 [node name="exits" type="Node2D" parent="world"]
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Exit" parent="world/exits" instance=ExtResource( 4 )]
-position = Vector2( -362.714, -215.562 )
-rotation = -0.524246
+[node name="Exit" parent="world/exits" instance=ExtResource( 3 )]
+position = Vector2( 563.455, -266.467 )
+rotation = 0.468325
 
-[node name="SecondExit" parent="world/exits" instance=ExtResource( 4 )]
-position = Vector2( -119.037, -564.93 )
-rotation = -0.521246
-is_working = false
+[node name="SecondExit" parent="world/exits" instance=ExtResource( 3 )]
+position = Vector2( 490.685, 346.706 )
+rotation = -0.449343
 
 [node name="sinners" type="YSort" parent="world"]
 
-[node name="Sinner" parent="world/sinners" instance=ExtResource( 7 )]
-position = Vector2( -1.33923, -102.688 )
+[node name="Sinner" parent="world/sinners" instance=ExtResource( 9 )]
+position = Vector2( 132.342, -159.447 )
 
-[node name="Sinner2" parent="world/sinners" instance=ExtResource( 7 )]
-position = Vector2( -159.231, -35.6192 )
+[node name="Sinner2" parent="world/sinners" instance=ExtResource( 9 )]
+position = Vector2( 3.01099, 45.6447 )
 
-[node name="Imp" parent="world" instance=ExtResource( 6 )]
-position = Vector2( -87.5425, -70.395 )
+[node name="Imp" parent="world" instance=ExtResource( 4 )]
+position = Vector2( 176.551, 2.83428 )
 
 [node name="Camera2D" type="Camera2D" parent="world/Imp"]
 current = true
@@ -129,24 +133,76 @@ environment = SubResource( 1 )
 
 [node name="sinner_spawns" type="Node2D" parent="world"]
 
-[node name="initial_respawn" parent="world/sinner_spawns" instance=ExtResource( 11 )]
-position = Vector2( -107.875, -90.5445 )
+[node name="initial_respawn" parent="world/sinner_spawns" instance=ExtResource( 1 )]
+position = Vector2( 172.283, -56.5224 )
 timeout = 4
 is_active = true
 
-[node name="respawn2" parent="world/sinner_spawns" instance=ExtResource( 11 )]
-position = Vector2( 368.364, -517.863 )
+[node name="initial_respawn2" parent="world/sinner_spawns" instance=ExtResource( 1 )]
+position = Vector2( -416.322, 72.9426 )
+timeout = 4
+is_active = true
 
-[node name="respawn3" parent="world/sinner_spawns" instance=ExtResource( 11 )]
-position = Vector2( 122.815, -375.665 )
+[node name="respawn2" parent="world/sinner_spawns" instance=ExtResource( 1 )]
+position = Vector2( 292.213, -112.863 )
+timeout = 5
+
+[node name="respawn3" parent="world/sinner_spawns" instance=ExtResource( 1 )]
+position = Vector2( -175.316, 37.9279 )
+timeout = 5
 
 [node name="obstacles" type="YSort" parent="world"]
 
-[node name="first" parent="world/obstacles" instance=ExtResource( 17 )]
-position = Vector2( -119.139, -246.994 )
+[node name="ObstacleTwo" parent="world/obstacles" instance=ExtResource( 5 )]
+position = Vector2( 67.3684, 204.211 )
 
-[node name="second" parent="world/obstacles" instance=ExtResource( 17 )]
-position = Vector2( 7.49054, -247.458 )
+[node name="ObstacleTwo17" parent="world/obstacles" instance=ExtResource( 5 )]
+position = Vector2( 18.3684, 157.211 )
+
+[node name="ObstacleTwo2" parent="world/obstacles" instance=ExtResource( 5 )]
+position = Vector2( 131.579, 241.053 )
+
+[node name="ObstacleTwo3" parent="world/obstacles" instance=ExtResource( 5 )]
+position = Vector2( 66.5789, 276.053 )
+
+[node name="ObstacleTwo4" parent="world/obstacles" instance=ExtResource( 5 )]
+position = Vector2( 198.769, 274.656 )
+
+[node name="ObstacleTwo16" parent="world/obstacles" instance=ExtResource( 5 )]
+position = Vector2( 267.206, 310.97 )
+
+[node name="ObstacleTwo5" parent="world/obstacles" instance=ExtResource( 5 )]
+position = Vector2( 132.579, 312.053 )
+
+[node name="ObstacleTwo6" parent="world/obstacles" instance=ExtResource( 5 )]
+position = Vector2( 65.5789, 346.053 )
+
+[node name="ObstacleTwo7" parent="world/obstacles" instance=ExtResource( 5 )]
+position = Vector2( -310.928, -66.2814 )
+
+[node name="ObstacleTwo8" parent="world/obstacles" instance=ExtResource( 5 )]
+position = Vector2( -120.992, -171.516 )
+
+[node name="ObstacleTwo10" parent="world/obstacles" instance=ExtResource( 5 )]
+position = Vector2( -57.8507, -207.964 )
+
+[node name="ObstacleTwo11" parent="world/obstacles" instance=ExtResource( 5 )]
+position = Vector2( -247.787, -101.702 )
+
+[node name="ObstacleTwo12" parent="world/obstacles" instance=ExtResource( 5 )]
+position = Vector2( -332.489, -134.556 )
+
+[node name="ObstacleTwo13" parent="world/obstacles" instance=ExtResource( 5 )]
+position = Vector2( -261.648, -177.163 )
+
+[node name="ObstacleTwo14" parent="world/obstacles" instance=ExtResource( 5 )]
+position = Vector2( -184.646, -219.257 )
+
+[node name="ObstacleTwo15" parent="world/obstacles" instance=ExtResource( 5 )]
+position = Vector2( -46.6089, -132.662 )
+
+[node name="ObstacleTwo9" parent="world/obstacles" instance=ExtResource( 5 )]
+position = Vector2( -183.62, -135.752 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -158,14 +214,14 @@ __meta__ = {
 }
 
 [node name="ColorDistortion" type="TextureRect" parent="CanvasLayer/Effects"]
-material = ExtResource( 13 )
+material = ExtResource( 12 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -1.5658
 margin_top = 38.5009
 margin_right = -1.5658
 margin_bottom = 38.5009
-texture = ExtResource( 12 )
+texture = ExtResource( 10 )
 expand = true
 stretch_mode = 1
 __meta__ = {
@@ -176,12 +232,10 @@ __meta__ = {
 anims/ColorDistortion = SubResource( 2 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="CanvasLayer/Effects/ColorDistortion"]
-stream = ExtResource( 14 )
+stream = ExtResource( 11 )
 
-[node name="HUD" parent="CanvasLayer" instance=ExtResource( 5 )]
+[node name="HUD" parent="CanvasLayer" instance=ExtResource( 7 )]
 pause_mode = 2
-margin_top = -1.0
-margin_bottom = -1.0
 
 [node name="OnStartNotice" type="Panel" parent="CanvasLayer"]
 pause_mode = 2
@@ -197,7 +251,7 @@ margin_bottom = 100.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_pivot_offset = Vector2( 245.28, 102.613 )
-theme = ExtResource( 10 )
+theme = ExtResource( 13 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -213,14 +267,11 @@ margin_right = 226.5
 margin_bottom = 77.5
 rect_pivot_offset = Vector2( 948.115, 163.016 )
 size_flags_horizontal = 3
-theme = ExtResource( 10 )
-custom_fonts/font = ExtResource( 15 )
-text = "You are regular imp
+theme = ExtResource( 13 )
+custom_fonts/font = ExtResource( 14 )
+text = "So annoying barrels
 
-Push 5 souls into pot, and gain more job
-Use pitchfork (LMB)
-
-"
+It is just not productive"
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -235,10 +286,10 @@ margin_left = -65.5
 margin_top = -45.4597
 margin_right = 65.5
 margin_bottom = -18.4597
-theme = ExtResource( 10 )
-custom_fonts/font = ExtResource( 15 )
+theme = ExtResource( 13 )
+custom_fonts/font = ExtResource( 14 )
 text = "Do your job"
-script = ExtResource( 16 )
+script = ExtResource( 20 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -257,7 +308,7 @@ margin_bottom = 100.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_pivot_offset = Vector2( 245.28, 102.613 )
-theme = ExtResource( 10 )
+theme = ExtResource( 13 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -273,8 +324,8 @@ margin_right = 226.5
 margin_bottom = 63.5
 rect_pivot_offset = Vector2( 948.115, 163.016 )
 size_flags_horizontal = 3
-theme = ExtResource( 10 )
-custom_fonts/font = ExtResource( 22 )
+theme = ExtResource( 13 )
+custom_fonts/font = ExtResource( 21 )
 text = "Well done!
 
 "
@@ -293,10 +344,10 @@ margin_left = -65.5
 margin_top = -84.0
 margin_right = 65.5
 margin_bottom = -57.0
-theme = ExtResource( 10 )
-custom_fonts/font = ExtResource( 15 )
+theme = ExtResource( 13 )
+custom_fonts/font = ExtResource( 14 )
 text = "Next level"
-script = ExtResource( 20 )
+script = ExtResource( 16 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -310,10 +361,10 @@ margin_left = -65.5
 margin_top = -43.7351
 margin_right = 65.5
 margin_bottom = -16.7351
-theme = ExtResource( 10 )
-custom_fonts/font = ExtResource( 15 )
+theme = ExtResource( 13 )
+custom_fonts/font = ExtResource( 14 )
 text = "Main menu"
-script = ExtResource( 21 )
+script = ExtResource( 17 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -332,7 +383,7 @@ margin_bottom = 100.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_pivot_offset = Vector2( 245.28, 102.613 )
-theme = ExtResource( 10 )
+theme = ExtResource( 13 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -348,8 +399,8 @@ margin_right = 226.5
 margin_bottom = 63.5
 rect_pivot_offset = Vector2( 948.115, 163.016 )
 size_flags_horizontal = 3
-theme = ExtResource( 10 )
-custom_fonts/font = ExtResource( 22 )
+theme = ExtResource( 13 )
+custom_fonts/font = ExtResource( 21 )
 text = "So uncapable imp
 
 You will be locked here forever
@@ -369,8 +420,8 @@ margin_left = -65.5
 margin_top = -58.0
 margin_right = 65.5
 margin_bottom = -31.0
-theme = ExtResource( 10 )
-custom_fonts/font = ExtResource( 15 )
+theme = ExtResource( 13 )
+custom_fonts/font = ExtResource( 14 )
 text = "Retry"
 script = ExtResource( 18 )
 __meta__ = {
@@ -391,7 +442,7 @@ margin_bottom = 135.5
 grow_horizontal = 2
 grow_vertical = 2
 rect_pivot_offset = Vector2( 245.28, 102.613 )
-theme = ExtResource( 10 )
+theme = ExtResource( 13 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -405,8 +456,8 @@ margin_right = 226.5
 margin_bottom = 197.0
 rect_pivot_offset = Vector2( 948.115, 163.016 )
 size_flags_horizontal = 3
-theme = ExtResource( 10 )
-custom_fonts/font = ExtResource( 15 )
+theme = ExtResource( 13 )
+custom_fonts/font = ExtResource( 14 )
 text = "Well done!
 
 Rise up number of punished souls to 25
@@ -430,8 +481,8 @@ margin_left = -65.5
 margin_top = -42.0
 margin_right = 65.5
 margin_bottom = -15.0
-theme = ExtResource( 10 )
-custom_fonts/font = ExtResource( 15 )
+theme = ExtResource( 13 )
+custom_fonts/font = ExtResource( 14 )
 text = "Do your job"
 script = ExtResource( 19 )
 __meta__ = {
@@ -441,7 +492,7 @@ __meta__ = {
 [node name="AudioStreamPlayer" parent="." instance=ExtResource( 8 )]
 pause_mode = 2
 volume_db = -30.203
-[connection signal="tree_exited" from="world/obstacles/first" to="world/obstacles/second" method="_on_first_tree_exited"]
+[connection signal="timeout" from="SecondStage" to="." method="_on_SecondStage_timeout"]
 [connection signal="pressed" from="CanvasLayer/OnStartNotice/DoJob" to="CanvasLayer/OnStartNotice/DoJob" method="_on_DoJob_pressed"]
 [connection signal="pressed" from="CanvasLayer/OnWinNotice/NextLevel" to="CanvasLayer/OnWinNotice/NextLevel" method="_on_NextLevel_pressed"]
 [connection signal="pressed" from="CanvasLayer/OnWinNotice/ToMainMenu" to="CanvasLayer/OnWinNotice/ToMainMenu" method="_on_ToMainMenu_pressed"]
