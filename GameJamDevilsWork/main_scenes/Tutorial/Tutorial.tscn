@@ -87,6 +87,14 @@ __meta__ = {
 [node name="Exit" parent="world/exits" instance=ExtResource( 4 )]
 position = Vector2( -350.826, -200.972 )
 
+[node name="sinners" type="YSort" parent="world"]
+
+[node name="Sinner" parent="world/sinners" instance=ExtResource( 7 )]
+position = Vector2( -1.33923, -102.688 )
+
+[node name="Sinner2" parent="world/sinners" instance=ExtResource( 7 )]
+position = Vector2( -159.231, -35.6192 )
+
 [node name="Imp" parent="world" instance=ExtResource( 6 )]
 position = Vector2( -87.5425, -70.395 )
 
@@ -97,14 +105,6 @@ smoothing_speed = 10.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="world/Imp/Camera2D"]
 environment = SubResource( 1 )
-
-[node name="sinners" type="Node2D" parent="world"]
-
-[node name="Sinner" parent="world/sinners" instance=ExtResource( 7 )]
-position = Vector2( -1.33923, -102.688 )
-
-[node name="Sinner2" parent="world/sinners" instance=ExtResource( 7 )]
-position = Vector2( -159.231, -35.6192 )
 
 [node name="sinner_spawns" type="Node2D" parent="world"]
 

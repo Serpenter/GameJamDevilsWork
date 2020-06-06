@@ -30,6 +30,7 @@ script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 visible = false
+light_mask = 17
 texture = ExtResource( 1 )
 __meta__ = {
 "_edit_lock_": true
@@ -53,8 +54,9 @@ __meta__ = {
 }
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+light_mask = 17
 frames = SubResource( 3 )
-frame = 1
+frame = 3
 playing = true
 __meta__ = {
 "_edit_lock_": true

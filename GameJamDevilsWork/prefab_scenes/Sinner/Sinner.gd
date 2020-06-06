@@ -29,7 +29,7 @@ onready var audio_player_2 = $AudioStreamPlayer2
 var state_change_time = 10.0
 var state_change_timeout = state_change_time
 
-var states = ["idle", "go_to_pot", "go_to_exit"]
+var states = ["idle", "go_to_pot", "go_to_exit", "ascension"]
 
 var state_upgrades = {
 	"go_to_pot":"idle",
@@ -64,7 +64,7 @@ var pot_time_min = 5.0
 func _ready():
 	set_state("idle")
 	animation_player.play("idle")
-	pass # Replace with function body.
+	$Sprite/AscensionParticles.emitting = false
 	
 func get_in_pot():
 	if current_state == "go_to_pot":
@@ -78,7 +78,9 @@ func get_in_pot():
 func exit_hell():
 	if current_state == "go_to_exit":
 		print("SINNER EXITED HELL")
-		queue_free()
+		current_state = "ascension"
+		$CollisionShape2D.disabled = true
+		$AnimationPlayer.play("Ascension")
 		return true
 	else:
 		print("SINNER WON'T EXIT HELL")
@@ -198,3 +200,8 @@ func _process(delta):
 #
 #    if move_speed > min_move_speed:
 #        move_speed = max(move_speed - delta * speed_deacceleration, min_move_speed)
+
+
+func _on_AnimationPlayer_animation_finished(anim_name):
+	if anim_name == "Ascension":
+		queue_free()
