@@ -15,6 +15,9 @@ var is_dissapearing = false
 
 var health = 5
 
+var stun_time = 0.0
+var stun_modifier = 0.5
+
 
 signal sinner_escaped(how_many)
 
@@ -25,9 +28,38 @@ func _ready():
     animation_player.play("idle")
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+func stun(duration):
+    if is_dissapearing:
+        return false
+        
+    duration *= stun_modifier
+
+    if stun_time < duration:
+        stun_time = duration
+        
+    enable_stun()
+    
+    return true
+        
+        
+func enable_stun():
+    animation_player.play("stun")
+    exit_area.monitoring = false
+    
+func disable_stun():
+    animation_player.play("idle")
+    exit_area.monitoring = true
+    
+
 func _process(delta):
-    # add exit animation
+    
+    if stun_time > 0:
+
+        stun_time -= delta
+        
+        if stun_time <= 0:
+            disable_stun()
+
     if is_dissapearing and not dissapear_audio_player.playing:
         queue_free()
     

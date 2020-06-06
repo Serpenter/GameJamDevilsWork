@@ -1,14 +1,9 @@
 extends KinematicBody2D
 
-# FOR OLD MOVING START
-#var is_moving = false
-
-
 var max_move_speed = 150.0
-var speed_deacceleration = 15.0
+var speed_deacceleration = 25.0
 var min_move_speed = 20.0
 
-# FOR OLD MOVING END
 
 var move_speed = 20.0
 
@@ -61,12 +56,14 @@ var idle_time_min = 5.0
 var pot_time_max = 15.0
 var pot_time_min = 5.0
 
+var stun_time = 0.0
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	set_state("idle")
-	animation_player.play("idle")
-	$Sprite/AscensionParticles.emitting = false
-	
+    set_state("idle")
+    animation_player.play("idle")
+    $Sprite/AscensionParticles.emitting = false
+    
 func get_in_pot():
     if current_state == "go_to_pot":
         print("SINNER ENTERS THE POT")
@@ -77,17 +74,17 @@ func get_in_pot():
         return false
         
 func exit_hell():
-	if current_state == "go_to_exit":
-		print("SINNER EXITED HELL")
-		current_state = "ascension"
-		$CollisionShape2D.disabled = true
-		$AnimationPlayer.play("Ascension")
-		return true
-	else:
-		print("SINNER WON'T EXIT HELL")
-		return false
-	
-	
+    if current_state == "go_to_exit":
+        print("SINNER EXITED HELL")
+        current_state = "ascension"
+        $CollisionShape2D.disabled = true
+        $AnimationPlayer.play("Ascension")
+        return true
+    else:
+        print("SINNER WON'T EXIT HELL")
+        return false
+    
+    
 func push_sinner(direction):
 #    move_vector = Vector2(1,0).rotated(direction)
 #    move_vector = move_vector.normalized()
@@ -177,9 +174,37 @@ func resolve_path_completion():
 func update_move_speed(delta):
     if move_speed > min_move_speed:
         move_speed = max(move_speed - delta * speed_deacceleration, min_move_speed)
+        
+        
+func stun(duration):
+    if current_state == "ascension":
+        return false
+
+    if stun_time < duration:
+        stun_time = duration
+        
+    enable_stun()
+    
+    return true
+        
+        
+func enable_stun():
+    animation_player.play("stun")
+    
+func disable_stun():
+    animation_player.play("idle")
     
 
 func _process(delta):
+    
+    if stun_time > 0:
+
+        stun_time -= delta
+        
+        if stun_time <= 0:
+            disable_stun()
+
+        return
     
     update_move_speed(delta)
     update_state(delta)
@@ -214,5 +239,5 @@ func _process(delta):
 
 
 func _on_AnimationPlayer_animation_finished(anim_name):
-	if anim_name == "Ascension":
-		queue_free()
+    if anim_name == "Ascension":
+        queue_free()

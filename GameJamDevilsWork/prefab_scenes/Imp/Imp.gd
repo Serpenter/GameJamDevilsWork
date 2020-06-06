@@ -5,6 +5,7 @@ var move_vector = Vector2()
 var look_vector = Vector2()
 
 onready var fork = $Fork
+onready var whip = $Whip
 onready var animation_player = $AnimationPlayer
 
 
@@ -22,6 +23,9 @@ func _process(delta):
     
     if Input.is_action_just_pressed("main_action"):
         fork.push()
+        
+    if Input.is_action_just_pressed("secondary_action"):
+        whip.use_whip(get_global_mouse_position())
 
     move_vector = Vector2()
     var is_moving = false
