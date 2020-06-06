@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://assets/images/angel_01.png" type="Texture" id=1]
 [ext_resource path="res://prefab_scenes/Angel/Angel.gd" type="Script" id=2]
@@ -6,16 +6,265 @@
 [ext_resource path="res://assets/images/halo.png" type="Texture" id=4]
 [ext_resource path="res://assets/images/wing.png" type="Texture" id=5]
 [ext_resource path="res://assets/sounds/bell_1.wav" type="AudioStream" id=6]
+[ext_resource path="res://assets/images/lights/star.png" type="Texture" id=7]
+[ext_resource path="res://assets/images/lights/cross.png" type="Texture" id=8]
+[ext_resource path="res://prefab_scenes/Nun/HolyArea.gd" type="Script" id=9]
+[ext_resource path="res://assets/images/lights/HollyParticles.png" type="Texture" id=10]
 
-[sub_resource type="CircleShape2D" id=1]
+[sub_resource type="Gradient" id=7]
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=8]
+gradient = SubResource( 7 )
+
+[sub_resource type="Curve" id=9]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.484127, 0.853409 ), 0.763636, 0.763636, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=10]
+curve = SubResource( 9 )
+
+[sub_resource type="ParticlesMaterial" id=11]
+emission_shape = 1
+emission_sphere_radius = 20.0
+flag_disable_z = true
+gravity = Vector3( 0, -30, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale_curve = SubResource( 10 )
+color_ramp = SubResource( 8 )
+
+[sub_resource type="CircleShape2D" id=22]
 radius = 64.0
 
-[sub_resource type="CapsuleShape2D" id=2]
+[sub_resource type="CapsuleShape2D" id=23]
 radius = 24.0
 height = 0.0
 
-[sub_resource type="Animation" id=3]
-resource_name = "idle"
+[sub_resource type="Animation" id=26]
+resource_name = "Ascension"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -250 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Body/LeftWingRotation:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6, 0.9, 1.2, 1.5, 1.8, 2.1, 2.4, 2.7, 3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 25.0, -25.0, 25.0, -25.0, 25.0, -25.0, 25.0, -25.0, 25.0, -25.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Body/RightWingRotation:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6, 0.9, 1.2, 1.5, 1.8, 2.1, 2.4, 2.7, 3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -25.0, 25.0, -25.0, 25.0, -25.0, 25.0, -25.0, 25.0, -25.0, 25.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Body/Halo:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -40 ), Vector2( 0, -44 ), Vector2( 0, -40 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("StunParticles:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Body/AscensionParticles:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Body:self_modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Body/LeftWingRotation/LeftWing:self_modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("Body/RightWingRotation/RightWing:self_modulate")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=27]
+resource_name = "Descension"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -250 ), Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Body/LeftWingRotation:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6, 0.9, 1.2, 1.5, 1.8, 2.1, 2.4, 2.7, 3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 25.0, -25.0, 25.0, -25.0, 25.0, -25.0, 25.0, -25.0, 25.0, -25.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Body/RightWingRotation:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6, 0.9, 1.2, 1.5, 1.8, 2.1, 2.4, 2.7, 3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -25.0, 25.0, -25.0, 25.0, -25.0, 25.0, -25.0, 25.0, -25.0, 25.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Body/Halo:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -40 ), Vector2( 0, -44 ), Vector2( 0, -40 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("StunParticles:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Body/AscensionParticles:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Body:self_modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Body/LeftWingRotation/LeftWing:self_modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("Body/RightWingRotation/RightWing:self_modulate")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=24]
 length = 0.6
 loop = true
 tracks/0/type = "value"
@@ -66,9 +315,68 @@ tracks/3/keys = {
 "update": 0,
 "values": [ Vector2( 0, -40 ), Vector2( 0, -44 ), Vector2( 0, -40 ) ]
 }
+tracks/4/type = "value"
+tracks/4/path = NodePath("StunParticles:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Body:self_modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Body/LeftWingRotation/LeftWing:self_modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Body/RightWingRotation/RightWing:self_modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("Body/AscensionParticles:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 
-[sub_resource type="Animation" id=4]
-resource_name = "stun"
+[sub_resource type="Animation" id=25]
 length = 0.6
 tracks/0/type = "value"
 tracks/0/path = NodePath("Body/LeftWingRotation:position")
@@ -214,14 +522,70 @@ tracks/11/keys = {
 "update": 0,
 "values": [ 0.0 ]
 }
+tracks/12/type = "value"
+tracks/12/path = NodePath("StunParticles:visible")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Curve" id=4]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.364773 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=5]
+curve = SubResource( 4 )
+
+[sub_resource type="ParticlesMaterial" id=6]
+emission_shape = 1
+emission_sphere_radius = 55.91
+flag_disable_z = true
+direction = Vector3( 0, -1, 0 )
+spread = 0.0
+gravity = Vector3( 0, -20, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 0.3
+scale_curve = SubResource( 5 )
+color = Color( 1, 0.905882, 0, 0.505882 )
+
+[sub_resource type="CircleShape2D" id=17]
+radius = 107.699
+
+[sub_resource type="Curve" id=18]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.364773 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=19]
+curve = SubResource( 18 )
+
+[sub_resource type="ParticlesMaterial" id=20]
+emission_shape = 1
+emission_sphere_radius = 200.0
+flag_disable_z = true
+direction = Vector3( 0, -1, 0 )
+spread = 0.0
+gravity = Vector3( 0, -20, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 5.0
+scale_curve = SubResource( 19 )
+color = Color( 1, 0.905882, 0, 0.505882 )
 
 [node name="Angel" type="KinematicBody2D" groups=[
 "angels",
+"aoe_stunnable",
 "exits",
 ]]
 script = ExtResource( 2 )
 
 [node name="Body" type="Sprite" parent="."]
+self_modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 0, -250 )
 texture = ExtResource( 1 )
 __meta__ = {
 "_edit_lock_": true
@@ -235,30 +599,41 @@ texture = ExtResource( 4 )
 
 [node name="LeftWingRotation" type="Node2D" parent="Body"]
 position = Vector2( -17.1979, 9.94009 )
-rotation = -0.436332
 
 [node name="LeftWing" type="Sprite" parent="Body/LeftWingRotation"]
+self_modulate = Color( 1, 1, 1, 0 )
 position = Vector2( -14.8021, -1.94009 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 5 )
 
 [node name="RightWingRotation" type="Node2D" parent="Body"]
 position = Vector2( 15.0825, 9.75115 )
-rotation = 0.436332
 
 [node name="RightWing" type="Sprite" parent="Body/RightWingRotation"]
+self_modulate = Color( 1, 1, 1, 0 )
 position = Vector2( 16.9175, -1.75115 )
 rotation = -3.14159
 scale = Vector2( 0.5, -0.5 )
 texture = ExtResource( 5 )
 
+[node name="AscensionParticles" type="Particles2D" parent="Body"]
+visible = false
+rotation = -0.00148935
+scale = Vector2( 1, 1 )
+lifetime = 2.0
+local_coords = false
+process_material = SubResource( 11 )
+texture = ExtResource( 10 )
+
 [node name="ExitArea" type="Area2D" parent="."]
 visible = false
+monitoring = false
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExitArea"]
 visible = false
 position = Vector2( 0, 24 )
-shape = SubResource( 1 )
+shape = SubResource( 22 )
 
 [node name="DissapearAudioPlayer" type="AudioStreamPlayer2D" parent="."]
 visible = false
@@ -279,9 +654,43 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
 position = Vector2( 0, 24 )
-shape = SubResource( 2 )
+shape = SubResource( 23 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/idle = SubResource( 3 )
-anims/stun = SubResource( 4 )
+anims/Ascension = SubResource( 26 )
+anims/Descension = SubResource( 27 )
+anims/idle = SubResource( 24 )
+anims/stun = SubResource( 25 )
+
+[node name="StunParticles" type="Particles2D" parent="."]
+visible = false
+position = Vector2( 0, -32 )
+scale = Vector2( 0.5, 0.5 )
+z_index = 5
+amount = 10
+lifetime = 3.0
+speed_scale = 3.0
+visibility_rect = Rect2( -300, -300, 600, 600 )
+process_material = SubResource( 6 )
+texture = ExtResource( 7 )
+
+[node name="HolyArea" type="Node2D" parent="."]
+script = ExtResource( 9 )
+
+[node name="Area2D" type="Area2D" parent="HolyArea"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HolyArea/Area2D"]
+shape = SubResource( 17 )
+
+[node name="HolyParticles" type="Particles2D" parent="HolyArea"]
+scale = Vector2( 0.5, 0.5 )
+z_index = 5
+amount = 50
+lifetime = 5.0
+visibility_rect = Rect2( -300, -300, 600, 600 )
+process_material = SubResource( 20 )
+texture = ExtResource( 8 )
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="HolyArea"]
 [connection signal="body_entered" from="ExitArea" to="." method="_on_ExitArea_body_entered"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

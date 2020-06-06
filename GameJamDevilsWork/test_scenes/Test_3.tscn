@@ -1,13 +1,15 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://test_scenes/Test_2.gd" type="Script" id=1]
 [ext_resource path="res://resources/dungeon_tileset.tres" type="TileSet" id=2]
 [ext_resource path="res://prefab_scenes/Background/Background.tscn" type="PackedScene" id=3]
 [ext_resource path="res://prefab_scenes/Imp/Imp.tscn" type="PackedScene" id=4]
+[ext_resource path="res://prefab_scenes/Nun/Nun.tscn" type="PackedScene" id=5]
 [ext_resource path="res://prefab_scenes/Pot/Pot.tscn" type="PackedScene" id=6]
 [ext_resource path="res://prefab_scenes/Exit/Exit.tscn" type="PackedScene" id=7]
 [ext_resource path="res://prefab_scenes/GameAudio/AudioStreamPlayer.tscn" type="PackedScene" id=8]
 [ext_resource path="res://prefab_scenes/Angel/Angel.tscn" type="PackedScene" id=9]
+[ext_resource path="res://prefab_scenes/Sinner/Sinner.tscn" type="PackedScene" id=10]
 [ext_resource path="res://prefab_scenes/Nun/Cardinal.tscn" type="PackedScene" id=11]
 
 [sub_resource type="NavigationPolygon" id=1]
@@ -83,7 +85,7 @@ __meta__ = {
 }
 
 [node name="Imp" parent="." instance=ExtResource( 4 )]
-position = Vector2( 410.659, 151.54 )
+position = Vector2( 894.954, -37.5528 )
 
 [node name="Camera2D" type="Camera2D" parent="Imp"]
 current = true
@@ -95,6 +97,15 @@ __meta__ = {
 
 [node name="Cardinal" parent="Sinners" instance=ExtResource( 11 )]
 position = Vector2( 742.198, -11.6881 )
+
+[node name="Nun" parent="Sinners" instance=ExtResource( 5 )]
+position = Vector2( 537.181, -103.478 )
+
+[node name="Sinner" parent="Sinners" instance=ExtResource( 10 )]
+position = Vector2( 337.26, -11.4505 )
+
+[node name="Sinner2" parent="Sinners" instance=ExtResource( 10 )]
+position = Vector2( 848.171, 193.231 )
 
 [node name="AudioStreamPlayer" parent="." instance=ExtResource( 8 )]
 volume_db = -80.0
