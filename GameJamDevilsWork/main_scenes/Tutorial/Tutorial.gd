@@ -30,3 +30,10 @@ func _on_ToMainMenu_pressed():
 func _on_sinner_escaped(change):
 	total_sinners_escaped += change
 
+func _on_imp_in_holy_place(is_entered):
+	if is_entered:
+		$CanvasLayer/Effects/ColorDistortion/AnimationPlayer.get_animation("ColorDistortion").loop = true
+		$CanvasLayer/Effects/ColorDistortion/AnimationPlayer.play("ColorDistortion")
+	else:
+		$CanvasLayer/Effects/ColorDistortion/AnimationPlayer.get_animation("ColorDistortion").loop = false
+		
