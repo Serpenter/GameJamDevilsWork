@@ -99,10 +99,6 @@ func push_sinner(direction):
         
 func go_to_node_in_group(group_name):
     var group_objects = get_tree().get_nodes_in_group(group_name)
-    
-    if len(group_objects) == 0:
-        return
-
     var chosen_object = group_objects[randi() % group_objects.size()]
     
     #a little workaround
@@ -195,7 +191,7 @@ func stun(duration):
         stun_time = duration
         
     enable_stun()
-    print("STUNNED")
+    
     return true
         
         

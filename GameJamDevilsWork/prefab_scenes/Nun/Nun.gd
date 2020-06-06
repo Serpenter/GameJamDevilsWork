@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-var max_move_speed = 20.0
+var max_move_speed = 100.0
 var speed_deacceleration = 25.0
 var min_move_speed = 20.0
 
@@ -13,6 +13,7 @@ var DEBUG = true
 
 onready var nav_2d = get_tree().get_root().get_node("MainGame/world/Navigation2D")
 onready var debug_line = get_tree().get_root().get_node("MainGame/world/DebugLine")
+onready var halo = $Halo
 
 var path = []
 
@@ -66,6 +67,7 @@ func _ready():
     set_state("idle")
     animation_player.play("idle")
     $Sprite/AscensionParticles.emitting = false
+    halo.visible = false
     
 func get_in_pot():
     if current_state == "go_to_pot":
@@ -97,6 +99,10 @@ func push_sinner(direction):
         audio_player_2.play()
     downgrade_state()
     if current_state == "go_to_pot":
+        move_speed = max_move_speed
+    
+    # for Nun and Cardinal, sinners won't do it because for them it's upgradable state
+    if current_state =="go_to_exit":
         move_speed = max_move_speed
     
         
@@ -158,6 +164,8 @@ func set_state(new_state):
     elif current_state == "go_to_pot":
         go_to_node_in_group("pots")
         
+    halo.visible = current_state == "pray"
+        
     state_change_timeout = randf()*state_range_time[current_state] + state_min_time[current_state]
     
     if is_angel_present():
@@ -205,6 +213,7 @@ func update_idle():
 func update_prayer(delta):
     if animation_player.current_animation != "pray":
             animation_player.play("pray")
+            halo.visible = true
             
     pray_time += delta
     
@@ -213,6 +222,9 @@ func update_prayer(delta):
         emit_signal("prayer_point", 1)
 
 func _process(delta):
+    
+    if current_state == "ascension":
+        return
     
     if stun_time > 0:
 

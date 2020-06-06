@@ -18,8 +18,6 @@ var health = 5
 var stun_time = 0.0
 var stun_modifier = 0.5
 
-export var is_working = true
-
 
 signal sinner_escaped(how_many)
 
