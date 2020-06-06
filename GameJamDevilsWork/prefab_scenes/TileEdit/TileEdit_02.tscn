@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=2]
+[gd_scene load_steps=51 format=2]
 
 [ext_resource path="res://prefab_scenes/TileEdit/TileEdit_02.gd" type="Script" id=1]
 [ext_resource path="res://assets/images/tiles_v2/ground01Cracked0001.png" type="Texture" id=2]
@@ -47,6 +47,9 @@
 [ext_resource path="res://assets/images/tiles_v2/wallWindow0007.png" type="Texture" id=45]
 [ext_resource path="res://assets/images/tiles_v2/wallStone01_0001.png" type="Texture" id=46]
 [ext_resource path="res://resources/NavigationPolygonInstance.tscn" type="PackedScene" id=47]
+[ext_resource path="res://assets/images/white.png" type="Texture" id=48]
+[ext_resource path="res://assets/images/icon.png" type="Texture" id=49]
+[ext_resource path="res://assets/images/tiles_v2/ground01_0001_0000.png" type="Texture" id=50]
 
 [node name="TileEdit_02" type="Node2D"]
 script = ExtResource( 1 )
@@ -455,3 +458,27 @@ collision_mask = 16
 
 [node name="CollisionPolygon2D8" type="CollisionPolygon2D" parent="wallWindow0007/StaticBody2D16"]
 polygon = PoolVector2Array( -62.5, 0, 0, 35, 62.5, 0, 0, -35 )
+
+[node name="wallWindow0008" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 619, 1200 )
+texture = ExtResource( 49 )
+
+[node name="StaticBody2D16" type="StaticBody2D" parent="wallWindow0008"]
+collision_layer = 16
+collision_mask = 16
+
+[node name="CollisionPolygon2D8" type="CollisionPolygon2D" parent="wallWindow0008/StaticBody2D16"]
+polygon = PoolVector2Array( -62.5, 0, 0, 35, 62.5, 0, 0, -35 )
+
+[node name="Sprite" type="Sprite" parent="wallWindow0008"]
+rotation = 0.817237
+scale = Vector2( 0.759082, 0.759082 )
+texture = ExtResource( 48 )
+
+[node name="ground01_0001_0000" type="Sprite" parent="."]
+position = Vector2( 618.95, 1311.82 )
+texture = ExtResource( 50 )
+offset = Vector2( 0, 9 )
+
+[node name="NavigationPolygonInstance2" parent="ground01_0001_0000" instance=ExtResource( 47 )]

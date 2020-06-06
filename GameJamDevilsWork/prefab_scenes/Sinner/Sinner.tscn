@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://prefab_scenes/Sinner/Sinner.gd" type="Script" id=1]
 [ext_resource path="res://assets/images/char04_0000.png" type="Texture" id=2]
@@ -6,19 +6,19 @@
 [ext_resource path="res://assets/sounds/hurt1.wav" type="AudioStream" id=4]
 [ext_resource path="res://assets/images/lights/HollyParticles.png" type="Texture" id=5]
 
-[sub_resource type="Gradient" id=4]
+[sub_resource type="Gradient" id=1]
 colors = PoolColorArray( 5, 5, 2, 1, 5, 5, 1, 0 )
 
-[sub_resource type="GradientTexture" id=5]
-gradient = SubResource( 4 )
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
 
-[sub_resource type="Curve" id=6]
+[sub_resource type="Curve" id=3]
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.484127, 0.853409 ), 0.763636, 0.763636, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=7]
-curve = SubResource( 6 )
+[sub_resource type="CurveTexture" id=4]
+curve = SubResource( 3 )
 
-[sub_resource type="ParticlesMaterial" id=8]
+[sub_resource type="ParticlesMaterial" id=5]
 emission_shape = 1
 emission_sphere_radius = 20.0
 flag_disable_z = true
@@ -29,15 +29,14 @@ initial_velocity = 100.0
 initial_velocity_random = 0.54
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
-scale_curve = SubResource( 7 )
-color_ramp = SubResource( 5 )
+scale_curve = SubResource( 4 )
+color_ramp = SubResource( 2 )
 
-[sub_resource type="CapsuleShape2D" id=1]
-radius = 26.1802
+[sub_resource type="CapsuleShape2D" id=6]
+radius = 10.1486
 height = 2.84817
 
-[sub_resource type="Animation" id=3]
-resource_name = "Ascension"
+[sub_resource type="Animation" id=7]
 length = 3.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite/AscensionParticles:emitting")
@@ -76,8 +75,7 @@ tracks/2/keys = {
 "values": [ Vector2( 0, -25 ), Vector2( 0, -250 ) ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "idle"
+[sub_resource type="Animation" id=8]
 length = 0.6
 loop = true
 tracks/0/type = "value"
@@ -105,9 +103,11 @@ tracks/1/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 0, 10 ), Vector2( 0, 0 ) ]
 }
 
+[sub_resource type="CircleShape2D" id=9]
+radius = 24.548
+
 [node name="Sinner" type="KinematicBody2D"]
-collision_layer = 32769
-collision_mask = 32770
+collision_mask = 2
 script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -121,20 +121,28 @@ scale = Vector2( 1, 1.00382 )
 amount = 32
 lifetime = 2.0
 local_coords = false
-process_material = SubResource( 8 )
+process_material = SubResource( 5 )
 texture = ExtResource( 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = -0.00084038
-shape = SubResource( 1 )
+shape = SubResource( 6 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Ascension = SubResource( 3 )
-anims/idle = SubResource( 2 )
+anims/Ascension = SubResource( 7 )
+anims/idle = SubResource( 8 )
 
 [node name="AudioStreamPlayer1" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 4 )
 
 [node name="AudioStreamPlayer2" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )
+
+[node name="sinnerArea" type="Area2D" parent="."]
+collision_layer = 128
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="sinnerArea"]
+shape = SubResource( 9 )
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="area_entered" from="sinnerArea" to="." method="_on_sinnerArea_area_entered"]
