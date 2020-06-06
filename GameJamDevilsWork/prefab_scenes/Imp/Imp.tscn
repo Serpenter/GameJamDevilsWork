@@ -1,10 +1,12 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://prefab_scenes/Imp/Imp.gd" type="Script" id=1]
 [ext_resource path="res://assets/images/imp.png" type="Texture" id=2]
 [ext_resource path="res://prefab_scenes/Fork/Fork.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/images/lights/devil_transparency.png" type="Texture" id=4]
 [ext_resource path="res://prefab_scenes/Whip/Whip.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/images/lights/star.png" type="Texture" id=6]
+[ext_resource path="res://assets/sounds/LaughMale.wav" type="AudioStream" id=7]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 14.4821
@@ -50,6 +52,53 @@ tracks/2/keys = {
 "update": 0,
 "values": [ Vector2( 0, 8 ), Vector2( 0, 18 ), Vector2( 0, 8 ) ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("StunParticles:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "stun"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("StunParticles:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, true ]
+}
+
+[sub_resource type="Curve" id=4]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.364773 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=5]
+curve = SubResource( 4 )
+
+[sub_resource type="ParticlesMaterial" id=6]
+emission_shape = 1
+emission_sphere_radius = 55.91
+flag_disable_z = true
+direction = Vector3( 0, -1, 0 )
+spread = 0.0
+gravity = Vector3( 0, -20, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 0.3
+scale_curve = SubResource( 5 )
+color = Color( 1, 0.905882, 0, 0.505882 )
 
 [node name="Imp" type="KinematicBody2D"]
 collision_layer = 16385
@@ -75,6 +124,7 @@ scale = Vector2( 4, 3 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/idle = SubResource( 2 )
+anims/stun = SubResource( 3 )
 
 [node name="Light2D" type="Light2D" parent="."]
 light_mask = 0
@@ -87,3 +137,17 @@ __meta__ = {
 
 [node name="Whip" parent="." instance=ExtResource( 5 )]
 position = Vector2( 0, 8 )
+
+[node name="StunParticles" type="Particles2D" parent="."]
+position = Vector2( 0, -32 )
+scale = Vector2( 0.5, 0.5 )
+z_index = 5
+amount = 10
+lifetime = 3.0
+speed_scale = 3.0
+visibility_rect = Rect2( -300, -300, 600, 600 )
+process_material = SubResource( 6 )
+texture = ExtResource( 6 )
+
+[node name="AOEStunSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 7 )

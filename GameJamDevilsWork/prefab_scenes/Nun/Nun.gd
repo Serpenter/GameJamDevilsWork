@@ -64,6 +64,8 @@ var pot_time_min = 5.0
 
 var stun_time = 0.0
 
+var holy_area = null
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
     set_state("idle")
@@ -167,7 +169,13 @@ func set_state(new_state):
         go_to_node_in_group("pots")
         
     halo.visible = current_state == "pray"
-        
+    
+    if holy_area:
+        if current_state == "pray":
+            holy_area.enable()
+        else:
+            holy_area.disable()
+            
     state_change_timeout = randf()*state_range_time[current_state] + state_min_time[current_state]
     
     if is_angel_present():
@@ -204,8 +212,14 @@ func stun(duration):
 func enable_stun():
     animation_player.play("stun")
     
+    if holy_area:
+        holy_area.disable()
+    
 func disable_stun():
     animation_player.play("idle")
+    
+    if current_state == "pray" and holy_area:
+        holy_area.enable()
     
 
 func update_idle():
