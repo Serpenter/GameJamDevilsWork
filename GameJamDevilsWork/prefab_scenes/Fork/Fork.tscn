@@ -65,7 +65,8 @@ tracks/0/keys = {
 script = ExtResource( 2 )
 
 [node name="ForkArea" type="Area2D" parent="."]
-position = Vector2( 1.42087, 0 )
+position = Vector2( 1.31072, 0 )
+collision_layer = 65537
 
 [node name="ForkShape" type="CollisionShape2D" parent="ForkArea"]
 position = Vector2( 8, 0 )
