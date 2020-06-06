@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://prefab_scenes/levels/LevelMap_00.tscn" type="PackedScene" id=1]
 [ext_resource path="res://prefab_scenes/Background/Background.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://prefab_scenes/GameAudio/AudioStreamPlayer.tscn" type="PackedScene" id=8]
 [ext_resource path="res://main_scenes/Tutorial/Tutorial.gd" type="Script" id=9]
 [ext_resource path="res://resources/main_ui_theme.tres" type="Theme" id=10]
+[ext_resource path="res://prefab_scenes/SinnerRespawn/SinnerRespawn.tscn" type="PackedScene" id=11]
 
 [sub_resource type="Environment" id=1]
 background_mode = 4
@@ -73,6 +74,10 @@ position = Vector2( -1.33923, -102.688 )
 [node name="Sinner2" parent="world/sinners" instance=ExtResource( 7 )]
 position = Vector2( -159.231, -35.6192 )
 
+[node name="sinner_spawns" type="Node2D" parent="world"]
+
+[node name="initial_respawn" parent="world/sinner_spawns" instance=ExtResource( 11 )]
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="HUD" parent="CanvasLayer" instance=ExtResource( 5 )]
@@ -80,7 +85,6 @@ margin_top = -1.0
 margin_bottom = -1.0
 
 [node name="PopupDialog" type="PopupDialog" parent="CanvasLayer"]
-visible = true
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5

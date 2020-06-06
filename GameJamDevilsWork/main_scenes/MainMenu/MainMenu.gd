@@ -6,7 +6,6 @@ const FADE_OUT_TIME = 2.5
 
 onready var screen_fader = $FadeLayer/ScreenFader
 
-
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
