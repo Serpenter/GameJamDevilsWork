@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-var move_speed = 200
+var move_speed = 300
 var move_vector = Vector2()
 var look_vector = Vector2()
 
