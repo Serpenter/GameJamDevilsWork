@@ -460,7 +460,7 @@ collision_mask = 16
 polygon = PoolVector2Array( -62.5, 0, 0, 35, 62.5, 0, 0, -35 )
 
 [node name="wallWindow0008" type="Sprite" parent="."]
-modulate = Color( 1, 1, 1, 0 )
+modulate = Color( 1, 1, 1, 0.533333 )
 position = Vector2( 619, 1200 )
 texture = ExtResource( 49 )
 
