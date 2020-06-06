@@ -100,7 +100,7 @@ tracks/1/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 0, 10 ), Vector2( 0, 0 ) ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=9]
 resource_name = "pray"
 length = 0.6
 loop = true
@@ -117,8 +117,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, -100 ), Vector2( 0, -105 ), Vector2( 0, -100 ) ]
 }
 
-[sub_resource type="Animation" id=9]
-resource_name = "stun"
+[sub_resource type="Animation" id=10]
 length = 0.6
 tracks/0/type = "value"
 tracks/0/path = NodePath("CollisionShape2D:position")
@@ -196,8 +195,8 @@ shape = SubResource( 6 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Ascension = SubResource( 7 )
 anims/idle = SubResource( 8 )
-anims/pray = SubResource( 10 )
-anims/stun = SubResource( 9 )
+anims/pray = SubResource( 9 )
+anims/stun = SubResource( 10 )
 
 [node name="AudioStreamPlayer1" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 4 )
