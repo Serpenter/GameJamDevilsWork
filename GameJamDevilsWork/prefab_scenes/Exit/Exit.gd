@@ -9,6 +9,8 @@ onready var exit_area = $ExitArea
 onready var audio_stream_player = $AudioStreamPlayer2D
 var sinners_exited = 0
 
+export var is_working = true
+
 signal sinner_escaped(how_many)
 signal imp_in_holy_place(is_entering) 
 

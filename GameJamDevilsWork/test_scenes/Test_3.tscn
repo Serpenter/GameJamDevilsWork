@@ -97,14 +97,14 @@ __meta__ = {
 [node name="Sinner" parent="Sinners" instance=ExtResource( 5 )]
 position = Vector2( 252.799, 66.3462 )
 
-[node name="Sinner" parent="Sinners/Sinner" instance=ExtResource( 5 )]
-position = Vector2( 502.815, 232.068 )
-
-[node name="Sinner2" parent="Sinners/Sinner" instance=ExtResource( 5 )]
-position = Vector2( 237.343, 218.004 )
-
 [node name="Sinner2" parent="Sinners" instance=ExtResource( 5 )]
 position = Vector2( 1080.86, -183.303 )
+
+[node name="Sinner3" parent="Sinners" instance=ExtResource( 5 )]
+position = Vector2( 755.614, 298.414 )
+
+[node name="Sinner4" parent="Sinners" instance=ExtResource( 5 )]
+position = Vector2( 490.142, 284.35 )
 
 [node name="AudioStreamPlayer" parent="." instance=ExtResource( 8 )]
 volume_db = -80.0
