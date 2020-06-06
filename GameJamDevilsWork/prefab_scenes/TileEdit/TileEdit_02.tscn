@@ -1,0 +1,415 @@
+[gd_scene load_steps=48 format=2]
+
+[ext_resource path="res://prefab_scenes/TileEdit/TileEdit_02.gd" type="Script" id=1]
+[ext_resource path="res://assets/images/tiles_v2/ground01Cracked0001.png" type="Texture" id=2]
+[ext_resource path="res://assets/images/tiles_v2/ground01Cracked0003.png" type="Texture" id=3]
+[ext_resource path="res://assets/images/tiles_v2/ground03Cracked0003.png" type="Texture" id=4]
+[ext_resource path="res://assets/images/tiles_v2/groundSpike01_0007.png" type="Texture" id=5]
+[ext_resource path="res://assets/images/tiles_v2/groundSpike02_0005.png" type="Texture" id=6]
+[ext_resource path="res://assets/images/tiles_v2/ground01_0001.png" type="Texture" id=7]
+[ext_resource path="res://assets/images/tiles_v2/ground03Cracked0007.png" type="Texture" id=8]
+[ext_resource path="res://assets/images/tiles_v2/ground01Cracked0007.png" type="Texture" id=9]
+[ext_resource path="res://assets/images/tiles_v2/ground02Cracked0005.png" type="Texture" id=10]
+[ext_resource path="res://assets/images/tiles_v2/ground03_0005.png" type="Texture" id=11]
+[ext_resource path="res://assets/images/tiles_v2/groundSpike01_0003.png" type="Texture" id=12]
+[ext_resource path="res://assets/images/tiles_v2/ground03Cracked0005.png" type="Texture" id=13]
+[ext_resource path="res://assets/images/tiles_v2/ground02Cracked0001.png" type="Texture" id=14]
+[ext_resource path="res://assets/images/tiles_v2/ground03_0007.png" type="Texture" id=15]
+[ext_resource path="res://assets/images/tiles_v2/ground02_0007.png" type="Texture" id=16]
+[ext_resource path="res://assets/images/tiles_v2/groundSpike02_0001.png" type="Texture" id=17]
+[ext_resource path="res://assets/images/tiles_v2/ground03Cracked0001.png" type="Texture" id=18]
+[ext_resource path="res://assets/images/tiles_v2/groundSpike02_0003.png" type="Texture" id=19]
+[ext_resource path="res://assets/images/tiles_v2/groundSpike01_0001.png" type="Texture" id=20]
+[ext_resource path="res://assets/images/tiles_v2/ground02Cracked0007.png" type="Texture" id=21]
+[ext_resource path="res://assets/images/tiles_v2/groundSpike01_0005.png" type="Texture" id=22]
+[ext_resource path="res://assets/images/tiles_v2/groundSpike02_0007.png" type="Texture" id=23]
+[ext_resource path="res://assets/images/tiles_v2/lava_tile.png" type="Texture" id=24]
+[ext_resource path="res://assets/images/tiles_v2/pikes copy.png" type="Texture" id=25]
+[ext_resource path="res://assets/images/tiles_v2/ground01_0007.png" type="Texture" id=26]
+[ext_resource path="res://assets/images/tiles_v2/ground03_0003.png" type="Texture" id=27]
+[ext_resource path="res://assets/images/tiles_v2/ground02Cracked0003.png" type="Texture" id=28]
+[ext_resource path="res://assets/images/tiles_v2/ground02_0003.png" type="Texture" id=29]
+[ext_resource path="res://assets/images/tiles_v2/ground01Cracked0005.png" type="Texture" id=30]
+[ext_resource path="res://assets/images/tiles_v2/ground01_0003.png" type="Texture" id=31]
+[ext_resource path="res://assets/images/tiles_v2/ground02_0005.png" type="Texture" id=32]
+[ext_resource path="res://assets/images/tiles_v2/ground02_0001.png" type="Texture" id=33]
+[ext_resource path="res://assets/images/tiles_v2/ground01_0005.png" type="Texture" id=34]
+[ext_resource path="res://assets/images/tiles_v2/ground03_0001.png" type="Texture" id=35]
+[ext_resource path="res://assets/images/tiles_v2/rusty_grate.png" type="Texture" id=36]
+[ext_resource path="res://assets/images/tiles_v2/rusty_grate_no_base.png" type="Texture" id=37]
+[ext_resource path="res://resources/shaders/lava_shader_material.tres" type="Material" id=38]
+[ext_resource path="res://assets/images/tiles_v2/wallSteps0007.png" type="Texture" id=39]
+[ext_resource path="res://assets/images/tiles_v2/wallChain0007.png" type="Texture" id=40]
+[ext_resource path="res://assets/images/tiles_v2/wallStone01_0005.png" type="Texture" id=41]
+[ext_resource path="res://assets/images/tiles_v2/wallWindow0001.png" type="Texture" id=42]
+[ext_resource path="res://assets/images/tiles_v2/wallChain0001.png" type="Texture" id=43]
+[ext_resource path="res://assets/images/tiles_v2/wallSteps0005.png" type="Texture" id=44]
+[ext_resource path="res://assets/images/tiles_v2/wallWindow0007.png" type="Texture" id=45]
+[ext_resource path="res://assets/images/tiles_v2/wallStone01_0001.png" type="Texture" id=46]
+[ext_resource path="res://resources/NavigationPolygonInstance.tscn" type="PackedScene" id=47]
+
+[node name="TileEdit_02" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="ground01Cracked0001" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+offset = Vector2( 0, 12 )
+
+[node name="NavigationPolygonInstance" parent="ground01Cracked0001" instance=ExtResource( 47 )]
+
+[node name="ground01Cracked0003" type="Sprite" parent="."]
+position = Vector2( 150, 0 )
+texture = ExtResource( 3 )
+offset = Vector2( 0, 12 )
+
+[node name="NavigationPolygonInstance" parent="ground01Cracked0003" instance=ExtResource( 47 )]
+
+[node name="ground01Cracked0005" type="Sprite" parent="."]
+position = Vector2( 300, 0 )
+texture = ExtResource( 30 )
+offset = Vector2( 0, 12 )
+
+[node name="NavigationPolygonInstance" parent="ground01Cracked0005" instance=ExtResource( 47 )]
+
+[node name="ground01Cracked0007" type="Sprite" parent="."]
+position = Vector2( 450, 0 )
+texture = ExtResource( 9 )
+offset = Vector2( 0, 12 )
+
+[node name="NavigationPolygonInstance" parent="ground01Cracked0007" instance=ExtResource( 47 )]
+
+[node name="ground01_0001" type="Sprite" parent="."]
+position = Vector2( 600, 0 )
+texture = ExtResource( 7 )
+offset = Vector2( 0, 12 )
+
+[node name="NavigationPolygonInstance" parent="ground01_0001" instance=ExtResource( 47 )]
+
+[node name="ground01_0003" type="Sprite" parent="."]
+position = Vector2( 0, 150 )
+texture = ExtResource( 31 )
+offset = Vector2( 0, 12 )
+
+[node name="NavigationPolygonInstance" parent="ground01_0003" instance=ExtResource( 47 )]
+
+[node name="ground01_0005" type="Sprite" parent="."]
+position = Vector2( 150, 150 )
+texture = ExtResource( 34 )
+offset = Vector2( 0, 12 )
+
+[node name="NavigationPolygonInstance" parent="ground01_0005" instance=ExtResource( 47 )]
+
+[node name="ground01_0007" type="Sprite" parent="."]
+position = Vector2( 300, 150 )
+texture = ExtResource( 26 )
+offset = Vector2( 0, 12 )
+
+[node name="NavigationPolygonInstance" parent="ground01_0007" instance=ExtResource( 47 )]
+
+[node name="ground02Cracked0001" type="Sprite" parent="."]
+position = Vector2( 450, 150 )
+texture = ExtResource( 14 )
+offset = Vector2( 0, 12 )
+
+[node name="NavigationPolygonInstance" parent="ground02Cracked0001" instance=ExtResource( 47 )]
+
+[node name="ground02Cracked0003" type="Sprite" parent="."]
+position = Vector2( 600, 150 )
+texture = ExtResource( 28 )
+offset = Vector2( 0, 12 )
+
+[node name="NavigationPolygonInstance" parent="ground02Cracked0003" instance=ExtResource( 47 )]
+
+[node name="ground02Cracked0005" type="Sprite" parent="."]
+position = Vector2( 0, 300 )
+texture = ExtResource( 10 )
+offset = Vector2( 0, 12 )
+
+[node name="NavigationPolygonInstance" parent="ground02Cracked0005" instance=ExtResource( 47 )]
+
+[node name="ground02Cracked0007" type="Sprite" parent="."]
+position = Vector2( 150, 300 )
+texture = ExtResource( 21 )
+offset = Vector2( 0, 12 )
+
+[node name="NavigationPolygonInstance" parent="ground02Cracked0007" instance=ExtResource( 47 )]
+
+[node name="ground02_0001" type="Sprite" parent="."]
+position = Vector2( 300, 300 )
+texture = ExtResource( 33 )
+offset = Vector2( 0, 12 )
+
+[node name="NavigationPolygonInstance" parent="ground02_0001" instance=ExtResource( 47 )]
+
+[node name="ground02_0003" type="Sprite" parent="."]
+position = Vector2( 450, 300 )
+texture = ExtResource( 29 )
+offset = Vector2( 0, 12 )
+
+[node name="NavigationPolygonInstance" parent="ground02_0003" instance=ExtResource( 47 )]
+
+[node name="ground02_0005" type="Sprite" parent="."]
+position = Vector2( 600, 300 )
+texture = ExtResource( 32 )
+offset = Vector2( 0, 12 )
+
+[node name="NavigationPolygonInstance" parent="ground02_0005" instance=ExtResource( 47 )]
+
+[node name="ground02_0007" type="Sprite" parent="."]
+position = Vector2( 0, 450 )
+texture = ExtResource( 16 )
+offset = Vector2( 0, 12 )
+
+[node name="NavigationPolygonInstance" parent="ground02_0007" instance=ExtResource( 47 )]
+
+[node name="ground03Cracked0001" type="Sprite" parent="."]
+position = Vector2( 150, 450 )
+texture = ExtResource( 18 )
+offset = Vector2( 0, 12 )
+
+[node name="NavigationPolygonInstance" parent="ground03Cracked0001" instance=ExtResource( 47 )]
+
+[node name="ground03Cracked0003" type="Sprite" parent="."]
+position = Vector2( 300, 450 )
+texture = ExtResource( 4 )
+offset = Vector2( 0, 12 )
+
+[node name="NavigationPolygonInstance" parent="ground03Cracked0003" instance=ExtResource( 47 )]
+
+[node name="ground03Cracked0005" type="Sprite" parent="."]
+position = Vector2( 450, 450 )
+texture = ExtResource( 13 )
+offset = Vector2( 0, 12 )
+
+[node name="NavigationPolygonInstance" parent="ground03Cracked0005" instance=ExtResource( 47 )]
+
+[node name="ground03Cracked0007" type="Sprite" parent="."]
+position = Vector2( 600, 450 )
+texture = ExtResource( 8 )
+offset = Vector2( 0, 12 )
+
+[node name="NavigationPolygonInstance" parent="ground03Cracked0007" instance=ExtResource( 47 )]
+
+[node name="ground03_0001" type="Sprite" parent="."]
+position = Vector2( 0, 600 )
+texture = ExtResource( 35 )
+offset = Vector2( 0, 12 )
+
+[node name="NavigationPolygonInstance" parent="ground03_0001" instance=ExtResource( 47 )]
+
+[node name="ground03_0003" type="Sprite" parent="."]
+position = Vector2( 150, 600 )
+texture = ExtResource( 27 )
+offset = Vector2( 0, 12 )
+
+[node name="NavigationPolygonInstance" parent="ground03_0003" instance=ExtResource( 47 )]
+
+[node name="ground03_0005" type="Sprite" parent="."]
+position = Vector2( 300, 600 )
+texture = ExtResource( 11 )
+offset = Vector2( 0, 12 )
+
+[node name="NavigationPolygonInstance" parent="ground03_0005" instance=ExtResource( 47 )]
+
+[node name="ground03_0007" type="Sprite" parent="."]
+position = Vector2( 450, 600 )
+texture = ExtResource( 15 )
+offset = Vector2( 0, 12 )
+
+[node name="NavigationPolygonInstance" parent="ground03_0007" instance=ExtResource( 47 )]
+
+[node name="groundSpike01_0001" type="Sprite" parent="."]
+position = Vector2( 600, 600 )
+texture = ExtResource( 20 )
+offset = Vector2( 0, -2 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="groundSpike01_0001"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="groundSpike01_0001/StaticBody2D"]
+polygon = PoolVector2Array( -62.5, 0, 0, 35, 62.5, 0, 0, -35 )
+
+[node name="groundSpike01_0003" type="Sprite" parent="."]
+position = Vector2( 0, 750 )
+texture = ExtResource( 12 )
+offset = Vector2( 0, -2 )
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="groundSpike01_0003"]
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="groundSpike01_0003/StaticBody2D2"]
+polygon = PoolVector2Array( -62.5, 0, 0, 35, 62.5, 0, 0, -35 )
+
+[node name="groundSpike01_0005" type="Sprite" parent="."]
+position = Vector2( 150, 750 )
+texture = ExtResource( 22 )
+offset = Vector2( 0, -2 )
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="groundSpike01_0005"]
+
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="groundSpike01_0005/StaticBody2D3"]
+polygon = PoolVector2Array( -62.5, 0, 0, 35, 62.5, 0, 0, -35 )
+
+[node name="groundSpike01_0007" type="Sprite" parent="."]
+position = Vector2( 300, 750 )
+texture = ExtResource( 5 )
+offset = Vector2( 0, -2 )
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="groundSpike01_0007"]
+
+[node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="groundSpike01_0007/StaticBody2D4"]
+polygon = PoolVector2Array( -62.5, 0, 0, 35, 62.5, 0, 0, -35 )
+
+[node name="groundSpike02_0001" type="Sprite" parent="."]
+position = Vector2( 450, 750 )
+texture = ExtResource( 17 )
+offset = Vector2( 0, -2 )
+
+[node name="StaticBody2D5" type="StaticBody2D" parent="groundSpike02_0001"]
+
+[node name="CollisionPolygon2D5" type="CollisionPolygon2D" parent="groundSpike02_0001/StaticBody2D5"]
+polygon = PoolVector2Array( -62.5, 0, 0, 35, 62.5, 0, 0, -35 )
+
+[node name="groundSpike02_0003" type="Sprite" parent="."]
+position = Vector2( 600, 750 )
+texture = ExtResource( 19 )
+offset = Vector2( 0, -2 )
+
+[node name="StaticBody2D6" type="StaticBody2D" parent="groundSpike02_0003"]
+
+[node name="CollisionPolygon2D6" type="CollisionPolygon2D" parent="groundSpike02_0003/StaticBody2D6"]
+polygon = PoolVector2Array( -62.5, 0, 0, 35, 62.5, 0, 0, -35 )
+
+[node name="groundSpike02_0005" type="Sprite" parent="."]
+position = Vector2( 0, 900 )
+texture = ExtResource( 6 )
+offset = Vector2( 0, -2 )
+
+[node name="StaticBody2D7" type="StaticBody2D" parent="groundSpike02_0005"]
+
+[node name="CollisionPolygon2D7" type="CollisionPolygon2D" parent="groundSpike02_0005/StaticBody2D7"]
+polygon = PoolVector2Array( -62.5, 0, 0, 35, 62.5, 0, 0, -35 )
+
+[node name="groundSpike02_0007" type="Sprite" parent="."]
+position = Vector2( 150, 900 )
+texture = ExtResource( 23 )
+offset = Vector2( 0, -2 )
+
+[node name="StaticBody2D8" type="StaticBody2D" parent="groundSpike02_0007"]
+
+[node name="CollisionPolygon2D8" type="CollisionPolygon2D" parent="groundSpike02_0007/StaticBody2D8"]
+polygon = PoolVector2Array( -62.5, 0, 0, 35, 62.5, 0, 0, -35 )
+
+[node name="lava_tile" type="Sprite" parent="."]
+material = ExtResource( 38 )
+position = Vector2( 300, 900 )
+texture = ExtResource( 24 )
+offset = Vector2( 0, -2 )
+
+[node name="StaticBody2D10" type="StaticBody2D" parent="lava_tile"]
+
+[node name="CollisionPolygon2D8" type="CollisionPolygon2D" parent="lava_tile/StaticBody2D10"]
+polygon = PoolVector2Array( -62.5, 0, 0, 35, 62.5, 0, 0, -35 )
+
+[node name="pikes copy" type="Sprite" parent="."]
+material = ExtResource( 38 )
+position = Vector2( 450, 900 )
+texture = ExtResource( 25 )
+offset = Vector2( 0, -18 )
+
+[node name="StaticBody2D9" type="StaticBody2D" parent="pikes copy"]
+
+[node name="CollisionPolygon2D8" type="CollisionPolygon2D" parent="pikes copy/StaticBody2D9"]
+polygon = PoolVector2Array( -62.5, 0, 0, 35, 62.5, 0, 0, -35 )
+
+[node name="rusty_grate" type="Sprite" parent="."]
+position = Vector2( 600, 900 )
+texture = ExtResource( 36 )
+offset = Vector2( 0, 12 )
+
+[node name="NavigationPolygonInstance" parent="rusty_grate" instance=ExtResource( 47 )]
+
+[node name="rusty_grate_no_base" type="Sprite" parent="."]
+position = Vector2( 0, 1050 )
+texture = ExtResource( 37 )
+offset = Vector2( 0, 12 )
+
+[node name="NavigationPolygonInstance" parent="rusty_grate_no_base" instance=ExtResource( 47 )]
+
+[node name="wallChain0001" type="Sprite" parent="."]
+position = Vector2( 150, 1050 )
+texture = ExtResource( 43 )
+offset = Vector2( 0, -43 )
+
+[node name="StaticBody2D9" type="StaticBody2D" parent="wallChain0001"]
+
+[node name="CollisionPolygon2D8" type="CollisionPolygon2D" parent="wallChain0001/StaticBody2D9"]
+polygon = PoolVector2Array( -62.5, 0, 0, 35, 62.5, 0, 0, -35 )
+
+[node name="wallChain0007" type="Sprite" parent="."]
+position = Vector2( 300, 1050 )
+texture = ExtResource( 40 )
+offset = Vector2( 0, -43 )
+
+[node name="StaticBody2D10" type="StaticBody2D" parent="wallChain0007"]
+
+[node name="CollisionPolygon2D8" type="CollisionPolygon2D" parent="wallChain0007/StaticBody2D10"]
+polygon = PoolVector2Array( -62.5, 0, 0, 35, 62.5, 0, 0, -35 )
+
+[node name="wallSteps0005" type="Sprite" parent="."]
+position = Vector2( 450, 1050 )
+texture = ExtResource( 44 )
+offset = Vector2( 0, -43 )
+
+[node name="StaticBody2D11" type="StaticBody2D" parent="wallSteps0005"]
+
+[node name="CollisionPolygon2D8" type="CollisionPolygon2D" parent="wallSteps0005/StaticBody2D11"]
+polygon = PoolVector2Array( -62.5, 0, 0, 35, 62.5, 0, 0, -35 )
+
+[node name="wallSteps0007" type="Sprite" parent="."]
+position = Vector2( 600, 1050 )
+texture = ExtResource( 39 )
+offset = Vector2( 0, -43 )
+
+[node name="StaticBody2D12" type="StaticBody2D" parent="wallSteps0007"]
+
+[node name="CollisionPolygon2D8" type="CollisionPolygon2D" parent="wallSteps0007/StaticBody2D12"]
+polygon = PoolVector2Array( -62.5, 0, 0, 35, 62.5, 0, 0, -35 )
+
+[node name="wallStone01_0001" type="Sprite" parent="."]
+position = Vector2( 0, 1200 )
+texture = ExtResource( 46 )
+offset = Vector2( 0, -43 )
+
+[node name="StaticBody2D13" type="StaticBody2D" parent="wallStone01_0001"]
+
+[node name="CollisionPolygon2D8" type="CollisionPolygon2D" parent="wallStone01_0001/StaticBody2D13"]
+polygon = PoolVector2Array( -62.5, 0, 0, 35, 62.5, 0, 0, -35 )
+
+[node name="wallStone01_0005" type="Sprite" parent="."]
+position = Vector2( 150, 1200 )
+texture = ExtResource( 41 )
+offset = Vector2( 0, -43 )
+
+[node name="StaticBody2D14" type="StaticBody2D" parent="wallStone01_0005"]
+
+[node name="CollisionPolygon2D8" type="CollisionPolygon2D" parent="wallStone01_0005/StaticBody2D14"]
+polygon = PoolVector2Array( -62.5, 0, 0, 35, 62.5, 0, 0, -35 )
+
+[node name="wallWindow0001" type="Sprite" parent="."]
+position = Vector2( 300, 1200 )
+texture = ExtResource( 42 )
+offset = Vector2( 0, -43 )
+
+[node name="StaticBody2D15" type="StaticBody2D" parent="wallWindow0001"]
+
+[node name="CollisionPolygon2D8" type="CollisionPolygon2D" parent="wallWindow0001/StaticBody2D15"]
+polygon = PoolVector2Array( -62.5, 0, 0, 35, 62.5, 0, 0, -35 )
+
+[node name="wallWindow0007" type="Sprite" parent="."]
+position = Vector2( 450, 1200 )
+texture = ExtResource( 45 )
+offset = Vector2( 0, -43 )
+
+[node name="StaticBody2D16" type="StaticBody2D" parent="wallWindow0007"]
+
+[node name="CollisionPolygon2D8" type="CollisionPolygon2D" parent="wallWindow0007/StaticBody2D16"]
+polygon = PoolVector2Array( -62.5, 0, 0, 35, 62.5, 0, 0, -35 )
