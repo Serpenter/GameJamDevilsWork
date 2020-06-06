@@ -224,6 +224,8 @@ texture = ExtResource( 20 )
 offset = Vector2( 0, -2 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="groundSpike01_0001"]
+collision_layer = 16
+collision_mask = 16
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="groundSpike01_0001/StaticBody2D"]
 polygon = PoolVector2Array( -62.5, 0, 0, 35, 62.5, 0, 0, -35 )
@@ -234,6 +236,8 @@ texture = ExtResource( 12 )
 offset = Vector2( 0, -2 )
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="groundSpike01_0003"]
+collision_layer = 16
+collision_mask = 16
 
 [node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="groundSpike01_0003/StaticBody2D2"]
 polygon = PoolVector2Array( -62.5, 0, 0, 35, 62.5, 0, 0, -35 )
@@ -244,6 +248,8 @@ texture = ExtResource( 22 )
 offset = Vector2( 0, -2 )
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="groundSpike01_0005"]
+collision_layer = 16
+collision_mask = 16
 
 [node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="groundSpike01_0005/StaticBody2D3"]
 polygon = PoolVector2Array( -62.5, 0, 0, 35, 62.5, 0, 0, -35 )
@@ -254,6 +260,8 @@ texture = ExtResource( 5 )
 offset = Vector2( 0, -2 )
 
 [node name="StaticBody2D4" type="StaticBody2D" parent="groundSpike01_0007"]
+collision_layer = 16
+collision_mask = 16
 
 [node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="groundSpike01_0007/StaticBody2D4"]
 polygon = PoolVector2Array( -62.5, 0, 0, 35, 62.5, 0, 0, -35 )
@@ -264,6 +272,8 @@ texture = ExtResource( 17 )
 offset = Vector2( 0, -2 )
 
 [node name="StaticBody2D5" type="StaticBody2D" parent="groundSpike02_0001"]
+collision_layer = 16
+collision_mask = 16
 
 [node name="CollisionPolygon2D5" type="CollisionPolygon2D" parent="groundSpike02_0001/StaticBody2D5"]
 polygon = PoolVector2Array( -62.5, 0, 0, 35, 62.5, 0, 0, -35 )
@@ -274,6 +284,8 @@ texture = ExtResource( 19 )
 offset = Vector2( 0, -2 )
 
 [node name="StaticBody2D6" type="StaticBody2D" parent="groundSpike02_0003"]
+collision_layer = 16
+collision_mask = 16
 
 [node name="CollisionPolygon2D6" type="CollisionPolygon2D" parent="groundSpike02_0003/StaticBody2D6"]
 polygon = PoolVector2Array( -62.5, 0, 0, 35, 62.5, 0, 0, -35 )
@@ -284,6 +296,8 @@ texture = ExtResource( 6 )
 offset = Vector2( 0, -2 )
 
 [node name="StaticBody2D7" type="StaticBody2D" parent="groundSpike02_0005"]
+collision_layer = 16
+collision_mask = 16
 
 [node name="CollisionPolygon2D7" type="CollisionPolygon2D" parent="groundSpike02_0005/StaticBody2D7"]
 polygon = PoolVector2Array( -62.5, 0, 0, 35, 62.5, 0, 0, -35 )
@@ -294,6 +308,8 @@ texture = ExtResource( 23 )
 offset = Vector2( 0, -2 )
 
 [node name="StaticBody2D8" type="StaticBody2D" parent="groundSpike02_0007"]
+collision_layer = 16
+collision_mask = 16
 
 [node name="CollisionPolygon2D8" type="CollisionPolygon2D" parent="groundSpike02_0007/StaticBody2D8"]
 polygon = PoolVector2Array( -62.5, 0, 0, 35, 62.5, 0, 0, -35 )
@@ -305,6 +321,8 @@ texture = ExtResource( 24 )
 offset = Vector2( 0, -2 )
 
 [node name="StaticBody2D10" type="StaticBody2D" parent="lava_tile"]
+collision_layer = 16
+collision_mask = 16
 
 [node name="CollisionPolygon2D8" type="CollisionPolygon2D" parent="lava_tile/StaticBody2D10"]
 polygon = PoolVector2Array( -62.5, 0, 0, 35, 62.5, 0, 0, -35 )
@@ -316,6 +334,8 @@ texture = ExtResource( 25 )
 offset = Vector2( 0, -18 )
 
 [node name="StaticBody2D9" type="StaticBody2D" parent="pikes copy"]
+collision_layer = 16
+collision_mask = 16
 
 [node name="CollisionPolygon2D8" type="CollisionPolygon2D" parent="pikes copy/StaticBody2D9"]
 polygon = PoolVector2Array( -62.5, 0, 0, 35, 62.5, 0, 0, -35 )
@@ -340,6 +360,8 @@ texture = ExtResource( 43 )
 offset = Vector2( 0, -43 )
 
 [node name="StaticBody2D9" type="StaticBody2D" parent="wallChain0001"]
+collision_layer = 16
+collision_mask = 16
 
 [node name="CollisionPolygon2D8" type="CollisionPolygon2D" parent="wallChain0001/StaticBody2D9"]
 polygon = PoolVector2Array( -62.5, 0, 0, 35, 62.5, 0, 0, -35 )
@@ -350,6 +372,8 @@ texture = ExtResource( 40 )
 offset = Vector2( 0, -43 )
 
 [node name="StaticBody2D10" type="StaticBody2D" parent="wallChain0007"]
+collision_layer = 16
+collision_mask = 16
 
 [node name="CollisionPolygon2D8" type="CollisionPolygon2D" parent="wallChain0007/StaticBody2D10"]
 polygon = PoolVector2Array( -62.5, 0, 0, 35, 62.5, 0, 0, -35 )
@@ -360,6 +384,8 @@ texture = ExtResource( 44 )
 offset = Vector2( 0, -43 )
 
 [node name="StaticBody2D11" type="StaticBody2D" parent="wallSteps0005"]
+collision_layer = 16
+collision_mask = 16
 
 [node name="CollisionPolygon2D8" type="CollisionPolygon2D" parent="wallSteps0005/StaticBody2D11"]
 polygon = PoolVector2Array( -62.5, 0, 0, 35, 62.5, 0, 0, -35 )
@@ -370,6 +396,8 @@ texture = ExtResource( 39 )
 offset = Vector2( 0, -43 )
 
 [node name="StaticBody2D12" type="StaticBody2D" parent="wallSteps0007"]
+collision_layer = 16
+collision_mask = 16
 
 [node name="CollisionPolygon2D8" type="CollisionPolygon2D" parent="wallSteps0007/StaticBody2D12"]
 polygon = PoolVector2Array( -62.5, 0, 0, 35, 62.5, 0, 0, -35 )
@@ -380,6 +408,8 @@ texture = ExtResource( 46 )
 offset = Vector2( 0, -43 )
 
 [node name="StaticBody2D13" type="StaticBody2D" parent="wallStone01_0001"]
+collision_layer = 16
+collision_mask = 16
 
 [node name="CollisionPolygon2D8" type="CollisionPolygon2D" parent="wallStone01_0001/StaticBody2D13"]
 polygon = PoolVector2Array( -62.5, 0, 0, 35, 62.5, 0, 0, -35 )
@@ -390,6 +420,8 @@ texture = ExtResource( 41 )
 offset = Vector2( 0, -43 )
 
 [node name="StaticBody2D14" type="StaticBody2D" parent="wallStone01_0005"]
+collision_layer = 16
+collision_mask = 16
 
 [node name="CollisionPolygon2D8" type="CollisionPolygon2D" parent="wallStone01_0005/StaticBody2D14"]
 polygon = PoolVector2Array( -62.5, 0, 0, 35, 62.5, 0, 0, -35 )
@@ -400,6 +432,8 @@ texture = ExtResource( 42 )
 offset = Vector2( 0, -43 )
 
 [node name="StaticBody2D15" type="StaticBody2D" parent="wallWindow0001"]
+collision_layer = 16
+collision_mask = 16
 
 [node name="CollisionPolygon2D8" type="CollisionPolygon2D" parent="wallWindow0001/StaticBody2D15"]
 polygon = PoolVector2Array( -62.5, 0, 0, 35, 62.5, 0, 0, -35 )
@@ -410,6 +444,8 @@ texture = ExtResource( 45 )
 offset = Vector2( 0, -43 )
 
 [node name="StaticBody2D16" type="StaticBody2D" parent="wallWindow0007"]
+collision_layer = 16
+collision_mask = 16
 
 [node name="CollisionPolygon2D8" type="CollisionPolygon2D" parent="wallWindow0007/StaticBody2D16"]
 polygon = PoolVector2Array( -62.5, 0, 0, 35, 62.5, 0, 0, -35 )

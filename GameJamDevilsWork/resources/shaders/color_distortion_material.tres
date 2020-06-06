@@ -4,7 +4,8 @@
 
 [resource]
 shader = ExtResource( 1 )
-shader_param/frequency = 0.0
+shader_param/frequency = 0.3
 shader_param/depth = 0.0
-shader_param/offset = 0.001
+shader_param/offset = 0.0
 shader_param/wave_offset = 1.0
+shader_param/time_scale = 5.0
