@@ -1,0 +1,6 @@
+[gd_scene format=2]
+
+[node name="SinnerRespawn" type="Node2D"]
+position = Vector2( -154.186, -86.6637 )
+
+[node name="Sprite" type="Sprite" parent="."]

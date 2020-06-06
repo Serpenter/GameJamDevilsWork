@@ -9,10 +9,10 @@
 [ext_resource path="res://assets/sounds/splash.wav" type="AudioStream" id=7]
 [ext_resource path="res://assets/sounds/human_scream_long.wav" type="AudioStream" id=8]
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 111.624, 44.1276 )
 
-[sub_resource type="ConvexPolygonShape2D" id=4]
+[sub_resource type="ConvexPolygonShape2D" id=2]
 points = PoolVector2Array( 160, -180, -160, -180, -160, 115, 0, 180, 160, 115 )
 
 [sub_resource type="SpriteFrames" id=3]
@@ -37,7 +37,7 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -1.73508, 48.4793 )
-shape = SubResource( 5 )
+shape = SubResource( 1 )
 
 [node name="PotArea" type="Area2D" parent="."]
 __meta__ = {
@@ -47,14 +47,14 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PotArea"]
 visible = false
 position = Vector2( 0.708435, 3.68149 )
-shape = SubResource( 4 )
+shape = SubResource( 2 )
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 3 )
-frame = 2
+frame = 1
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -65,3 +65,4 @@ stream = ExtResource( 8 )
 
 [node name="SplashAudioStreamPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 7 )
+[connection signal="body_entered" from="PotArea" to="." method="_on_PotArea_body_entered"]

@@ -1,0 +1,133 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://prefab_scenes/levels/LevelMap_00.tscn" type="PackedScene" id=1]
+[ext_resource path="res://prefab_scenes/Background/Background.tscn" type="PackedScene" id=2]
+[ext_resource path="res://prefab_scenes/Pot/Pot.tscn" type="PackedScene" id=3]
+[ext_resource path="res://prefab_scenes/Exit/Exit.tscn" type="PackedScene" id=4]
+[ext_resource path="res://prefab_scenes/HUD/HUD.tscn" type="PackedScene" id=5]
+[ext_resource path="res://prefab_scenes/Imp/Imp.tscn" type="PackedScene" id=6]
+[ext_resource path="res://prefab_scenes/Sinner/Sinner.tscn" type="PackedScene" id=7]
+[ext_resource path="res://prefab_scenes/GameAudio/AudioStreamPlayer.tscn" type="PackedScene" id=8]
+[ext_resource path="res://main_scenes/Tutorial/Tutorial.gd" type="Script" id=9]
+[ext_resource path="res://resources/main_ui_theme.tres" type="Theme" id=10]
+[ext_resource path="res://prefab_scenes/SinnerRespawn/SinnerRespawn.tscn" type="PackedScene" id=11]
+
+[sub_resource type="Environment" id=1]
+background_mode = 4
+tonemap_mode = 3
+tonemap_exposure = 0.8
+tonemap_white = 0.7
+auto_exposure_max_luma = 12.0
+
+[node name="MainGame" type="Node2D"]
+script = ExtResource( 9 )
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.1, 0.1 )
+
+[node name="Background" parent="ParallaxBackground/ParallaxLayer" instance=ExtResource( 2 )]
+position = Vector2( -54.5446, -396.782 )
+
+[node name="world" type="Node2D" parent="."]
+
+[node name="Navigation2D" type="Navigation2D" parent="world"]
+
+[node name="LevelMap_00" parent="world/Navigation2D" instance=ExtResource( 1 )]
+tile_data = PoolIntArray( -393217, 43, 0, -458752, 24, 0, -327682, 24, 0, -327681, 24, 0, -196622, 38, 0, -131079, 40, 0, -131078, 40, 0, -131077, 24, 0, -131076, 24, 0, -131075, 40, 0, -131074, 24, 0, -131073, 40, 0, -196608, 24, 0, -196607, 40, 0, -196606, 24, 0, -196605, 40, 0, -196604, 40, 0, -196603, 40, 0, -196602, 26, 0, -65543, 37, 0, -65542, 15, 0, -65541, 15, 0, -65540, 15, 0, -65539, 15, 0, -65538, 15, 0, -65537, 15, 0, -131072, 15, 0, -131071, 15, 0, -131070, 15, 0, -131069, 15, 0, -131068, 15, 0, -131067, 15, 0, -131066, 26, 0, -7, 40, 0, -6, 15, 0, -5, 4, 0, -4, 4, 0, -3, 15, 0, -2, 15, 0, -1, 15, 0, -65536, 15, 0, -65535, 15, 0, -65534, 15, 0, -65533, 20, 0, -65532, 20, 0, -65531, 15, 0, -65530, 26, 0, 65529, 40, 0, 65530, 15, 0, 65531, 4, 0, 65532, 4, 0, 65533, 15, 0, 65534, 15, 0, 65535, 15, 0, 0, 15, 0, 1, 15, 0, 2, 15, 0, 3, 20, 0, 4, 20, 0, 5, 15, 0, 6, 26, 0, 131065, 37, 0, 131066, 15, 0, 131067, 15, 0, 131068, 15, 0, 131069, 15, 0, 131070, 15, 0, 131071, 15, 0, 65536, 15, 0, 65537, 15, 0, 65538, 15, 0, 65539, 15, 0, 65540, 15, 0, 65541, 15, 0, 65542, 26, 0, 196601, 40, 0, 196602, 26, 0, 196603, 26, 0, 196604, 26, 0, 196605, 32, 0, 196606, 32, 0, 196607, 32, 0, 131072, 32, 0, 131073, 32, 0, 131074, 32, 0, 131075, 26, 0, 131076, 26, 0, 131077, 26, 0, 131078, 26, 0, 262142, 33, 0, 262143, 32, 0, 196608, 32, 0, 196609, 33, 0, 196610, 32, 0, 327678, 32, 0, 327679, 32, 0, 262145, 32, 0, 393214, 32, 0, 458749, 32, 0, 458750, 32, 0 )
+
+[node name="DebugLine" type="Line2D" parent="world"]
+
+[node name="pots" type="Node2D" parent="world"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Pot" parent="world/pots" instance=ExtResource( 3 )]
+position = Vector2( 248.132, 68.4948 )
+
+[node name="exits" type="Node2D" parent="world"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Exit" parent="world/exits" instance=ExtResource( 4 )]
+position = Vector2( -350.826, -200.972 )
+
+[node name="Imp" parent="world" instance=ExtResource( 6 )]
+position = Vector2( -87.5425, -70.395 )
+
+[node name="Camera2D" type="Camera2D" parent="world/Imp"]
+current = true
+smoothing_enabled = true
+smoothing_speed = 10.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="world/Imp/Camera2D"]
+environment = SubResource( 1 )
+
+[node name="sinners" type="Node2D" parent="world"]
+
+[node name="Sinner" parent="world/sinners" instance=ExtResource( 7 )]
+position = Vector2( -1.33923, -102.688 )
+
+[node name="Sinner2" parent="world/sinners" instance=ExtResource( 7 )]
+position = Vector2( -159.231, -35.6192 )
+
+[node name="sinner_spawns" type="Node2D" parent="world"]
+
+[node name="initial_respawn" parent="world/sinner_spawns" instance=ExtResource( 11 )]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HUD" parent="CanvasLayer" instance=ExtResource( 5 )]
+margin_top = -1.0
+margin_bottom = -1.0
+
+[node name="PopupDialog" type="PopupDialog" parent="CanvasLayer"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -263.0
+margin_top = -152.0
+margin_right = 265.0
+margin_bottom = 111.0
+theme = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/PopupDialog"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -172.5
+margin_top = 24.0
+margin_right = 172.5
+margin_bottom = 183.0
+text = "Congratulations!
+You have finished 
+tutorial!"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ToMainMenu" type="Button" parent="CanvasLayer/PopupDialog"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -158.0
+margin_top = -74.0
+margin_right = 159.0
+margin_bottom = -23.0
+theme = ExtResource( 10 )
+text = "Go to main menu"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AudioStreamPlayer" parent="." instance=ExtResource( 8 )]
+volume_db = -30.203
+[connection signal="pressed" from="CanvasLayer/PopupDialog/ToMainMenu" to="." method="_on_ToMainMenu_pressed"]
