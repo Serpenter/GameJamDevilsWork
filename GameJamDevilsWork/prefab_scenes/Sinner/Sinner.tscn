@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://prefab_scenes/Sinner/Sinner.gd" type="Script" id=1]
 [ext_resource path="res://assets/images/char04_0000.png" type="Texture" id=2]
@@ -39,7 +39,7 @@ height = 2.84817
 [sub_resource type="Animation" id=7]
 length = 3.0
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite/AscensionParticles:emitting")
+tracks/0/path = NodePath("../Sinner/Sprite/AscensionParticles:emitting")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -51,7 +51,7 @@ tracks/0/keys = {
 "values": [ true ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite:self_modulate")
+tracks/1/path = NodePath("../Sinner/Sprite:self_modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -63,7 +63,7 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Sprite:offset")
+tracks/2/path = NodePath("../Sinner/Sprite:offset")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -79,7 +79,7 @@ tracks/2/keys = {
 length = 0.6
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("CollisionShape2D:position")
+tracks/0/path = NodePath("../Sinner/CollisionShape2D:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -91,7 +91,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 0, 10 ), Vector2( 0, 0 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite:position")
+tracks/1/path = NodePath("../Sinner/Sprite:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -103,7 +103,10 @@ tracks/1/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 0, 10 ), Vector2( 0, 0 ) ]
 }
 
-[sub_resource type="CircleShape2D" id=9]
+[sub_resource type="Animation" id=9]
+resource_name = "stun"
+
+[sub_resource type="CircleShape2D" id=10]
 radius = 24.548
 
 [node name="Sinner" type="KinematicBody2D"]
@@ -131,6 +134,7 @@ shape = SubResource( 6 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Ascension = SubResource( 7 )
 anims/idle = SubResource( 8 )
+anims/stun = SubResource( 9 )
 
 [node name="AudioStreamPlayer1" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 4 )
@@ -143,6 +147,6 @@ collision_layer = 128
 collision_mask = 128
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="sinnerArea"]
-shape = SubResource( 9 )
+shape = SubResource( 10 )
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="area_entered" from="sinnerArea" to="." method="_on_sinnerArea_area_entered"]

@@ -16,20 +16,20 @@ signal sinner_punished(how_many)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	connect("sinner_punished", get_tree().get_root().get_node("MainGame/CanvasLayer/HUD"), "_on_sinner_punished")
-	connect("sinner_punished", get_tree().get_root().get_node("MainGame"), "_on_sinner_punished")
+    connect("sinner_punished", get_tree().get_root().get_node("MainGame/CanvasLayer/HUD"), "_on_sinner_punished")
+    connect("sinner_punished", get_tree().get_root().get_node("MainGame"), "_on_sinner_punished")
 
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+    pass
 
 
 func _on_PotArea_body_entered(colBody):
-	if colBody.has_method("get_in_pot"):
-		if colBody.get_in_pot():
-			sinners_inside += 1
-			scream_audio_player.play()
-			splash_audio_player.play()
-			emit_signal("sinner_punished", 1)
+    if colBody.has_method("get_in_pot"):
+        if colBody.get_in_pot():
+            sinners_inside += 1
+            scream_audio_player.play()
+            splash_audio_player.play()
+            emit_signal("sinner_punished", 1)
