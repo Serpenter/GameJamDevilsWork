@@ -15,6 +15,8 @@ onready var nav_2d = get_tree().get_root().get_node("MainGame/world/Navigation2D
 onready var debug_line = get_tree().get_root().get_node("MainGame/world/DebugLine")
 onready var halo = $Halo
 
+
+
 var path = []
 
 onready var animation_player = $AnimationPlayer

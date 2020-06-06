@@ -21,7 +21,7 @@ func _ready():
 
 
 func _on_ToMainMenu_pressed():
-
+	get_tree().paused = false
 	$"/root/GSceneManager".goto_scene_wloader("res://main_scenes/MainMenu/MainMenu.tscn")
 
 
