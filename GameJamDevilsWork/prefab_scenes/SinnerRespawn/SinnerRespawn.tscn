@@ -1,6 +1,13 @@
-[gd_scene format=2]
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://prefab_scenes/SinnerRespawn/SinnerRespawn.gd" type="Script" id=1]
 
 [node name="SinnerRespawn" type="Node2D"]
 position = Vector2( -154.186, -86.6637 )
+script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
+
+[node name="SpawnTimer" type="Timer" parent="."]
+autostart = true
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_SpawnTimer_timeout"]
