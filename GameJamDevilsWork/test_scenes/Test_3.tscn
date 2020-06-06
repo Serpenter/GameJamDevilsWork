@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://test_scenes/Test_2.gd" type="Script" id=1]
 [ext_resource path="res://resources/dungeon_tileset.tres" type="TileSet" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://prefab_scenes/Pot/Pot.tscn" type="PackedScene" id=6]
 [ext_resource path="res://prefab_scenes/Exit/Exit.tscn" type="PackedScene" id=7]
 [ext_resource path="res://prefab_scenes/GameAudio/AudioStreamPlayer.tscn" type="PackedScene" id=8]
+[ext_resource path="res://prefab_scenes/Angel/Angel.tscn" type="PackedScene" id=9]
 
 [sub_resource type="NavigationPolygon" id=1]
 vertices = PoolVector2Array( 726.468, 197.458, 1392.22, 112.151, 59.8741, 768.131, 560.846, 284.934, 223.77, 263.94, 466.371, 227.783, 115.299, 311.76, 923.522, -127.185, 1004.41, -95.0515, 624.996, 157.801, 1408.46, -377.703, 1229.34, -471.581, 1440.98, -583.492, 1465.32, -354.238, 1601.49, -673.435, 1734.53, -620.584, 1750.68, -613.934, 1786.15, -595.027, 2020.48, -433.907, 1672.56, -257.73, 1475.53, -612.216, -783.9, 349.433, 23.1566, 263.94, 546.401, -317.448, 125.796, 217.286, 1454.66, -602.394 )
@@ -53,12 +54,6 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Exit" parent="world/exits" instance=ExtResource( 7 )]
-position = Vector2( -614.737, 359.336 )
-
-[node name="Exit2" parent="world/exits" instance=ExtResource( 7 )]
-position = Vector2( 1333.96, 121.766 )
-
 [node name="Exit1" parent="world/exits" instance=ExtResource( 7 )]
 position = Vector2( 543.315, -278.027 )
 
@@ -88,7 +83,7 @@ __meta__ = {
 }
 
 [node name="Imp" parent="." instance=ExtResource( 4 )]
-position = Vector2( 409.227, 151.54 )
+position = Vector2( 410.659, 151.54 )
 
 [node name="Camera2D" type="Camera2D" parent="Imp"]
 current = true
@@ -111,4 +106,9 @@ position = Vector2( -32.9528, 236.69 )
 position = Vector2( 385.69, -107.047 )
 
 [node name="AudioStreamPlayer" parent="." instance=ExtResource( 8 )]
+
+[node name="Angels" type="Node2D" parent="."]
+
+[node name="Angel" parent="Angels" instance=ExtResource( 9 )]
+position = Vector2( 1164.42, 94.3422 )
 [connection signal="pressed" from="CanvasLayer/GoToMainMenu" to="." method="_on_GoToMainMenu_pressed"]
