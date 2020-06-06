@@ -4,13 +4,13 @@ extends KinematicBody2D
 #var is_moving = false
 
 
-var max_move_speed = 100.0
+var max_move_speed = 200.0
 var speed_deacceleration = 10.0
-var min_move_speed = 20.0
+var min_move_speed = 50.0
 
 # FOR OLD MOVING END
 
-var move_speed = 20.0
+var move_speed = 50.0
 
 var needed_point_proximity = 5.0
 
@@ -26,7 +26,7 @@ onready var audio_player_1 = $AudioStreamPlayer1
 onready var audio_player_2 = $AudioStreamPlayer2
 
 
-var state_change_time = 10.0
+var state_change_time = 5.0
 var state_change_timeout = state_change_time
 
 var states = ["idle", "go_to_pot", "go_to_exit", "ascension"]
@@ -62,7 +62,7 @@ var pot_time_min = 5.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	set_state("idle")
+	set_state("go_to_exit")
 	animation_player.play("idle")
 	$Sprite/AscensionParticles.emitting = false
 	
@@ -102,6 +102,13 @@ func push_sinner(direction):
 func go_to_node_in_group(group_name):
 	var group_objects = get_tree().get_nodes_in_group(group_name)
 	var chosen_object = group_objects[randi() % group_objects.size()]
+	
+	#a little workaround
+	if not chosen_object.is_working:
+		for object in group_objects:
+			if object.is_working:
+				chosen_object = object
+	
 	var end_position = chosen_object.get_global_position()
 	var start_position = self.get_global_position()
 	path = nav_2d.get_simple_path(start_position, end_position)
@@ -205,3 +212,9 @@ func _process(delta):
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "Ascension":
 		queue_free()
+
+
+func _on_sinnerArea_area_entered(area):
+	var point = get_global_transform().origin - area.get_global_transform().origin
+	point = point.normalized() * 20
+	path.insert(0, point)

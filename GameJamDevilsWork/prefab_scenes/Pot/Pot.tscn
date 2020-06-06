@@ -56,7 +56,7 @@ __meta__ = {
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 light_mask = 17
 frames = SubResource( 3 )
-frame = 3
+frame = 2
 playing = true
 __meta__ = {
 "_edit_lock_": true

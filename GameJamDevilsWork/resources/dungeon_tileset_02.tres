@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=65 format=2]
+[gd_resource type="TileSet" load_steps=68 format=2]
 
 [ext_resource path="res://resources/shaders/lava_shader_material.tres" type="Material" id=1]
 [ext_resource path="res://assets/images/tiles_v2/ground01Cracked0001.png" type="Texture" id=2]
@@ -45,6 +45,8 @@
 [ext_resource path="res://assets/images/tiles_v2/wallSteps0005.png" type="Texture" id=43]
 [ext_resource path="res://assets/images/tiles_v2/wallWindow0007.png" type="Texture" id=44]
 [ext_resource path="res://assets/images/tiles_v2/wallStone01_0001.png" type="Texture" id=45]
+[ext_resource path="res://assets/images/icon.png" type="Texture" id=46]
+[ext_resource path="res://assets/images/tiles_v2/ground01_0001_0000.png" type="Texture" id=47]
 
 [sub_resource type="NavigationPolygon" id=1]
 vertices = PoolVector2Array( -0.00452709, -34.9822, 61.9212, 0.0261335, -0.0220985, 35.0202, -61.9522, 0.00625896 )
@@ -103,6 +105,9 @@ points = PoolVector2Array( 0, -35, 62.5, 0, 0, 35, -62.5, 0 )
 points = PoolVector2Array( 0, -35, 62.5, 0, 0, 35, -62.5, 0 )
 
 [sub_resource type="ConvexPolygonShape2D" id=19]
+points = PoolVector2Array( 0, -35, 62.5, 0, 0, 35, -62.5, 0 )
+
+[sub_resource type="ConvexPolygonShape2D" id=20]
 points = PoolVector2Array( 0, -35, 62.5, 0, 0, 35, -62.5, 0 )
 
 [resource]
@@ -711,7 +716,7 @@ points = PoolVector2Array( 0, -35, 62.5, 0, 0, 35, -62.5, 0 )
 36/name = "wallChain0001"
 36/texture = ExtResource( 42 )
 36/tex_offset = Vector2( 0, -43 )
-36/modulate = Color( 1, 1, 1, 1 )
+36/modulate = Color( 0.768627, 0.341176, 0.341176, 1 )
 36/region = Rect2( 0, 0, 135, 156 )
 36/tile_mode = 0
 36/occluder_offset = Vector2( 67.5, 78 )
@@ -732,7 +737,7 @@ points = PoolVector2Array( 0, -35, 62.5, 0, 0, 35, -62.5, 0 )
 37/name = "wallChain0007"
 37/texture = ExtResource( 37 )
 37/tex_offset = Vector2( 0, -43 )
-37/modulate = Color( 1, 1, 1, 1 )
+37/modulate = Color( 0.768627, 0.341176, 0.341176, 1 )
 37/region = Rect2( 0, 0, 135, 156 )
 37/tile_mode = 0
 37/occluder_offset = Vector2( 67.5, 78 )
@@ -795,7 +800,7 @@ points = PoolVector2Array( 0, -35, 62.5, 0, 0, 35, -62.5, 0 )
 40/name = "wallStone01_0001"
 40/texture = ExtResource( 45 )
 40/tex_offset = Vector2( 0, -43 )
-40/modulate = Color( 1, 1, 1, 1 )
+40/modulate = Color( 0.768627, 0.341176, 0.341176, 1 )
 40/region = Rect2( 0, 0, 125, 156 )
 40/tile_mode = 0
 40/occluder_offset = Vector2( 62.5, 78 )
@@ -816,7 +821,7 @@ points = PoolVector2Array( 0, -35, 62.5, 0, 0, 35, -62.5, 0 )
 41/name = "wallStone01_0005"
 41/texture = ExtResource( 38 )
 41/tex_offset = Vector2( 0, -43 )
-41/modulate = Color( 1, 1, 1, 1 )
+41/modulate = Color( 0.768627, 0.341176, 0.341176, 1 )
 41/region = Rect2( 0, 0, 125, 156 )
 41/tile_mode = 0
 41/occluder_offset = Vector2( 62.5, 78 )
@@ -837,7 +842,7 @@ points = PoolVector2Array( 0, -35, 62.5, 0, 0, 35, -62.5, 0 )
 42/name = "wallWindow0001"
 42/texture = ExtResource( 39 )
 42/tex_offset = Vector2( 0, -43 )
-42/modulate = Color( 1, 1, 1, 1 )
+42/modulate = Color( 0.768627, 0.341176, 0.341176, 1 )
 42/region = Rect2( 0, 0, 125, 156 )
 42/tile_mode = 0
 42/occluder_offset = Vector2( 62.5, 78 )
@@ -858,7 +863,7 @@ points = PoolVector2Array( 0, -35, 62.5, 0, 0, 35, -62.5, 0 )
 43/name = "wallWindow0007"
 43/texture = ExtResource( 44 )
 43/tex_offset = Vector2( 0, -43 )
-43/modulate = Color( 1, 1, 1, 1 )
+43/modulate = Color( 0.768627, 0.341176, 0.341176, 1 )
 43/region = Rect2( 0, 0, 125, 156 )
 43/tile_mode = 0
 43/occluder_offset = Vector2( 62.5, 78 )
@@ -876,3 +881,39 @@ points = PoolVector2Array( 0, -35, 62.5, 0, 0, 35, -62.5, 0 )
 "shape_transform": Transform2D( 1, 0, 0, 1, 62.5, 78 )
 } ]
 43/z_index = 0
+44/name = "wallWindow0008"
+44/texture = ExtResource( 46 )
+44/tex_offset = Vector2( 0, 0 )
+44/modulate = Color( 1, 1, 1, 0 )
+44/region = Rect2( 0, 0, 64, 64 )
+44/tile_mode = 0
+44/occluder_offset = Vector2( 32, 32 )
+44/navigation_offset = Vector2( 32, 32 )
+44/shape_offset = Vector2( 32, 32 )
+44/shape_transform = Transform2D( 1, 0, 0, 1, 32, 32 )
+44/shape = SubResource( 20 )
+44/shape_one_way = false
+44/shape_one_way_margin = 1.0
+44/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 20 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 32, 32 )
+} ]
+44/z_index = 0
+45/name = "ground01_0001_0000"
+45/texture = ExtResource( 47 )
+45/tex_offset = Vector2( 0, 9 )
+45/modulate = Color( 1, 1, 1, 1 )
+45/region = Rect2( 0, 0, 125, 91 )
+45/tile_mode = 0
+45/occluder_offset = Vector2( 62.5, 45.5 )
+45/navigation_offset = Vector2( 62.5, 45.5 )
+45/navigation = SubResource( 1 )
+45/shape_offset = Vector2( 0, 0 )
+45/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+45/shape_one_way = false
+45/shape_one_way_margin = 0.0
+45/shapes = [  ]
+45/z_index = 0

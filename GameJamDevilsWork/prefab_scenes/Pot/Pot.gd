@@ -8,6 +8,8 @@ onready var scream_audio_player = $ScreamAudioStreamPlayer
 onready var splash_audio_player = $SplashAudioStreamPlayer
 onready var pot_area = $PotArea
 
+export var is_working = true
+
 var sinners_inside = 0
 
 signal sinner_punished(how_many)

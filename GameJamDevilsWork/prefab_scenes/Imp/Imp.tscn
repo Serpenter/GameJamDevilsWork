@@ -6,7 +6,7 @@
 [ext_resource path="res://assets/images/lights/devil_transparency.png" type="Texture" id=4]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 24.0
+radius = 14.4821
 height = 1.23684
 
 [sub_resource type="Animation" id=2]

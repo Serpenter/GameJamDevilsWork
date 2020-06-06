@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://prefab_scenes/levels/LevelMap_00.tscn" type="PackedScene" id=1]
 [ext_resource path="res://prefab_scenes/Background/Background.tscn" type="PackedScene" id=2]
@@ -14,6 +14,13 @@
 [ext_resource path="res://assets/images/white.png" type="Texture" id=12]
 [ext_resource path="res://resources/shaders/color_distortion_material.tres" type="Material" id=13]
 [ext_resource path="res://assets/sounds/clang.wav" type="AudioStream" id=14]
+[ext_resource path="res://resources/fonts/chomsky_22.tres" type="DynamicFont" id=15]
+[ext_resource path="res://main_scenes/Tutorial/DoJob.gd" type="Script" id=16]
+[ext_resource path="res://prefab_scenes/ObstacleOne/ObstacleOne.tscn" type="PackedScene" id=17]
+[ext_resource path="res://main_scenes/Tutorial/Retry.gd" type="Script" id=18]
+[ext_resource path="res://main_scenes/Tutorial/MoveOn.gd" type="Script" id=19]
+[ext_resource path="res://main_scenes/Tutorial/NextLevel.gd" type="Script" id=20]
+[ext_resource path="res://main_scenes/Tutorial/ToMainMenu.gd" type="Script" id=21]
 
 [sub_resource type="Environment" id=1]
 background_mode = 4
@@ -21,6 +28,10 @@ tonemap_mode = 3
 tonemap_exposure = 0.8
 tonemap_white = 0.7
 auto_exposure_max_luma = 12.0
+glow_enabled = true
+glow_intensity = 8.0
+glow_strength = 1.3
+glow_blend_mode = 0
 
 [sub_resource type="Animation" id=2]
 resource_name = "ColorDistortion"
@@ -67,7 +78,6 @@ position = Vector2( -54.5446, -396.782 )
 [node name="Navigation2D" type="Navigation2D" parent="world"]
 
 [node name="LevelMap_00" parent="world/Navigation2D" instance=ExtResource( 1 )]
-tile_data = PoolIntArray( -393217, 43, 0, -458752, 24, 0, -327682, 24, 0, -327681, 24, 0, -196622, 38, 0, -131079, 40, 0, -131078, 40, 0, -131077, 24, 0, -131076, 24, 0, -131075, 40, 0, -131074, 24, 0, -131073, 40, 0, -196608, 24, 0, -196607, 40, 0, -196606, 24, 0, -196605, 40, 0, -196604, 40, 0, -196603, 40, 0, -196602, 26, 0, -65543, 37, 0, -65542, 15, 0, -65541, 15, 0, -65540, 15, 0, -65539, 15, 0, -65538, 15, 0, -65537, 15, 0, -131072, 15, 0, -131071, 15, 0, -131070, 15, 0, -131069, 15, 0, -131068, 15, 0, -131067, 15, 0, -131066, 26, 0, -7, 40, 0, -6, 15, 0, -5, 4, 0, -4, 4, 0, -3, 15, 0, -2, 15, 0, -1, 15, 0, -65536, 15, 0, -65535, 15, 0, -65534, 15, 0, -65533, 20, 0, -65532, 20, 0, -65531, 15, 0, -65530, 26, 0, 65529, 40, 0, 65530, 15, 0, 65531, 4, 0, 65532, 4, 0, 65533, 15, 0, 65534, 15, 0, 65535, 15, 0, 0, 15, 0, 1, 15, 0, 2, 15, 0, 3, 20, 0, 4, 20, 0, 5, 15, 0, 6, 26, 0, 131065, 37, 0, 131066, 15, 0, 131067, 15, 0, 131068, 15, 0, 131069, 15, 0, 131070, 15, 0, 131071, 15, 0, 65536, 15, 0, 65537, 15, 0, 65538, 15, 0, 65539, 15, 0, 65540, 15, 0, 65541, 15, 0, 65542, 26, 0, 196601, 40, 0, 196602, 26, 0, 196603, 26, 0, 196604, 26, 0, 196605, 32, 0, 196606, 32, 0, 196607, 32, 0, 131072, 32, 0, 131073, 32, 0, 131074, 32, 0, 131075, 26, 0, 131076, 26, 0, 131077, 26, 0, 131078, 26, 0, 262142, 33, 0, 262143, 32, 0, 196608, 32, 0, 196609, 33, 0, 196610, 32, 0, 327678, 32, 0, 327679, 32, 0, 262145, 32, 0, 393214, 32, 0, 458749, 32, 0, 458750, 32, 0 )
 
 [node name="DebugLine" type="Line2D" parent="world"]
 
@@ -79,6 +89,10 @@ __meta__ = {
 [node name="Pot" parent="world/pots" instance=ExtResource( 3 )]
 position = Vector2( 248.132, 68.4948 )
 
+[node name="second" parent="world/pots" instance=ExtResource( 3 )]
+position = Vector2( 498.549, -701.22 )
+is_working = false
+
 [node name="exits" type="Node2D" parent="world"]
 __meta__ = {
 "_edit_lock_": true
@@ -86,6 +100,10 @@ __meta__ = {
 
 [node name="Exit" parent="world/exits" instance=ExtResource( 4 )]
 position = Vector2( -350.826, -200.972 )
+
+[node name="SecondExit" parent="world/exits" instance=ExtResource( 4 )]
+position = Vector2( 11.0354, -487.12 )
+is_working = false
 
 [node name="sinners" type="YSort" parent="world"]
 
@@ -109,56 +127,26 @@ environment = SubResource( 1 )
 [node name="sinner_spawns" type="Node2D" parent="world"]
 
 [node name="initial_respawn" parent="world/sinner_spawns" instance=ExtResource( 11 )]
+timeout = 4
+is_active = true
+
+[node name="respawn2" parent="world/sinner_spawns" instance=ExtResource( 11 )]
+position = Vector2( 368.364, -517.863 )
+timeout = 4
+
+[node name="respawn3" parent="world/sinner_spawns" instance=ExtResource( 11 )]
+position = Vector2( 122.815, -375.665 )
+timeout = 4
+
+[node name="obstacles" type="YSort" parent="world"]
+
+[node name="first" parent="world/obstacles" instance=ExtResource( 17 )]
+position = Vector2( -119.139, -246.994 )
+
+[node name="second" parent="world/obstacles" instance=ExtResource( 17 )]
+position = Vector2( 7.49054, -247.458 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="HUD" parent="CanvasLayer" instance=ExtResource( 5 )]
-margin_top = -1.0
-margin_bottom = -1.0
-
-[node name="PopupDialog" type="PopupDialog" parent="CanvasLayer"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -263.0
-margin_top = -152.0
-margin_right = 265.0
-margin_bottom = 111.0
-theme = ExtResource( 10 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="CanvasLayer/PopupDialog"]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -172.5
-margin_top = 24.0
-margin_right = 172.5
-margin_bottom = 183.0
-text = "Congratulations!
-You have finished 
-tutorial!"
-align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ToMainMenu" type="Button" parent="CanvasLayer/PopupDialog"]
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = -158.0
-margin_top = -74.0
-margin_right = 159.0
-margin_bottom = -23.0
-theme = ExtResource( 10 )
-text = "Go to main menu"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Effects" type="Control" parent="CanvasLayer"]
 anchor_right = 1.0
@@ -171,6 +159,10 @@ __meta__ = {
 material = ExtResource( 13 )
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = -1.5658
+margin_top = 38.5009
+margin_right = -1.5658
+margin_bottom = 38.5009
 texture = ExtResource( 12 )
 expand = true
 stretch_mode = 1
@@ -184,6 +176,277 @@ anims/ColorDistortion = SubResource( 2 )
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="CanvasLayer/Effects/ColorDistortion"]
 stream = ExtResource( 14 )
 
+[node name="OnStartNotice" type="Panel" parent="CanvasLayer"]
+pause_mode = 2
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -250.0
+margin_top = -100.0
+margin_right = 250.0
+margin_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_pivot_offset = Vector2( 245.28, 102.613 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/OnStartNotice"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -226.5
+margin_top = -63.5
+margin_right = 226.5
+margin_bottom = 63.5
+rect_pivot_offset = Vector2( 948.115, 163.016 )
+size_flags_horizontal = 3
+theme = ExtResource( 10 )
+custom_fonts/font = ExtResource( 15 )
+text = "You are regular imp
+
+Punish 5 souls, and gain more job
+
+"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DoJob" type="Button" parent="CanvasLayer/OnStartNotice"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -65.5
+margin_top = -58.0
+margin_right = 65.5
+margin_bottom = -31.0
+theme = ExtResource( 10 )
+custom_fonts/font = ExtResource( 15 )
+text = "Do your job"
+script = ExtResource( 16 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OnWinNotice" type="Panel" parent="CanvasLayer"]
+pause_mode = 2
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -250.0
+margin_top = -100.0
+margin_right = 250.0
+margin_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_pivot_offset = Vector2( 245.28, 102.613 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/OnWinNotice"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -226.5
+margin_top = -63.5
+margin_right = 226.5
+margin_bottom = 63.5
+rect_pivot_offset = Vector2( 948.115, 163.016 )
+size_flags_horizontal = 3
+theme = ExtResource( 10 )
+custom_fonts/font = ExtResource( 15 )
+text = "Well done!
+
+"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NextLevel" type="Button" parent="CanvasLayer/OnWinNotice"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -65.5
+margin_top = -84.0
+margin_right = 65.5
+margin_bottom = -57.0
+theme = ExtResource( 10 )
+custom_fonts/font = ExtResource( 15 )
+text = "Next level"
+script = ExtResource( 20 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ToMainMenu" type="Button" parent="CanvasLayer/OnWinNotice"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -65.5
+margin_top = -43.7351
+margin_right = 65.5
+margin_bottom = -16.7351
+theme = ExtResource( 10 )
+custom_fonts/font = ExtResource( 15 )
+text = "Main menu"
+script = ExtResource( 21 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OnFailNotice" type="Panel" parent="CanvasLayer"]
+pause_mode = 2
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -250.0
+margin_top = -100.0
+margin_right = 250.0
+margin_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_pivot_offset = Vector2( 245.28, 102.613 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/OnFailNotice"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -226.5
+margin_top = -63.5
+margin_right = 226.5
+margin_bottom = 63.5
+rect_pivot_offset = Vector2( 948.115, 163.016 )
+size_flags_horizontal = 3
+theme = ExtResource( 10 )
+custom_fonts/font = ExtResource( 15 )
+text = "So uncapable imp
+
+You will locked here forever
+
+"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Retry" type="Button" parent="CanvasLayer/OnFailNotice"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -65.5
+margin_top = -58.0
+margin_right = 65.5
+margin_bottom = -31.0
+theme = ExtResource( 10 )
+custom_fonts/font = ExtResource( 15 )
+text = "Retry"
+script = ExtResource( 18 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OnSecondStageNotice" type="Panel" parent="CanvasLayer"]
+pause_mode = 2
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -250.0
+margin_top = -100.0
+margin_right = 250.0
+margin_bottom = 115.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_pivot_offset = Vector2( 245.28, 102.613 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/OnSecondStageNotice"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -226.5
+margin_top = 18.0
+margin_right = 226.5
+margin_bottom = 197.0
+rect_pivot_offset = Vector2( 948.115, 163.016 )
+size_flags_horizontal = 3
+theme = ExtResource( 10 )
+custom_fonts/font = ExtResource( 15 )
+text = "Well done!
+
+Rise up number of punished souls to 25
+
+Don't let escape more than 5 souls, or else
+
+"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MoveOn" type="Button" parent="CanvasLayer/OnSecondStageNotice"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -65.5
+margin_top = -42.0
+margin_right = 65.5
+margin_bottom = -15.0
+theme = ExtResource( 10 )
+custom_fonts/font = ExtResource( 15 )
+text = "Do your job"
+script = ExtResource( 19 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HUD" parent="CanvasLayer" instance=ExtResource( 5 )]
+pause_mode = 2
+margin_top = -1.0
+margin_bottom = -1.0
+
 [node name="AudioStreamPlayer" parent="." instance=ExtResource( 8 )]
+pause_mode = 2
 volume_db = -30.203
-[connection signal="pressed" from="CanvasLayer/PopupDialog/ToMainMenu" to="." method="_on_ToMainMenu_pressed"]
+[connection signal="tree_exited" from="world/obstacles/first" to="world/obstacles/second" method="_on_first_tree_exited"]
+[connection signal="pressed" from="CanvasLayer/OnStartNotice/DoJob" to="CanvasLayer/OnStartNotice/DoJob" method="_on_DoJob_pressed"]
+[connection signal="pressed" from="CanvasLayer/OnWinNotice/NextLevel" to="CanvasLayer/OnWinNotice/NextLevel" method="_on_NextLevel_pressed"]
+[connection signal="pressed" from="CanvasLayer/OnWinNotice/ToMainMenu" to="CanvasLayer/OnWinNotice/ToMainMenu" method="_on_ToMainMenu_pressed"]
+[connection signal="pressed" from="CanvasLayer/OnFailNotice/Retry" to="CanvasLayer/OnFailNotice/Retry" method="_on_Retry_pressed"]
+[connection signal="pressed" from="CanvasLayer/OnSecondStageNotice/MoveOn" to="CanvasLayer/OnSecondStageNotice/MoveOn" method="_on_MoveOn_pressed"]
