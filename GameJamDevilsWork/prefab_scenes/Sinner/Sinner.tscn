@@ -7,7 +7,7 @@
 [ext_resource path="res://assets/images/lights/HollyParticles.png" type="Texture" id=5]
 
 [sub_resource type="Gradient" id=4]
-colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
+colors = PoolColorArray( 5, 5, 2, 1, 5, 5, 1, 0 )
 
 [sub_resource type="GradientTexture" id=5]
 gradient = SubResource( 4 )
@@ -22,7 +22,11 @@ curve = SubResource( 6 )
 emission_shape = 1
 emission_sphere_radius = 20.0
 flag_disable_z = true
-gravity = Vector3( 0, -30, 0 )
+direction = Vector3( 0, -1, 0 )
+spread = 10.0
+gravity = Vector3( 0, -150, 0 )
+initial_velocity = 100.0
+initial_velocity_random = 0.54
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale_curve = SubResource( 7 )
@@ -113,7 +117,8 @@ offset = Vector2( 0, -25 )
 
 [node name="AscensionParticles" type="Particles2D" parent="Sprite"]
 rotation = -0.00148935
-scale = Vector2( 1, 1 )
+scale = Vector2( 1, 1.00382 )
+amount = 32
 lifetime = 2.0
 local_coords = false
 process_material = SubResource( 8 )
