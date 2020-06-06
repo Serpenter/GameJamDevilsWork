@@ -33,7 +33,7 @@ size_flags_vertical = 3
 alignment = 1
 
 [node name="GoToGame" type="Button" parent="MarginContainer/HBoxContainer/MenuButtons"]
-margin_top = 219.0
+margin_top = 218.0
 margin_right = 338.0
 margin_bottom = 270.0
 theme = ExtResource( 3 )
@@ -42,14 +42,14 @@ text = "Rise KPI"
 [node name="Tutorial" type="Button" parent="MarginContainer/HBoxContainer/MenuButtons"]
 margin_top = 274.0
 margin_right = 338.0
-margin_bottom = 325.0
+margin_bottom = 326.0
 theme = ExtResource( 3 )
 text = "Tutorial"
 
 [node name="Exit" type="Button" parent="MarginContainer/HBoxContainer/MenuButtons"]
-margin_top = 329.0
+margin_top = 330.0
 margin_right = 338.0
-margin_bottom = 380.0
+margin_bottom = 382.0
 theme = ExtResource( 3 )
 text = "Exit"
 __meta__ = {
