@@ -3,12 +3,12 @@ extends Node2D
 
 onready var area = $Area2D
 onready var holy_particles = $HolyParticles
-
+onready var light = $Light2D
 
 var is_enabled = false
 var is_active = false
 
-var reactivation_timeout = 10.0
+var reactivation_timeout = 3.0
 var reactivation_time = reactivation_timeout
 
 var stun_time = 1.0
@@ -21,10 +21,12 @@ func _ready():
     
 func enable():
     is_enabled = true
+    light.visible = true
     activate_holy_area()
     
 func disable():
     is_enabled = false
+    light.visible = false
     deactivate_holy_area()
     
 func activate_holy_area():
