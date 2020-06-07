@@ -4,6 +4,15 @@ var max_move_speed = 150.0
 var speed_deacceleration = 25.0
 var min_move_speed = 50.0
 
+var sinner_textures =  [
+    preload("res://assets/images/char_assets/sinner-1-all.png"),
+    preload("res://assets/images/char_assets/sinner-2-all.png"),
+    preload("res://assets/images/char_assets/sinner-3-all.png"),
+    preload("res://assets/images/char_assets/sinner-4-all.png"),
+    preload("res://assets/images/char_assets/sinner-5-all.png"),
+    preload("res://assets/images/char_assets/sinner-6-all.png")
+    ]
+
 
 var move_speed = 50.0
 
