@@ -18,7 +18,9 @@ bg_color = Color( 0.490196, 0.101961, 0.101961, 0.294118 )
 bg_color = Color( 0.352941, 0.054902, 0.054902, 1 )
 
 [sub_resource type="StyleBoxFlat" id=6]
-bg_color = Color( 0.490196, 0.101961, 0.101961, 0.411765 )
+content_margin_left = 100.0
+content_margin_bottom = 10.0
+bg_color = Color( 0.0823529, 0.0196078, 0.0196078, 0.670588 )
 
 [sub_resource type="StyleBoxFlat" id=7]
 bg_color = Color( 0.25098, 0.00784314, 0.00784314, 0.470588 )

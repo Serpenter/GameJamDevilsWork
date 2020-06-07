@@ -43,6 +43,7 @@ func _on_ExitArea_body_entered(colBody):
             colBody.get_node('CollisionShape2D').disabled = true
             audio_stream_player.play()
             emit_signal("holy_escape")
+            colBody.exit_hell()
             print("HOLY_ESCAPE")
 
 

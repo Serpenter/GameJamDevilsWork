@@ -3,7 +3,7 @@
 [ext_resource path="res://prefab_scenes/Imp/Imp.gd" type="Script" id=1]
 [ext_resource path="res://assets/images/imp/imp0001.png" type="Texture" id=2]
 [ext_resource path="res://prefab_scenes/Fork/Fork.tscn" type="PackedScene" id=3]
-[ext_resource path="res://assets/images/lights/devil_transparency.png" type="Texture" id=4]
+[ext_resource path="res://prefab_scenes/IsometricTransparency/Isolight.tscn" type="PackedScene" id=4]
 [ext_resource path="res://prefab_scenes/Whip/Whip.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/images/lights/star.png" type="Texture" id=6]
 [ext_resource path="res://assets/sounds/LaughMale.wav" type="AudioStream" id=7]
@@ -136,14 +136,7 @@ scale = Vector2( 4, 3 )
 anims/idle = SubResource( 3 )
 anims/stun = SubResource( 4 )
 
-[node name="Light2D" type="Light2D" parent="."]
-light_mask = 0
-texture = ExtResource( 4 )
-mode = 3
-range_item_cull_mask = 16
-__meta__ = {
-"_edit_lock_": true
-}
+[node name="Light2D" parent="." instance=ExtResource( 4 )]
 
 [node name="Whip" parent="." instance=ExtResource( 5 )]
 position = Vector2( 0, 12 )

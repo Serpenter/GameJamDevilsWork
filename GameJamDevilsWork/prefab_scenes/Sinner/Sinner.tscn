@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://prefab_scenes/Sinner/Sinner.gd" type="Script" id=1]
 [ext_resource path="res://assets/images/char_assets/sinner-1-all.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://assets/sounds/hurt1.wav" type="AudioStream" id=4]
 [ext_resource path="res://assets/images/lights/HollyParticles.png" type="Texture" id=5]
 [ext_resource path="res://assets/images/lights/star.png" type="Texture" id=6]
+[ext_resource path="res://prefab_scenes/IsometricTransparency/Isolight.tscn" type="PackedScene" id=7]
 
 [sub_resource type="Gradient" id=1]
 colors = PoolColorArray( 5, 5, 2, 1, 5, 5, 1, 0 )
@@ -210,4 +211,6 @@ speed_scale = 3.0
 visibility_rect = Rect2( -300, -300, 600, 600 )
 process_material = SubResource( 12 )
 texture = ExtResource( 6 )
+
+[node name="Light2D" parent="." instance=ExtResource( 7 )]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
