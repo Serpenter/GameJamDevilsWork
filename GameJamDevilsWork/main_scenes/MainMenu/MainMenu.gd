@@ -21,6 +21,7 @@ func _ready():
 #	pass
 
 func _on_go_to_game_pressed():
+    $Pressed.play()
     if screen_fader.is_playing:
         return
     screen_fader.fade_out()
@@ -29,6 +30,7 @@ func _on_go_to_game_pressed():
 
 
 func _on_Tutorial_pressed():
+    $Pressed.play()
     if screen_fader.is_playing:
         return
     screen_fader.fade_out()
@@ -38,4 +40,17 @@ func _on_Tutorial_pressed():
 
 
 func _on_Exit_pressed():
+    $Pressed.play()
     get_tree().quit()
+
+
+func _on_GoToGame_mouse_entered():
+    $Hover.play()
+
+
+func _on_Tutorial_mouse_entered():
+    $Hover.play()
+
+
+func _on_Exit_mouse_entered():
+    $Hover.play()

@@ -20,6 +20,7 @@ var stun_duration = 5.0
 
 var max_whip_length = 500
 
+signal whip_used(current_timeout)
 
 
 # Called when the node enters the scene tree for the first time.
@@ -28,6 +29,7 @@ func _ready():
     line.visible = false
     area_of_effect.connect("body_entered", self, "body_enter")
     pass # Replace with function body.
+    connect("whip_used", get_tree().get_root().get_node("MainGame/CanvasLayer/HUD"), "_on_whip_used")
     
 func _quadratic_bezier(p0: Vector2, p1: Vector2, p2: Vector2, t: float):
     var q0 = p0.linear_interpolate(p1, t)
@@ -50,13 +52,15 @@ func update_line():
         line_points.append(new_position)
         
     line.points = line_points
+    $Outline.points = line_points
 
 
 func use_whip(new_target_position):
 
     if in_use:
         return false
-        
+    
+    emit_signal("whip_used", use_timeout)
     in_use = true
     
     target_position = new_target_position
@@ -72,6 +76,8 @@ func use_whip(new_target_position):
     area_of_effect.position = target_vector
     area_of_effect.monitoring = true
     
+    $Particles2D.position = target_vector
+    $Particles2D.emitting = true
     audio_payer.play()
     
 func body_enter(body):
@@ -101,4 +107,5 @@ func _process(delta):
         area_of_effect.position = Vector2()
         area_of_effect.monitoring = false
         line.visible = false
+        $Outline.visible = false
         use_time = use_timeout

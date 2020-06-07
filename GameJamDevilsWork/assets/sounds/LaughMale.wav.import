@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/LaughMale.wav-b620fefee89f3ac4ec0ba64840ac9d79.sample"
+
+[deps]
+
+source_file="res://assets/sounds/LaughMale.wav"
+dest_files=[ "res://.import/LaughMale.wav-b620fefee89f3ac4ec0ba64840ac9d79.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

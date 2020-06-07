@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Abears.ogg-7371bb9190dc774cab10d86df273e539.oggstr"
+
+[deps]
+
+source_file="res://assets/sounds/Abears.ogg"
+dest_files=[ "res://.import/Abears.ogg-7371bb9190dc774cab10d86df273e539.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

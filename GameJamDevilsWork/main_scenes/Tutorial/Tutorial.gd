@@ -93,6 +93,7 @@ func check_stage_conditions():
             
             $CanvasLayer/OnSecondStageNotice.visible = true
             max_sinners_in_game = 4
+            $world/Imp.can_use_whip = true
             get_tree().paused = true
 
     if current_stage == 2:

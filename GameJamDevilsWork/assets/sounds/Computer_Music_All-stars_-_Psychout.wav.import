@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Computer_Music_All-stars_-_Psychout.wav-e7e21444af930c98706596043e0477fe.sample"
+
+[deps]
+
+source_file="res://assets/sounds/Computer_Music_All-stars_-_Psychout.wav"
+dest_files=[ "res://.import/Computer_Music_All-stars_-_Psychout.wav-e7e21444af930c98706596043e0477fe.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

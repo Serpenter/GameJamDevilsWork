@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://prefab_scenes/SinnerRespawn/SinnerRespawn.tscn" type="PackedScene" id=1]
 [ext_resource path="res://prefab_scenes/Background/Background.tscn" type="PackedScene" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://assets/sounds/clang.wav" type="AudioStream" id=11]
 [ext_resource path="res://resources/shaders/color_distortion_material.tres" type="Material" id=12]
 [ext_resource path="res://resources/main_ui_theme.tres" type="Theme" id=13]
+[ext_resource path="res://main_scenes/Level_01/Camera2D.gd" type="Script" id=14]
 [ext_resource path="res://main_scenes/Level_01/Level_01.gd" type="Script" id=15]
 [ext_resource path="res://main_scenes/Tutorial/NextLevel.gd" type="Script" id=16]
 [ext_resource path="res://main_scenes/Tutorial/ToMainMenu.gd" type="Script" id=17]
@@ -126,6 +127,7 @@ position = Vector2( 176.551, 2.83428 )
 current = true
 smoothing_enabled = true
 smoothing_speed = 10.0
+script = ExtResource( 14 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="world/Imp/Camera2D"]
 environment = SubResource( 1 )

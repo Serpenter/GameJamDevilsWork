@@ -11,11 +11,14 @@ onready var animation_player = $AnimationPlayer
 onready var aoe_stun_sound = $AOEStunSound
 
 var aoe_stun_time = 10.0
-
+var aoe_stun_reload = 8.0
+var is_aoe_reloaded = false
+signal aoe_taunt_stun(reload_time)
 
 var stun_time = 0.0
 
-var can_aoe_stun = true
+export var can_aoe_stun = true
+export var can_use_whip = true
 
 var radians_to_frame = {
     [- PI - 0.01, -0.875 * PI] : 1,
@@ -31,6 +34,7 @@ var radians_to_frame = {
 
 
 func _ready():
+    connect("aoe_taunt_stun", get_tree().get_root().get_node("MainGame/CanvasLayer/HUD"), "_on_aoe_taunt_stun")
     sprite.set_frame(3)
     animation_player.play("idle")
     
@@ -83,6 +87,8 @@ func disable_stun():
     
 
 func stun_everyone():
+    emit_signal("aoe_taunt_stun", aoe_stun_reload)
+    is_aoe_reloaded = false
     aoe_stun_sound.play()
 
     var group_members = get_tree().get_nodes_in_group("aoe_stunnable")
@@ -91,6 +97,7 @@ func stun_everyone():
         if member.has_method("stun"):
             member.stun(aoe_stun_time)
  
+
 func _process(delta):
     
     
@@ -110,10 +117,12 @@ func _process(delta):
         fork.push()
         
     if Input.is_action_just_pressed("secondary_action"):
-        whip.use_whip(get_global_mouse_position())
+        if can_use_whip:
+            whip.use_whip(get_global_mouse_position())
         
     if Input.is_action_just_pressed("space"):
-        stun_everyone()
+        if can_aoe_stun and is_aoe_reloaded:
+            stun_everyone()
 
     move_vector = Vector2()
     var is_moving = false
@@ -134,5 +143,7 @@ func _process(delta):
         move_and_collide(move_vector * move_speed * delta)
         
     update_body_frame()
-        
-        
+
+
+func _on_Timer_timeout():
+    is_aoe_reloaded = true
