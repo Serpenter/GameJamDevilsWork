@@ -1,0 +1,48 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://main_scenes/Level_01/Resume.gd" type="Script" id=1]
+[ext_resource path="res://resources/main_ui_theme.tres" type="Theme" id=2]
+
+[node name="OnPause" type="VBoxContainer"]
+pause_mode = 2
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -369.0
+margin_top = -114.0
+margin_right = 369.0
+margin_bottom = 114.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_pivot_offset = Vector2( 245.28, 102.613 )
+theme = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+margin_right = 738.0
+margin_bottom = 62.0
+rect_pivot_offset = Vector2( 948.115, 163.016 )
+size_flags_horizontal = 3
+theme = ExtResource( 2 )
+text = "Paused"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Resume" type="Button" parent="."]
+pause_mode = 2
+margin_top = 66.0
+margin_right = 738.0
+margin_bottom = 118.0
+theme = ExtResource( 2 )
+text = "Do your job"
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="Resume" to="Resume" method="_on_Resume_pressed"]

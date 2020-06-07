@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://prefab_scenes/levels/LevelMap_00.tscn" type="PackedScene" id=1]
 [ext_resource path="res://prefab_scenes/Background/Background.tscn" type="PackedScene" id=2]
@@ -22,6 +22,7 @@
 [ext_resource path="res://main_scenes/Tutorial/NextLevel.gd" type="Script" id=20]
 [ext_resource path="res://main_scenes/Tutorial/ToMainMenu.gd" type="Script" id=21]
 [ext_resource path="res://resources/fonts/chomsky_36.tres" type="DynamicFont" id=22]
+[ext_resource path="res://main_scenes/Level_01/Resume.gd" type="Script" id=23]
 
 [sub_resource type="Environment" id=1]
 background_mode = 4
@@ -187,6 +188,49 @@ margin_left = -0.540405
 margin_top = -0.512329
 margin_right = -0.540405
 margin_bottom = -0.512329
+
+[node name="OnPause" type="VBoxContainer" parent="CanvasLayer"]
+pause_mode = 2
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -369.0
+margin_top = -114.0
+margin_right = 369.0
+margin_bottom = 114.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_pivot_offset = Vector2( 245.28, 102.613 )
+theme = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/OnPause"]
+margin_right = 738.0
+margin_bottom = 62.0
+rect_pivot_offset = Vector2( 948.115, 163.016 )
+size_flags_horizontal = 3
+theme = ExtResource( 10 )
+text = "Paused"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Resume" type="Button" parent="CanvasLayer/OnPause"]
+pause_mode = 2
+margin_top = 66.0
+margin_right = 738.0
+margin_bottom = 118.0
+theme = ExtResource( 10 )
+text = "Do your job"
+script = ExtResource( 23 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="OnStartNotice" type="VBoxContainer" parent="CanvasLayer"]
 pause_mode = 2
@@ -386,6 +430,7 @@ __meta__ = {
 pause_mode = 2
 volume_db = -30.203
 [connection signal="tree_exited" from="world/obstacles/first" to="world/obstacles/second" method="_on_first_tree_exited"]
+[connection signal="pressed" from="CanvasLayer/OnPause/Resume" to="CanvasLayer/OnPause/Resume" method="_on_Resume_pressed"]
 [connection signal="pressed" from="CanvasLayer/OnStartNotice/DoJob" to="CanvasLayer/OnStartNotice/DoJob" method="_on_DoJob_pressed"]
 [connection signal="pressed" from="CanvasLayer/OnWinNotice/NextLevel" to="CanvasLayer/OnWinNotice/NextLevel" method="_on_NextLevel_pressed"]
 [connection signal="pressed" from="CanvasLayer/OnWinNotice/ToMainMenu" to="CanvasLayer/OnWinNotice/ToMainMenu" method="_on_ToMainMenu_pressed"]

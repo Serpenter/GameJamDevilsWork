@@ -12,10 +12,9 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
-
+func _process(delta):
+    if Input.is_action_pressed("pause") or Input.is_action_pressed("space"):
+        _on_DoJob_pressed();
 
 func _on_DoJob_pressed():
     get_parent().visible = false

@@ -54,3 +54,11 @@ func _on_aoe_taunt_stun(current_timeout):
     $MarginContainer/HBoxContainer/Control/VBoxContainer/Taunt.visible = true
     $MarginContainer/HBoxContainer/Control/VBoxContainer/Taunt/AnimationPlayer.get_animation("taunt").length = current_timeout
     $MarginContainer/HBoxContainer/Control/VBoxContainer/Taunt/AnimationPlayer.play("taunt")
+
+
+
+func _process(delta):
+    if Input.is_action_pressed("pause"):
+        print("PAUSE")
+        get_parent().get_node("OnPause").visible = true
+        get_tree().paused = true

@@ -1,4 +1,4 @@
-extends Button
+extends Control
 
 
 # Declare member variables here. Examples:
@@ -12,11 +12,4 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
 
-
-
-func _on_DoJob_pressed():
-    get_parent().visible = false
-    get_tree().paused = false

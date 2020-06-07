@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://prefab_scenes/SinnerRespawn/SinnerRespawn.tscn" type="PackedScene" id=1]
 [ext_resource path="res://prefab_scenes/Background/Background.tscn" type="PackedScene" id=2]
@@ -18,6 +18,7 @@
 [ext_resource path="res://main_scenes/Tutorial/NextLevel.gd" type="Script" id=16]
 [ext_resource path="res://main_scenes/Tutorial/ToMainMenu.gd" type="Script" id=17]
 [ext_resource path="res://main_scenes/Level_01/Retry.gd" type="Script" id=18]
+[ext_resource path="res://main_scenes/Level_01/Resume.gd" type="Script" id=19]
 [ext_resource path="res://main_scenes/Tutorial/DoJob.gd" type="Script" id=20]
 [ext_resource path="res://resources/fonts/chomsky_36.tres" type="DynamicFont" id=21]
 [ext_resource path="res://prefab_scenes/levels/LevelMap_02.tscn" type="PackedScene" id=22]
@@ -157,17 +158,11 @@ timeout = 5
 [node name="ObstacleTwo" parent="world/obstacles" instance=ExtResource( 5 )]
 position = Vector2( -188.632, 68.211 )
 
-[node name="ObstacleTwo2" parent="world/obstacles" instance=ExtResource( 5 )]
-position = Vector2( -124.421, 105.053 )
-
 [node name="ObstacleTwo3" parent="world/obstacles" instance=ExtResource( 5 )]
 position = Vector2( -189.421, 140.053 )
 
 [node name="ObstacleTwo4" parent="world/obstacles" instance=ExtResource( 5 )]
 position = Vector2( -57.231, 138.656 )
-
-[node name="ObstacleTwo5" parent="world/obstacles" instance=ExtResource( 5 )]
-position = Vector2( -123.421, 176.053 )
 
 [node name="ObstacleTwo6" parent="world/obstacles" instance=ExtResource( 5 )]
 position = Vector2( -190.421, 210.053 )
@@ -181,9 +176,6 @@ position = Vector2( -120.992, -171.516 )
 [node name="ObstacleTwo10" parent="world/obstacles" instance=ExtResource( 5 )]
 position = Vector2( -57.8507, -207.964 )
 
-[node name="ObstacleTwo11" parent="world/obstacles" instance=ExtResource( 5 )]
-position = Vector2( -247.787, -101.702 )
-
 [node name="ObstacleTwo12" parent="world/obstacles" instance=ExtResource( 5 )]
 position = Vector2( -332.489, -134.556 )
 
@@ -192,12 +184,6 @@ position = Vector2( -261.648, -177.163 )
 
 [node name="ObstacleTwo14" parent="world/obstacles" instance=ExtResource( 5 )]
 position = Vector2( -184.646, -219.257 )
-
-[node name="ObstacleTwo15" parent="world/obstacles" instance=ExtResource( 5 )]
-position = Vector2( -46.6089, -132.662 )
-
-[node name="ObstacleTwo9" parent="world/obstacles" instance=ExtResource( 5 )]
-position = Vector2( -183.62, -135.752 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -231,8 +217,53 @@ stream = ExtResource( 11 )
 
 [node name="HUD" parent="CanvasLayer" instance=ExtResource( 7 )]
 pause_mode = 2
-margin_left = 2.69867
-margin_right = 2.69873
+margin_left = 3.60117
+margin_top = 0.0974731
+margin_right = 3.6012
+margin_bottom = 0.0974731
+
+[node name="OnPause" type="VBoxContainer" parent="CanvasLayer"]
+pause_mode = 2
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -369.0
+margin_top = -114.0
+margin_right = 369.0
+margin_bottom = 114.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_pivot_offset = Vector2( 245.28, 102.613 )
+theme = ExtResource( 13 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/OnPause"]
+margin_right = 738.0
+margin_bottom = 62.0
+rect_pivot_offset = Vector2( 948.115, 163.016 )
+size_flags_horizontal = 3
+theme = ExtResource( 13 )
+text = "Paused"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Resume" type="Button" parent="CanvasLayer/OnPause"]
+pause_mode = 2
+margin_top = 66.0
+margin_right = 738.0
+margin_bottom = 118.0
+theme = ExtResource( 13 )
+text = "Do your job"
+script = ExtResource( 19 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="OnStartNotice" type="VBoxContainer" parent="CanvasLayer"]
 pause_mode = 2
@@ -379,6 +410,7 @@ __meta__ = {
 pause_mode = 2
 volume_db = -30.203
 [connection signal="timeout" from="SecondStage" to="." method="_on_SecondStage_timeout"]
+[connection signal="pressed" from="CanvasLayer/OnPause/Resume" to="CanvasLayer/OnPause/Resume" method="_on_Resume_pressed"]
 [connection signal="pressed" from="CanvasLayer/OnStartNotice/DoJob" to="CanvasLayer/OnStartNotice/DoJob" method="_on_DoJob_pressed"]
 [connection signal="pressed" from="CanvasLayer/OnWinNotice/NextLevel" to="CanvasLayer/OnWinNotice/NextLevel" method="_on_NextLevel_pressed"]
 [connection signal="pressed" from="CanvasLayer/OnWinNotice/ToMainMenu" to="CanvasLayer/OnWinNotice/ToMainMenu" method="_on_ToMainMenu_pressed"]

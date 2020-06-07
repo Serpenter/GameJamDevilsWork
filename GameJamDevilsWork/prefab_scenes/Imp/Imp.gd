@@ -100,8 +100,6 @@ func stun_everyone():
 
 func _process(delta):
     
-    
-    
     if stun_time > 0:
 
         stun_time -= delta

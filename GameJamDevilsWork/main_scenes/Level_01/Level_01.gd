@@ -8,8 +8,8 @@ var stage_two_condition = 40
 var stage_two_holy_condition = 12
 var stage_two_fail_condition = 10
 
-var stage_two_nun_factor = 5
-var cardinal_factor = 3
+var stage_two_nun_factor = 7
+var cardinal_factor = 4
 var nuns_left_before_cardinal = cardinal_factor
 var sinners_left_before_nun = stage_two_nun_factor
 var total_holy_expelled = 0
@@ -142,3 +142,4 @@ func _on_prayer_point(prayer_position):
 
 func _on_holy_escape():
     total_holy_expelled += 1
+
