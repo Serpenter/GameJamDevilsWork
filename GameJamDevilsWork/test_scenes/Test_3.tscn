@@ -128,7 +128,7 @@ position = Vector2( 1115.4, -158.372 )
 position = Vector2( 848.171, 193.231 )
 
 [node name="Pope" parent="Sinners" instance=ExtResource( 12 )]
-visible = false
+
 position = Vector2( 693.26, 305.994 )
 
 [node name="AudioStreamPlayer" parent="." instance=ExtResource( 8 )]

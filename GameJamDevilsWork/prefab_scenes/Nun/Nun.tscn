@@ -1,40 +1,45 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://assets/images/char_assets/Nun_all.png" type="Texture" id=1]
 [ext_resource path="res://prefab_scenes/Nun/Nun.gd" type="Script" id=2]
+[ext_resource path="res://assets/images/lights/light2.png" type="Texture" id=3]
+
 [ext_resource path="res://assets/sounds/Hook.wav" type="AudioStream" id=4]
 [ext_resource path="res://assets/images/lights/HollyParticles.png" type="Texture" id=5]
 [ext_resource path="res://assets/images/Angel/nimb3.png" type="Texture" id=6]
 [ext_resource path="res://assets/images/lights/star.png" type="Texture" id=7]
 [ext_resource path="res://prefab_scenes/IsometricTransparency/Isolight.tscn" type="PackedScene" id=8]
+[ext_resource path="res://assets/sounds/bell_1.wav" type="AudioStream" id=9]
+[ext_resource path="res://assets/images/lights/cross.png" type="Texture" id=10]
+[ext_resource path="res://prefab_scenes/Nun/HolyArea.gd" type="Script" id=11]
 
-[sub_resource type="Gradient" id=1]
+[sub_resource type="Gradient" id=15]
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture" id=2]
-gradient = SubResource( 1 )
+[sub_resource type="GradientTexture" id=16]
+gradient = SubResource( 15 )
 
-[sub_resource type="Curve" id=3]
+[sub_resource type="Curve" id=17]
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.484127, 0.853409 ), 0.763636, 0.763636, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=4]
-curve = SubResource( 3 )
+[sub_resource type="CurveTexture" id=18]
+curve = SubResource( 17 )
 
-[sub_resource type="ParticlesMaterial" id=5]
+[sub_resource type="ParticlesMaterial" id=19]
 emission_shape = 1
 emission_sphere_radius = 20.0
 flag_disable_z = true
 gravity = Vector3( 0, -30, 0 )
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
-scale_curve = SubResource( 4 )
-color_ramp = SubResource( 2 )
+scale_curve = SubResource( 18 )
+color_ramp = SubResource( 16 )
 
-[sub_resource type="CapsuleShape2D" id=6]
+[sub_resource type="CapsuleShape2D" id=20]
 radius = 26.1802
 height = 2.84817
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=21]
 length = 3.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite/AscensionParticles:emitting")
@@ -85,7 +90,7 @@ tracks/3/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=22]
 length = 0.6
 loop = true
 tracks/0/type = "value"
@@ -125,7 +130,7 @@ tracks/2/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=23]
 length = 0.6
 loop = true
 tracks/0/type = "value"
@@ -153,7 +158,7 @@ tracks/1/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=24]
 length = 0.6
 tracks/0/type = "value"
 tracks/0/path = NodePath("CollisionShape2D:position")
@@ -216,13 +221,13 @@ tracks/4/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Curve" id=11]
+[sub_resource type="Curve" id=25]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.364773 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=12]
-curve = SubResource( 11 )
+[sub_resource type="CurveTexture" id=26]
+curve = SubResource( 25 )
 
-[sub_resource type="ParticlesMaterial" id=13]
+[sub_resource type="ParticlesMaterial" id=27]
 emission_shape = 1
 emission_sphere_radius = 55.91
 flag_disable_z = true
@@ -232,7 +237,29 @@ gravity = Vector3( 0, -20, 0 )
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 0.3
-scale_curve = SubResource( 12 )
+scale_curve = SubResource( 26 )
+color = Color( 1, 0.905882, 0, 0.505882 )
+
+[sub_resource type="CircleShape2D" id=11]
+radius = 100.0
+
+[sub_resource type="Curve" id=12]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.364773 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=13]
+curve = SubResource( 12 )
+
+[sub_resource type="ParticlesMaterial" id=14]
+emission_shape = 1
+emission_sphere_radius = 200.0
+flag_disable_z = true
+direction = Vector3( 0, -1, 0 )
+spread = 0.0
+gravity = Vector3( 0, -20, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 5.0
+scale_curve = SubResource( 13 )
 color = Color( 1, 0.905882, 0, 0.505882 )
 
 [node name="Nun" type="KinematicBody2D" groups=[
@@ -252,18 +279,18 @@ hframes = 8
 rotation = -0.00148935
 lifetime = 2.0
 local_coords = false
-process_material = SubResource( 5 )
+process_material = SubResource( 19 )
 texture = ExtResource( 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = -0.00084038
-shape = SubResource( 6 )
+shape = SubResource( 20 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Ascension = SubResource( 7 )
-anims/idle = SubResource( 8 )
-anims/pray = SubResource( 9 )
-anims/stun = SubResource( 10 )
+anims/Ascension = SubResource( 21 )
+anims/idle = SubResource( 22 )
+anims/pray = SubResource( 23 )
+anims/stun = SubResource( 24 )
 
 [node name="AudioStreamPlayer1" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 4 )
@@ -286,8 +313,36 @@ amount = 10
 lifetime = 3.0
 speed_scale = 3.0
 visibility_rect = Rect2( -300, -300, 600, 600 )
-process_material = SubResource( 13 )
+process_material = SubResource( 27 )
 texture = ExtResource( 7 )
 
 [node name="Light2D" parent="." instance=ExtResource( 8 )]
+
+[node name="HolyArea" type="Node2D" parent="."]
+script = ExtResource( 11 )
+
+[node name="Area2D" type="Area2D" parent="HolyArea"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HolyArea/Area2D"]
+shape = SubResource( 11 )
+
+[node name="HolyParticles" type="Particles2D" parent="HolyArea"]
+scale = Vector2( 0.5, 0.5 )
+z_index = 5
+amount = 60
+lifetime = 5.0
+visibility_rect = Rect2( -300, -300, 600, 600 )
+process_material = SubResource( 14 )
+texture = ExtResource( 10 )
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="HolyArea"]
+stream = ExtResource( 9 )
+volume_db = 16.156
+
+[node name="Light2D" type="Light2D" parent="HolyArea"]
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 3 )
+texture_scale = 2.0
+color = Color( 0.992157, 0.992157, 0.188235, 1 )
+energy = 0.5
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
