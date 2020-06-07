@@ -82,6 +82,9 @@ script = ExtResource( 2 )
 
 [node name="ForkArea" type="Area2D" parent="."]
 
+position = Vector2( 0, 0 )
+collision_layer = 65537
+
 [node name="ForkShape" type="CollisionShape2D" parent="ForkArea"]
 position = Vector2( 8, 0 )
 shape = SubResource( 1 )
