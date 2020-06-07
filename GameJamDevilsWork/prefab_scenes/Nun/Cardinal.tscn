@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://assets/images/char_assets/Cardinal_Black_all.png" type="Texture" id=1]
 [ext_resource path="res://prefab_scenes/Nun/Cardinal.gd" type="Script" id=2]
@@ -9,7 +9,8 @@
 [ext_resource path="res://prefab_scenes/Nun/HolyArea.gd" type="Script" id=7]
 [ext_resource path="res://assets/images/lights/cross.png" type="Texture" id=8]
 [ext_resource path="res://assets/images/lights/star.png" type="Texture" id=9]
-[ext_resource path="res://assets/images/lights/light2.png" type="Texture" id=10]
+[ext_resource path="res://prefab_scenes/IsometricTransparency/Isolight.tscn" type="PackedScene" id=10]
+[ext_resource path="res://assets/images/lights/light2.png" type="Texture" id=11]
 
 [sub_resource type="Gradient" id=1]
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
@@ -323,7 +324,7 @@ texture = ExtResource( 8 )
 
 [node name="Light2D" type="Light2D" parent="HolyArea"]
 scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 10 )
+texture = ExtResource( 11 )
 texture_scale = 2.0
 color = Color( 0.992157, 0.992157, 0.188235, 1 )
 energy = 0.5
@@ -338,4 +339,6 @@ speed_scale = 3.0
 visibility_rect = Rect2( -300, -300, 600, 600 )
 process_material = SubResource( 17 )
 texture = ExtResource( 9 )
+
+[node name="Light2D" parent="." instance=ExtResource( 10 )]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
