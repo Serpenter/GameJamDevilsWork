@@ -3,8 +3,8 @@
 [ext_resource path="res://prefab_scenes/Nun/Pope.gd" type="Script" id=1]
 [ext_resource path="res://assets/images/lights/HollyParticles.png" type="Texture" id=2]
 [ext_resource path="res://assets/images/lights/cross.png" type="Texture" id=3]
-[ext_resource path="res://assets/sounds/hurt2.wav" type="AudioStream" id=4]
-[ext_resource path="res://assets/sounds/hurt1.wav" type="AudioStream" id=5]
+[ext_resource path="res://assets/sounds/Hook.wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/sounds/bell_1.wav" type="AudioStream" id=5]
 [ext_resource path="res://assets/images/lights/star.png" type="Texture" id=6]
 [ext_resource path="res://assets/images/Angel/nimb3.png" type="Texture" id=7]
 [ext_resource path="res://assets/images/char_assets/pope_all.png" type="Texture" id=8]
@@ -291,7 +291,7 @@ anims/pray = SubResource( 9 )
 anims/stun = SubResource( 10 )
 
 [node name="AudioStreamPlayer1" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 5 )
+stream = ExtResource( 4 )
 
 [node name="AudioStreamPlayer2" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 4 )
@@ -320,6 +320,8 @@ process_material = SubResource( 14 )
 texture = ExtResource( 3 )
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="HolyArea"]
+stream = ExtResource( 5 )
+volume_db = 16.156
 
 [node name="Light2D" type="Light2D" parent="HolyArea"]
 scale = Vector2( 0.5, 0.5 )

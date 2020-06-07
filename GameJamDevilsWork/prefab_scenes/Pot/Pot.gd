@@ -1,6 +1,6 @@
 extends Node2D
 
-
+var scream_and_splash = preload("res://prefab_scenes/Pot/ScreamAndSplash.tscn")
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -30,6 +30,8 @@ func _on_PotArea_body_entered(colBody):
     if colBody.has_method("get_in_pot"):
         if colBody.get_in_pot():
             sinners_inside += 1
-            scream_audio_player.play()
-            splash_audio_player.play()
+            var sound = scream_and_splash.instance()
+            self.add_child(sound)
+#            scream_audio_player.play()
+#            splash_audio_player.play()
             emit_signal("sinner_punished", 1)

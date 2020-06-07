@@ -4,6 +4,7 @@ extends Node2D
 onready var area = $Area2D
 onready var holy_particles = $HolyParticles
 onready var light = $Light2D
+onready var audio_player = $AudioStreamPlayer2D
 
 var is_enabled = false
 var is_active = false
@@ -39,6 +40,7 @@ func activate_holy_area():
                 print("stunning imp")
                 body.stun_imp(stun_time)
                 deactivate_holy_area()
+                
 
 func deactivate_holy_area():
     is_active = false
@@ -56,6 +58,7 @@ func body_enter(body):
             print("stunning imp")
             body.stun_imp(stun_time)
             deactivate_holy_area()
+            audio_player.play()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

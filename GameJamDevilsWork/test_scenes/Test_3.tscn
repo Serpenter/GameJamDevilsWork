@@ -99,19 +99,37 @@ __meta__ = {
 }
 
 [node name="Cardinal" parent="Sinners" instance=ExtResource( 11 )]
+visible = false
 position = Vector2( 444.902, -112.687 )
 
 [node name="Nun" parent="Sinners" instance=ExtResource( 5 )]
+visible = false
 position = Vector2( 537.181, -103.478 )
 
 [node name="Sinner" parent="Sinners" instance=ExtResource( 10 )]
 position = Vector2( 337.26, -11.4505 )
 
+[node name="Sinner6" parent="Sinners" instance=ExtResource( 10 )]
+position = Vector2( 1425.56, -361.068 )
+
+[node name="Sinner7" parent="Sinners" instance=ExtResource( 10 )]
+position = Vector2( 1316.73, -291.689 )
+
+[node name="Sinner3" parent="Sinners" instance=ExtResource( 10 )]
+position = Vector2( 988.882, -98.5148 )
+
+[node name="Sinner4" parent="Sinners" instance=ExtResource( 10 )]
+position = Vector2( 1233.75, -245.436 )
+
+[node name="Sinner5" parent="Sinners" instance=ExtResource( 10 )]
+position = Vector2( 1115.4, -158.372 )
+
 [node name="Sinner2" parent="Sinners" instance=ExtResource( 10 )]
 position = Vector2( 848.171, 193.231 )
 
 [node name="Pope" parent="Sinners" instance=ExtResource( 12 )]
-position = Vector2( 497.47, 133.362 )
+visible = false
+position = Vector2( 693.26, 305.994 )
 
 [node name="AudioStreamPlayer" parent="." instance=ExtResource( 8 )]
 volume_db = -14.369
