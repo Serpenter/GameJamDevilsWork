@@ -1,29 +1,29 @@
 [gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://assets/images/lights/star.png" type="Texture" id=1]
-[ext_resource path="res://assets/images/coffin-dance-man-2/coffin-dance-man0007.png" type="Texture" id=2]
-[ext_resource path="res://assets/images/coffin-dance-man-2/coffin-dance-man0004.png" type="Texture" id=3]
-[ext_resource path="res://assets/images/coffin-dance-man-2/coffin-dance-man0006.png" type="Texture" id=4]
-[ext_resource path="res://assets/images/coffin-dance-man-2/coffin-dance-man0005.png" type="Texture" id=5]
-[ext_resource path="res://assets/images/coffin-dance-man-2/coffin-dance-man0003.png" type="Texture" id=6]
-[ext_resource path="res://assets/images/coffin-dance-man-2/coffin-dance-man0001.png" type="Texture" id=7]
-[ext_resource path="res://assets/images/coffin-dance-man-2/coffin-dance-man0000.png" type="Texture" id=8]
-[ext_resource path="res://assets/images/coffin-dance-man-2/coffin-dance-man0002.png" type="Texture" id=9]
+[ext_resource path="res://assets/images/coffin-dance-man-1/coffin-dance-man0007.png" type="Texture" id=2]
+[ext_resource path="res://assets/images/coffin-dance-man-1/coffin-dance-man0000.png" type="Texture" id=3]
+[ext_resource path="res://assets/images/coffin-dance-man-1/coffin-dance-man0001.png" type="Texture" id=4]
+[ext_resource path="res://assets/images/coffin-dance-man-1/coffin-dance-man0006.png" type="Texture" id=5]
+[ext_resource path="res://assets/images/coffin-dance-man-1/coffin-dance-man0004.png" type="Texture" id=6]
+[ext_resource path="res://assets/images/coffin-dance-man-1/coffin-dance-man0003.png" type="Texture" id=7]
+[ext_resource path="res://assets/images/coffin-dance-man-1/coffin-dance-man0002.png" type="Texture" id=8]
+[ext_resource path="res://assets/images/coffin-dance-man-1/coffin-dance-man0005.png" type="Texture" id=9]
 [ext_resource path="res://prefab_scenes/Pallbearers/Pallbearer.gd" type="Script" id=10]
 
-[sub_resource type="CapsuleShape2D" id=1]
+[sub_resource type="CapsuleShape2D" id=9]
 radius = 14.4821
 height = 1.23684
 
-[sub_resource type="SpriteFrames" id=2]
+[sub_resource type="SpriteFrames" id=10]
 animations = [ {
-"frames": [ ExtResource( 8 ), ExtResource( 7 ), ExtResource( 9 ), ExtResource( 6 ), ExtResource( 3 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 2 ) ],
+"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 8 ), ExtResource( 7 ), ExtResource( 6 ), ExtResource( 9 ), ExtResource( 5 ), ExtResource( 2 ) ],
 "loop": true,
 "name": "default",
 "speed": 0.0
 } ]
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=11]
 length = 0.6
 loop = true
 tracks/0/type = "value"
@@ -63,7 +63,7 @@ tracks/2/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=12]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("StunParticles:visible")
@@ -78,13 +78,13 @@ tracks/0/keys = {
 "values": [ true, true ]
 }
 
-[sub_resource type="Curve" id=5]
+[sub_resource type="Curve" id=13]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.364773 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=6]
-curve = SubResource( 5 )
+[sub_resource type="CurveTexture" id=14]
+curve = SubResource( 13 )
 
-[sub_resource type="ParticlesMaterial" id=7]
+[sub_resource type="ParticlesMaterial" id=15]
 emission_shape = 1
 emission_sphere_radius = 55.91
 flag_disable_z = true
@@ -94,7 +94,7 @@ gravity = Vector3( 0, -20, 0 )
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 0.3
-scale_curve = SubResource( 6 )
+scale_curve = SubResource( 14 )
 color = Color( 1, 0.905882, 0, 0.505882 )
 
 [node name="Pallbearer" type="KinematicBody2D"]
@@ -104,21 +104,21 @@ collision_mask = 16385
 script = ExtResource( 10 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 6.79631 )
-shape = SubResource( 1 )
+position = Vector2( 0, 4.19914 )
+shape = SubResource( 9 )
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
-position = Vector2( 0, 6.79631 )
+position = Vector2( 0, 4.19914 )
 scale = Vector2( 0.5, 0.5 )
-frames = SubResource( 2 )
-frame = 3
+frames = SubResource( 10 )
+frame = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/idle = SubResource( 3 )
-anims/stun = SubResource( 4 )
+anims/idle = SubResource( 11 )
+anims/stun = SubResource( 12 )
 
 [node name="StunParticles" type="Particles2D" parent="."]
 visible = false
@@ -129,5 +129,5 @@ amount = 10
 lifetime = 3.0
 speed_scale = 3.0
 visibility_rect = Rect2( -300, -300, 600, 600 )
-process_material = SubResource( 7 )
+process_material = SubResource( 15 )
 texture = ExtResource( 1 )

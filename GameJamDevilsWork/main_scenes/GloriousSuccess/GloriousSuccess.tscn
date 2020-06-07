@@ -1,0 +1,575 @@
+[gd_scene load_steps=45 format=2]
+
+[ext_resource path="res://prefab_scenes/levels/LevelMap_00.tscn" type="PackedScene" id=1]
+[ext_resource path="res://prefab_scenes/Background/Background.tscn" type="PackedScene" id=2]
+[ext_resource path="res://prefab_scenes/Pallbearers/PallbearerTopHat.tscn" type="PackedScene" id=3]
+[ext_resource path="res://prefab_scenes/Pallbearers/PallbearerCrewRight.tscn" type="PackedScene" id=4]
+[ext_resource path="res://prefab_scenes/HUD/HUD.tscn" type="PackedScene" id=5]
+[ext_resource path="res://prefab_scenes/Pallbearers/PallbearerCrewLeft.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/sounds/Astronomia.wav" type="AudioStream" id=7]
+[ext_resource path="res://prefab_scenes/GameAudio/AudioStreamPlayer.tscn" type="PackedScene" id=8]
+[ext_resource path="res://main_scenes/Tutorial/Tutorial.gd" type="Script" id=9]
+[ext_resource path="res://resources/main_ui_theme.tres" type="Theme" id=10]
+[ext_resource path="res://prefab_scenes/Pallbearers/Pallbearer.gd" type="Script" id=11]
+[ext_resource path="res://assets/images/white.png" type="Texture" id=12]
+[ext_resource path="res://resources/shaders/color_distortion_material.tres" type="Material" id=13]
+[ext_resource path="res://assets/sounds/clang.wav" type="AudioStream" id=14]
+[ext_resource path="res://main_scenes/Tutorial/DoJob.gd" type="Script" id=16]
+[ext_resource path="res://assets/images/lights/star.png" type="Texture" id=17]
+[ext_resource path="res://main_scenes/Tutorial/Retry.gd" type="Script" id=18]
+[ext_resource path="res://main_scenes/Tutorial/MoveOn.gd" type="Script" id=19]
+[ext_resource path="res://main_scenes/Tutorial/NextLevel.gd" type="Script" id=20]
+[ext_resource path="res://main_scenes/Tutorial/ToMainMenu.gd" type="Script" id=21]
+[ext_resource path="res://resources/fonts/chomsky_36.tres" type="DynamicFont" id=22]
+[ext_resource path="res://assets/images/coffin-dance-man-1/coffin-dance-man0000.png" type="Texture" id=25]
+[ext_resource path="res://assets/images/coffin-dance-man-1/coffin-dance-man0004.png" type="Texture" id=26]
+[ext_resource path="res://assets/images/coffin-dance-man-1/coffin-dance-man0001.png" type="Texture" id=27]
+[ext_resource path="res://assets/images/coffin-dance-man-1/coffin-dance-man0003.png" type="Texture" id=28]
+[ext_resource path="res://assets/images/coffin-dance-man-1/coffin-dance-man0007.png" type="Texture" id=29]
+[ext_resource path="res://assets/images/coffin-dance-man-1/coffin-dance-man0002.png" type="Texture" id=30]
+[ext_resource path="res://assets/images/coffin-dance-man-1/coffin-dance-man0006.png" type="Texture" id=31]
+[ext_resource path="res://assets/images/coffin-dance-man-1/coffin-dance-man0005.png" type="Texture" id=32]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 14.4821
+height = 1.23684
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 25 ), ExtResource( 27 ), ExtResource( 30 ), ExtResource( 28 ), ExtResource( 26 ), ExtResource( 32 ), ExtResource( 31 ), ExtResource( 29 ) ],
+"loop": true,
+"name": "default",
+"speed": 0.0
+} ]
+
+[sub_resource type="Animation" id=3]
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 10 ), Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CollisionShape2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 10 ), Vector2( 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("StunParticles:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=4]
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("StunParticles:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, true ]
+}
+
+[sub_resource type="Curve" id=5]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.364773 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=6]
+curve = SubResource( 5 )
+
+[sub_resource type="ParticlesMaterial" id=7]
+emission_shape = 1
+emission_sphere_radius = 55.91
+flag_disable_z = true
+direction = Vector3( 0, -1, 0 )
+spread = 0.0
+gravity = Vector3( 0, -20, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 0.3
+scale_curve = SubResource( 6 )
+color = Color( 1, 0.905882, 0, 0.505882 )
+
+[sub_resource type="CapsuleShape2D" id=8]
+radius = 14.4821
+height = 1.23684
+
+[sub_resource type="SpriteFrames" id=9]
+animations = [ {
+"frames": [ ExtResource( 25 ), ExtResource( 27 ), ExtResource( 30 ), ExtResource( 28 ), ExtResource( 26 ), ExtResource( 32 ), ExtResource( 31 ), ExtResource( 29 ) ],
+"loop": true,
+"name": "default",
+"speed": 0.0
+} ]
+
+[sub_resource type="Animation" id=10]
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 10 ), Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CollisionShape2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 10 ), Vector2( 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("StunParticles:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=11]
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("StunParticles:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, true ]
+}
+
+[sub_resource type="Curve" id=12]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.364773 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=13]
+curve = SubResource( 12 )
+
+[sub_resource type="ParticlesMaterial" id=14]
+emission_shape = 1
+emission_sphere_radius = 55.91
+flag_disable_z = true
+direction = Vector3( 0, -1, 0 )
+spread = 0.0
+gravity = Vector3( 0, -20, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 0.3
+scale_curve = SubResource( 13 )
+color = Color( 1, 0.905882, 0, 0.505882 )
+
+[sub_resource type="Animation" id=15]
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:material:shader_param/depth")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.005, 0.0 ]
+}
+tracks/1/type = "audio"
+tracks/1/path = NodePath("AudioStreamPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 14 )
+} ],
+"times": PoolRealArray( 0 )
+}
+
+[node name="MainGame" type="Node2D"]
+script = ExtResource( 9 )
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.1, 0.1 )
+
+[node name="Background" parent="ParallaxBackground/ParallaxLayer" instance=ExtResource( 2 )]
+position = Vector2( -53.4366, -396.047 )
+
+[node name="world" type="Node2D" parent="."]
+
+[node name="Navigation2D" type="Navigation2D" parent="world"]
+
+[node name="LevelMap_00" parent="world/Navigation2D" instance=ExtResource( 1 )]
+tile_data = PoolIntArray( -458741, 29, 0, -458740, 29, 0, -458739, 29, 0, -393207, 41, 0, -393206, 41, 0, -393205, 29, 0, -393204, 29, 0, -393203, 29, 0, -327672, 41, 0, -327671, 41, 0, -327670, 21, 0, -327669, 21, 0, -327668, 21, 0, -327667, 47, 0, -327666, 32, 0, -262137, 41, 0, -262136, 41, 0, -262135, 21, 0, -262134, 21, 0, -262133, 21, 0, -262132, 21, 0, -262131, 47, 0, -262130, 32, 0, -262129, 32, 0, -196602, 41, 0, -196601, 41, 0, -196600, 21, 0, -196599, 21, 0, -196598, 21, 0, -196597, 21, 0, -196596, 21, 0, -196595, 47, 0, -196594, 32, 0, -196593, 32, 0, -131067, 41, 0, -131066, 41, 0, -131065, 21, 0, -131064, 21, 0, -131063, 21, 0, -131062, 21, 0, -131061, 21, 0, -131060, 47, 0, -131059, 47, 0, -131058, 32, 0, -131057, 32, 0, -65532, 41, 0, -65531, 41, 0, -65530, 21, 0, -65529, 21, 0, -65528, 21, 0, -65527, 21, 0, -65526, 21, 0, -65525, 47, 0, -65524, 47, 0, -65523, 32, 0, -65522, 32, 0, 3, 41, 0, 4, 41, 0, 5, 21, 0, 6, 21, 0, 7, 21, 0, 8, 21, 0, 9, 21, 0, 10, 47, 0, 11, 47, 0, 12, 32, 0, 13, 32, 0, 14, 32, 0, 65538, 41, 0, 65539, 41, 0, 65540, 21, 0, 65541, 21, 0, 65542, 21, 0, 65543, 21, 0, 65544, 21, 0, 65545, 47, 0, 65546, 47, 0, 65547, 32, 0, 65548, 32, 0, 65549, 32, 0, 131074, 41, 0, 131075, 21, 0, 131076, 21, 0, 131077, 21, 0, 131078, 21, 0, 131079, 21, 0, 131080, 47, 0, 131081, 47, 0, 131082, 32, 0, 131083, 32, 0, 131084, 32, 0, 196609, 29, 0, 196610, 29, 0, 196611, 21, 0, 196612, 21, 0, 196613, 21, 0, 196614, 21, 0, 196615, 47, 0, 196616, 47, 0, 196617, 32, 0, 196618, 32, 0, 196619, 32, 0, 262145, 29, 0, 262146, 29, 0, 262147, 21, 0, 262148, 21, 0, 262149, 21, 0, 262150, 47, 0, 262151, 47, 0, 262152, 32, 0, 262153, 32, 0, 262154, 32, 0, 327681, 29, 0, 327682, 29, 0, 327683, 47, 0, 327684, 47, 0, 327685, 47, 0, 327686, 47, 0, 327687, 32, 0, 327688, 32, 0, 327689, 32, 0, 393217, 29, 0, 393218, 29, 0, 393219, 32, 0, 393220, 32, 0, 393221, 32, 0, 393222, 32, 0, 393223, 32, 0, 393224, 32, 0, 458755, 32, 0, 458756, 32, 0, 458757, 32, 0, 458758, 32, 0, 458759, 32, 0 )
+
+[node name="DebugLine" type="Line2D" parent="world"]
+
+[node name="Pallbearers" type="Node2D" parent="world"]
+
+[node name="Pallbearer" parent="world/Pallbearers" instance=ExtResource( 3 )]
+position = Vector2( 497.028, 187.748 )
+
+[node name="Pallbearer2" type="KinematicBody2D" parent="world/Pallbearers"]
+position = Vector2( 373.026, 186.52 )
+scale = Vector2( 2, 2 )
+collision_layer = 16385
+collision_mask = 16385
+script = ExtResource( 11 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="world/Pallbearers/Pallbearer2"]
+position = Vector2( 0, 10 )
+shape = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Sprite" type="AnimatedSprite" parent="world/Pallbearers/Pallbearer2"]
+position = Vector2( 0, 10 )
+scale = Vector2( 0.5, 0.5 )
+frames = SubResource( 2 )
+frame = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="world/Pallbearers/Pallbearer2"]
+anims/idle = SubResource( 3 )
+anims/stun = SubResource( 4 )
+
+[node name="StunParticles" type="Particles2D" parent="world/Pallbearers/Pallbearer2"]
+visible = false
+position = Vector2( 0, -32 )
+scale = Vector2( 0.5, 0.5 )
+z_index = 5
+amount = 10
+lifetime = 3.0
+speed_scale = 3.0
+visibility_rect = Rect2( -300, -300, 600, 600 )
+process_material = SubResource( 7 )
+texture = ExtResource( 17 )
+
+[node name="Pallbearer4" type="KinematicBody2D" parent="world/Pallbearers"]
+position = Vector2( 623.485, 193.886 )
+scale = Vector2( 2, 2 )
+collision_layer = 16385
+collision_mask = 16385
+script = ExtResource( 11 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="world/Pallbearers/Pallbearer4"]
+position = Vector2( 0, 10 )
+shape = SubResource( 8 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Sprite" type="AnimatedSprite" parent="world/Pallbearers/Pallbearer4"]
+position = Vector2( 0, 10 )
+scale = Vector2( 0.5, 0.5 )
+frames = SubResource( 9 )
+frame = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="world/Pallbearers/Pallbearer4"]
+anims/idle = SubResource( 10 )
+anims/stun = SubResource( 11 )
+
+[node name="StunParticles" type="Particles2D" parent="world/Pallbearers/Pallbearer4"]
+visible = false
+position = Vector2( 0, -32 )
+scale = Vector2( 0.5, 0.5 )
+z_index = 5
+amount = 10
+lifetime = 3.0
+speed_scale = 3.0
+visibility_rect = Rect2( -300, -300, 600, 600 )
+process_material = SubResource( 14 )
+texture = ExtResource( 17 )
+
+[node name="Pallbearer5" parent="world/Pallbearers" instance=ExtResource( 4 )]
+position = Vector2( 736.437, 256.501 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Effects" type="Control" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorDistortion" type="TextureRect" parent="CanvasLayer/Effects"]
+material = ExtResource( 13 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -1.5658
+margin_top = 38.5009
+margin_right = -1.5658
+margin_bottom = 38.5009
+texture = ExtResource( 12 )
+expand = true
+stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Effects/ColorDistortion"]
+anims/ColorDistortion = SubResource( 15 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="CanvasLayer/Effects/ColorDistortion"]
+stream = ExtResource( 14 )
+
+[node name="HUD" parent="CanvasLayer" instance=ExtResource( 5 )]
+pause_mode = 2
+margin_left = -0.540405
+margin_top = -0.512329
+margin_right = -0.540405
+margin_bottom = -0.512329
+
+[node name="OnStartNotice" type="VBoxContainer" parent="CanvasLayer"]
+pause_mode = 2
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -388.5
+margin_top = -141.5
+margin_right = 388.5
+margin_bottom = 141.5
+grow_horizontal = 2
+grow_vertical = 2
+rect_pivot_offset = Vector2( 245.28, 102.613 )
+theme = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/OnStartNotice"]
+margin_right = 777.0
+margin_bottom = 227.0
+rect_pivot_offset = Vector2( 948.115, 163.016 )
+size_flags_horizontal = 3
+theme = ExtResource( 10 )
+text = "You are regular imp
+
+Push 5 souls into pot, and gain more job
+Use pitchfork (LMB)"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DoJob" type="Button" parent="CanvasLayer/OnStartNotice"]
+margin_top = 231.0
+margin_right = 777.0
+margin_bottom = 283.0
+theme = ExtResource( 10 )
+text = "Do your job"
+script = ExtResource( 16 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OnWinNotice" type="VBoxContainer" parent="CanvasLayer"]
+pause_mode = 2
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -250.0
+margin_top = -100.0
+margin_right = 250.0
+margin_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_pivot_offset = Vector2( 245.28, 102.613 )
+theme = ExtResource( 10 )
+
+[node name="Label" type="Label" parent="CanvasLayer/OnWinNotice"]
+margin_right = 500.0
+margin_bottom = 127.0
+rect_pivot_offset = Vector2( 948.115, 163.016 )
+size_flags_horizontal = 3
+theme = ExtResource( 10 )
+custom_fonts/font = ExtResource( 22 )
+text = "
+Well done!
+"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NextLevel" type="Button" parent="CanvasLayer/OnWinNotice"]
+margin_top = 131.0
+margin_right = 500.0
+margin_bottom = 183.0
+theme = ExtResource( 10 )
+text = "Next level"
+script = ExtResource( 20 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ToMainMenu" type="Button" parent="CanvasLayer/OnWinNotice"]
+margin_top = 187.0
+margin_right = 500.0
+margin_bottom = 239.0
+theme = ExtResource( 10 )
+text = "Main menu"
+script = ExtResource( 21 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OnFailNotice" type="VBoxContainer" parent="CanvasLayer"]
+pause_mode = 2
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -231.5
+margin_top = -86.5
+margin_right = 231.5
+margin_bottom = 86.5
+grow_horizontal = 2
+grow_vertical = 2
+rect_pivot_offset = Vector2( 245.28, 102.613 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme = ExtResource( 10 )
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/OnFailNotice"]
+margin_right = 563.0
+margin_bottom = 127.0
+rect_pivot_offset = Vector2( 948.115, 163.016 )
+size_flags_horizontal = 3
+theme = ExtResource( 10 )
+custom_fonts/font = ExtResource( 22 )
+text = "So uncapable imp
+
+You will be locked here forever"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Retry" type="Button" parent="CanvasLayer/OnFailNotice"]
+margin_top = 131.0
+margin_right = 563.0
+margin_bottom = 183.0
+theme = ExtResource( 10 )
+text = "Retry"
+script = ExtResource( 18 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OnSecondStageNotice" type="VBoxContainer" parent="CanvasLayer"]
+pause_mode = 2
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -402.0
+margin_top = -141.5
+margin_right = 402.0
+margin_bottom = 141.5
+grow_horizontal = 2
+grow_vertical = 2
+rect_pivot_offset = Vector2( 245.28, 102.613 )
+theme = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/OnSecondStageNotice"]
+margin_right = 856.0
+margin_bottom = 227.0
+rect_pivot_offset = Vector2( 948.115, 163.016 )
+size_flags_horizontal = 3
+theme = ExtResource( 10 )
+text = "Well done!
+Rise up number of punished souls to 25
+Don't let to escape more than 5 souls, or else!
+Use whip-tail to stun (RMB)"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MoveOn" type="Button" parent="CanvasLayer/OnSecondStageNotice"]
+margin_top = 231.0
+margin_right = 856.0
+margin_bottom = 283.0
+theme = ExtResource( 10 )
+text = "Do your job"
+script = ExtResource( 19 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AudioStreamPlayer" parent="." instance=ExtResource( 8 )]
+pause_mode = 2
+stream = ExtResource( 7 )
+volume_db = -30.203
+
+[node name="Pallbearer" parent="." instance=ExtResource( 6 )]
+position = Vector2( 253.936, 252.818 )
+[connection signal="pressed" from="CanvasLayer/OnStartNotice/DoJob" to="CanvasLayer/OnStartNotice/DoJob" method="_on_DoJob_pressed"]
+[connection signal="pressed" from="CanvasLayer/OnWinNotice/NextLevel" to="CanvasLayer/OnWinNotice/NextLevel" method="_on_NextLevel_pressed"]
+[connection signal="pressed" from="CanvasLayer/OnWinNotice/ToMainMenu" to="CanvasLayer/OnWinNotice/ToMainMenu" method="_on_ToMainMenu_pressed"]
+[connection signal="pressed" from="CanvasLayer/OnFailNotice/Retry" to="CanvasLayer/OnFailNotice/Retry" method="_on_Retry_pressed"]
+[connection signal="pressed" from="CanvasLayer/OnSecondStageNotice/MoveOn" to="CanvasLayer/OnSecondStageNotice/MoveOn" method="_on_MoveOn_pressed"]
