@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=68 format=2]
+[gd_resource type="TileSet" load_steps=73 format=2]
 
 [ext_resource path="res://resources/shaders/lava_shader_material.tres" type="Material" id=1]
 [ext_resource path="res://assets/images/tiles_v2/ground01Cracked0001.png" type="Texture" id=2]
@@ -47,6 +47,11 @@
 [ext_resource path="res://assets/images/tiles_v2/wallStone01_0001.png" type="Texture" id=45]
 [ext_resource path="res://assets/images/icon.png" type="Texture" id=46]
 [ext_resource path="res://assets/images/tiles_v2/ground01_0001_0000.png" type="Texture" id=47]
+[ext_resource path="res://assets/images/tiles_v2/ground-half-1-2.png" type="Texture" id=48]
+[ext_resource path="res://assets/images/tiles_v2/ground-half-2-1.png" type="Texture" id=49]
+[ext_resource path="res://assets/images/tiles_v2/ground-half-1-1.png" type="Texture" id=50]
+[ext_resource path="res://assets/images/tiles_v2/ground-half-2-2.png" type="Texture" id=51]
+[ext_resource path="res://assets/images/tiles_v2/ground01_0101.png" type="Texture" id=52]
 
 [sub_resource type="NavigationPolygon" id=1]
 vertices = PoolVector2Array( -0.00452709, -34.9822, 61.9212, 0.0261335, -0.0220985, 35.0202, -61.9522, 0.00625896 )
@@ -884,7 +889,7 @@ points = PoolVector2Array( 0, -35, 62.5, 0, 0, 35, -62.5, 0 )
 44/name = "wallWindow0008"
 44/texture = ExtResource( 46 )
 44/tex_offset = Vector2( 0, 0 )
-44/modulate = Color( 1, 1, 1, 0 )
+44/modulate = Color( 1, 1, 1, 0.533333 )
 44/region = Rect2( 0, 0, 64, 64 )
 44/tile_mode = 0
 44/occluder_offset = Vector2( 32, 32 )
@@ -917,3 +922,78 @@ points = PoolVector2Array( 0, -35, 62.5, 0, 0, 35, -62.5, 0 )
 45/shape_one_way_margin = 0.0
 45/shapes = [  ]
 45/z_index = 0
+46/name = "ground-half-1-1"
+46/texture = ExtResource( 50 )
+46/tex_offset = Vector2( 0, 9 )
+46/modulate = Color( 1, 1, 1, 1 )
+46/region = Rect2( 0, 0, 125, 91 )
+46/tile_mode = 0
+46/occluder_offset = Vector2( 62.5, 45.5 )
+46/navigation_offset = Vector2( 62.5, 45.5 )
+46/navigation = SubResource( 1 )
+46/shape_offset = Vector2( 0, 0 )
+46/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+46/shape_one_way = false
+46/shape_one_way_margin = 0.0
+46/shapes = [  ]
+46/z_index = 0
+47/name = "ground-half-1-2"
+47/texture = ExtResource( 48 )
+47/tex_offset = Vector2( 0, 9 )
+47/modulate = Color( 1, 1, 1, 1 )
+47/region = Rect2( 0, 0, 125, 91 )
+47/tile_mode = 0
+47/occluder_offset = Vector2( 62.5, 45.5 )
+47/navigation_offset = Vector2( 62.5, 45.5 )
+47/navigation = SubResource( 1 )
+47/shape_offset = Vector2( 0, 0 )
+47/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+47/shape_one_way = false
+47/shape_one_way_margin = 0.0
+47/shapes = [  ]
+47/z_index = 0
+48/name = "ground-half-2-1"
+48/texture = ExtResource( 49 )
+48/tex_offset = Vector2( 0, 9 )
+48/modulate = Color( 1, 1, 1, 1 )
+48/region = Rect2( 0, 0, 125, 91 )
+48/tile_mode = 0
+48/occluder_offset = Vector2( 62.5, 45.5 )
+48/navigation_offset = Vector2( 62.5, 45.5 )
+48/navigation = SubResource( 1 )
+48/shape_offset = Vector2( 0, 0 )
+48/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+48/shape_one_way = false
+48/shape_one_way_margin = 0.0
+48/shapes = [  ]
+48/z_index = 0
+49/name = "ground-half-2-2"
+49/texture = ExtResource( 51 )
+49/tex_offset = Vector2( 0, 9 )
+49/modulate = Color( 1, 1, 1, 1 )
+49/region = Rect2( 0, 0, 125, 91 )
+49/tile_mode = 0
+49/occluder_offset = Vector2( 62.5, 45.5 )
+49/navigation_offset = Vector2( 62.5, 45.5 )
+49/navigation = SubResource( 1 )
+49/shape_offset = Vector2( 0, 0 )
+49/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+49/shape_one_way = false
+49/shape_one_way_margin = 0.0
+49/shapes = [  ]
+49/z_index = 0
+50/name = "ground01_0101"
+50/texture = ExtResource( 52 )
+50/tex_offset = Vector2( 0, 11 )
+50/modulate = Color( 1, 1, 1, 1 )
+50/region = Rect2( 0, 0, 125, 91 )
+50/tile_mode = 0
+50/occluder_offset = Vector2( 62.5, 45.5 )
+50/navigation_offset = Vector2( 62.5, 45.5 )
+50/navigation = SubResource( 1 )
+50/shape_offset = Vector2( 0, 0 )
+50/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+50/shape_one_way = false
+50/shape_one_way_margin = 0.0
+50/shapes = [  ]
+50/z_index = 0

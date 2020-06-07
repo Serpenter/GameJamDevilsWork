@@ -9,8 +9,8 @@ var end_position = null
 
 
 func _process(delta):
-	if not Input.is_action_just_pressed("main_action"):
-		return
+    if not Input.is_action_just_pressed("main_action"):
+        return
 
 #    var mouse_position = get_global_mouse_position()
 #

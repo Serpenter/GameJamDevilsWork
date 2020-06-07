@@ -18,6 +18,8 @@ var target_position
 
 var stun_duration = 5.0
 
+var max_whip_length = 500
+
 
 
 # Called when the node enters the scene tree for the first time.
@@ -51,6 +53,7 @@ func update_line():
 
 
 func use_whip(new_target_position):
+
     if in_use:
         return false
         
@@ -60,6 +63,9 @@ func use_whip(new_target_position):
         
     var target_vector = target_position - get_global_position()
     
+    if target_vector.length() > max_whip_length:
+        target_position =  get_global_position() + target_vector.normalized() * max_whip_length
+    
     update_line()
     line.visible = true
     
@@ -67,7 +73,6 @@ func use_whip(new_target_position):
     area_of_effect.monitoring = true
     
     audio_payer.play()
-    
     
 func body_enter(body):
     if not in_use:

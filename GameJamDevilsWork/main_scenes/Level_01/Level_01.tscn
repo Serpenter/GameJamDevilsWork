@@ -1,0 +1,498 @@
+[gd_scene load_steps=25 format=2]
+
+[ext_resource path="res://prefab_scenes/SinnerRespawn/SinnerRespawn.tscn" type="PackedScene" id=1]
+[ext_resource path="res://prefab_scenes/Background/Background.tscn" type="PackedScene" id=2]
+[ext_resource path="res://prefab_scenes/Exit/Exit.tscn" type="PackedScene" id=3]
+[ext_resource path="res://prefab_scenes/Imp/Imp.tscn" type="PackedScene" id=4]
+[ext_resource path="res://prefab_scenes/ObstacleTwo/ObstacleTwo.tscn" type="PackedScene" id=5]
+[ext_resource path="res://prefab_scenes/Pot/Pot.tscn" type="PackedScene" id=6]
+[ext_resource path="res://prefab_scenes/HUD/HUD.tscn" type="PackedScene" id=7]
+[ext_resource path="res://prefab_scenes/GameAudio/AudioStreamPlayer.tscn" type="PackedScene" id=8]
+[ext_resource path="res://prefab_scenes/Sinner/Sinner.tscn" type="PackedScene" id=9]
+[ext_resource path="res://assets/images/white.png" type="Texture" id=10]
+[ext_resource path="res://assets/sounds/clang.wav" type="AudioStream" id=11]
+[ext_resource path="res://resources/shaders/color_distortion_material.tres" type="Material" id=12]
+[ext_resource path="res://resources/main_ui_theme.tres" type="Theme" id=13]
+[ext_resource path="res://main_scenes/Level_01/Level_01.gd" type="Script" id=15]
+[ext_resource path="res://main_scenes/Tutorial/NextLevel.gd" type="Script" id=16]
+[ext_resource path="res://main_scenes/Tutorial/ToMainMenu.gd" type="Script" id=17]
+[ext_resource path="res://main_scenes/Level_01/Retry.gd" type="Script" id=18]
+[ext_resource path="res://main_scenes/Level_01/HolyExpell.gd" type="Script" id=19]
+[ext_resource path="res://main_scenes/Tutorial/DoJob.gd" type="Script" id=20]
+[ext_resource path="res://resources/fonts/chomsky_36.tres" type="DynamicFont" id=21]
+[ext_resource path="res://prefab_scenes/levels/LevelMap_02.tscn" type="PackedScene" id=22]
+[ext_resource path="res://resources/transparent_panel.tres" type="StyleBox" id=23]
+
+[sub_resource type="Environment" id=1]
+background_mode = 4
+tonemap_mode = 3
+tonemap_exposure = 0.8
+tonemap_white = 0.7
+auto_exposure_max_luma = 12.0
+glow_enabled = true
+glow_intensity = 8.0
+glow_strength = 1.3
+glow_blend_mode = 0
+
+[sub_resource type="Animation" id=2]
+resource_name = "ColorDistortion"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:material:shader_param/depth")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.005, 0.0 ]
+}
+tracks/1/type = "audio"
+tracks/1/path = NodePath("AudioStreamPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 11 )
+} ],
+"times": PoolRealArray( 0 )
+}
+
+[node name="MainGame" type="Node2D"]
+script = ExtResource( 15 )
+
+[node name="SecondStage" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+autostart = true
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.1, 0.1 )
+
+[node name="Background" parent="ParallaxBackground/ParallaxLayer" instance=ExtResource( 2 )]
+position = Vector2( 22.2039, -448.386 )
+
+[node name="world" type="Node2D" parent="."]
+
+[node name="Navigation2D" type="Navigation2D" parent="world"]
+
+[node name="LevelMap_02" parent="world/Navigation2D" instance=ExtResource( 22 )]
+position = Vector2( 0, 0 )
+
+[node name="DebugLine" type="Line2D" parent="world"]
+
+[node name="pots" type="Node2D" parent="world"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Pot" parent="world/pots" instance=ExtResource( 6 )]
+position = Vector2( -432.244, -349.002 )
+
+[node name="second" parent="world/pots" instance=ExtResource( 6 )]
+position = Vector2( -122.304, 260.674 )
+
+[node name="exits" type="Node2D" parent="world"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Exit" parent="world/exits" instance=ExtResource( 3 )]
+position = Vector2( 563.455, -266.467 )
+rotation = 0.468325
+
+[node name="SecondExit" parent="world/exits" instance=ExtResource( 3 )]
+position = Vector2( 490.685, 346.706 )
+rotation = -0.449343
+
+[node name="sinners" type="YSort" parent="world"]
+
+[node name="Sinner" parent="world/sinners" instance=ExtResource( 9 )]
+position = Vector2( 132.342, -159.447 )
+
+[node name="Sinner2" parent="world/sinners" instance=ExtResource( 9 )]
+position = Vector2( 3.01099, 45.6447 )
+
+[node name="Imp" parent="world" instance=ExtResource( 4 )]
+position = Vector2( 176.551, 2.83428 )
+
+[node name="Camera2D" type="Camera2D" parent="world/Imp"]
+current = true
+smoothing_enabled = true
+smoothing_speed = 10.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="world/Imp/Camera2D"]
+environment = SubResource( 1 )
+
+[node name="sinner_spawns" type="Node2D" parent="world"]
+
+[node name="initial_respawn" parent="world/sinner_spawns" instance=ExtResource( 1 )]
+position = Vector2( -67.717, -56.5224 )
+timeout = 4
+is_active = true
+
+[node name="initial_respawn2" parent="world/sinner_spawns" instance=ExtResource( 1 )]
+position = Vector2( -416.322, 72.9426 )
+timeout = 4
+is_active = true
+
+[node name="respawn2" parent="world/sinner_spawns" instance=ExtResource( 1 )]
+position = Vector2( 92.213, -120.863 )
+timeout = 5
+
+[node name="respawn3" parent="world/sinner_spawns" instance=ExtResource( 1 )]
+position = Vector2( -175.316, 37.9279 )
+timeout = 5
+
+[node name="obstacles" type="YSort" parent="world"]
+
+[node name="ObstacleTwo" parent="world/obstacles" instance=ExtResource( 5 )]
+position = Vector2( 67.3684, 204.211 )
+
+[node name="ObstacleTwo17" parent="world/obstacles" instance=ExtResource( 5 )]
+position = Vector2( 18.3684, 157.211 )
+
+[node name="ObstacleTwo2" parent="world/obstacles" instance=ExtResource( 5 )]
+position = Vector2( 131.579, 241.053 )
+
+[node name="ObstacleTwo3" parent="world/obstacles" instance=ExtResource( 5 )]
+position = Vector2( 66.5789, 276.053 )
+
+[node name="ObstacleTwo4" parent="world/obstacles" instance=ExtResource( 5 )]
+position = Vector2( 198.769, 274.656 )
+
+[node name="ObstacleTwo16" parent="world/obstacles" instance=ExtResource( 5 )]
+position = Vector2( 267.206, 310.97 )
+
+[node name="ObstacleTwo5" parent="world/obstacles" instance=ExtResource( 5 )]
+position = Vector2( 132.579, 312.053 )
+
+[node name="ObstacleTwo6" parent="world/obstacles" instance=ExtResource( 5 )]
+position = Vector2( 65.5789, 346.053 )
+
+[node name="ObstacleTwo7" parent="world/obstacles" instance=ExtResource( 5 )]
+position = Vector2( -310.928, -66.2814 )
+
+[node name="ObstacleTwo8" parent="world/obstacles" instance=ExtResource( 5 )]
+position = Vector2( -120.992, -171.516 )
+
+[node name="ObstacleTwo10" parent="world/obstacles" instance=ExtResource( 5 )]
+position = Vector2( -57.8507, -207.964 )
+
+[node name="ObstacleTwo11" parent="world/obstacles" instance=ExtResource( 5 )]
+position = Vector2( -247.787, -101.702 )
+
+[node name="ObstacleTwo12" parent="world/obstacles" instance=ExtResource( 5 )]
+position = Vector2( -332.489, -134.556 )
+
+[node name="ObstacleTwo13" parent="world/obstacles" instance=ExtResource( 5 )]
+position = Vector2( -261.648, -177.163 )
+
+[node name="ObstacleTwo14" parent="world/obstacles" instance=ExtResource( 5 )]
+position = Vector2( -184.646, -219.257 )
+
+[node name="ObstacleTwo15" parent="world/obstacles" instance=ExtResource( 5 )]
+position = Vector2( -46.6089, -132.662 )
+
+[node name="ObstacleTwo9" parent="world/obstacles" instance=ExtResource( 5 )]
+position = Vector2( -183.62, -135.752 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Effects" type="Control" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorDistortion" type="TextureRect" parent="CanvasLayer/Effects"]
+material = ExtResource( 12 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -1.5658
+margin_top = 38.5009
+margin_right = -1.5658
+margin_bottom = 38.5009
+texture = ExtResource( 10 )
+expand = true
+stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Effects/ColorDistortion"]
+anims/ColorDistortion = SubResource( 2 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="CanvasLayer/Effects/ColorDistortion"]
+stream = ExtResource( 11 )
+
+[node name="HUD" parent="CanvasLayer" instance=ExtResource( 7 )]
+pause_mode = 2
+margin_left = 2.69867
+margin_right = 2.69873
+
+[node name="OnStartNotice" type="Panel" parent="CanvasLayer"]
+pause_mode = 2
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -250.0
+margin_top = -100.0
+margin_right = 250.0
+margin_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_pivot_offset = Vector2( 245.28, 102.613 )
+theme = ExtResource( 13 )
+custom_styles/panel = ExtResource( 23 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/OnStartNotice"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -281.5
+margin_top = -141.0
+margin_right = 281.5
+margin_bottom = 141.0
+rect_pivot_offset = Vector2( 948.115, 163.016 )
+size_flags_horizontal = 3
+theme = ExtResource( 13 )
+text = "So annoying barrels
+
+It is just not productive"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DoJob" type="Button" parent="CanvasLayer/OnStartNotice"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -97.5
+margin_top = -52.0
+margin_right = 97.5
+theme = ExtResource( 13 )
+text = "Do your job"
+script = ExtResource( 20 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OnWinNotice" type="Panel" parent="CanvasLayer"]
+pause_mode = 2
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -250.0
+margin_top = -100.0
+margin_right = 250.0
+margin_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_pivot_offset = Vector2( 245.28, 102.613 )
+theme = ExtResource( 13 )
+custom_styles/panel = ExtResource( 23 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/OnWinNotice"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -226.0
+margin_top = -149.0
+margin_right = 227.0
+margin_bottom = 135.0
+rect_pivot_offset = Vector2( 948.115, 163.016 )
+size_flags_horizontal = 3
+theme = ExtResource( 13 )
+custom_fonts/font = ExtResource( 21 )
+text = "Well done!
+
+
+
+"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NextLevel" type="Button" parent="CanvasLayer/OnWinNotice"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -83.0
+margin_top = -139.0
+margin_right = 83.0
+margin_bottom = -87.0
+theme = ExtResource( 13 )
+text = "Next level"
+script = ExtResource( 16 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ToMainMenu" type="Button" parent="CanvasLayer/OnWinNotice"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -97.0
+margin_top = -57.0
+margin_right = 97.0
+margin_bottom = -5.0
+theme = ExtResource( 13 )
+text = "Main menu"
+script = ExtResource( 17 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OnFailNotice" type="Panel" parent="CanvasLayer"]
+pause_mode = 2
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -250.0
+margin_top = -100.0
+margin_right = 250.0
+margin_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_pivot_offset = Vector2( 245.28, 102.613 )
+theme = ExtResource( 13 )
+custom_styles/panel = ExtResource( 23 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/OnFailNotice"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -281.5
+margin_top = -143.5
+margin_right = 281.5
+margin_bottom = 143.5
+rect_pivot_offset = Vector2( 948.115, 163.016 )
+size_flags_horizontal = 3
+theme = ExtResource( 13 )
+custom_fonts/font = ExtResource( 21 )
+text = "So uncapable imp
+
+You will be locked here forever
+
+"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Retry" type="Button" parent="CanvasLayer/OnFailNotice"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -65.5
+margin_top = 52.0
+margin_right = 65.5
+margin_bottom = 104.0
+theme = ExtResource( 13 )
+text = "Retry"
+script = ExtResource( 18 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OnNun" type="Panel" parent="CanvasLayer"]
+pause_mode = 2
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -250.0
+margin_top = -135.5
+margin_right = 250.0
+margin_bottom = 135.5
+grow_horizontal = 2
+grow_vertical = 2
+rect_pivot_offset = Vector2( 245.28, 102.613 )
+theme = ExtResource( 13 )
+custom_styles/panel = ExtResource( 23 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/OnNun"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -328.5
+margin_top = -161.5
+margin_right = 328.5
+margin_bottom = 161.5
+rect_pivot_offset = Vector2( 948.115, 163.016 )
+size_flags_horizontal = 3
+theme = ExtResource( 13 )
+text = "Holy creatures interfere with us
+
+Expell them from hell
+"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HolyExpell" type="Button" parent="CanvasLayer/OnNun"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -97.5
+margin_top = -52.0
+margin_right = 97.5
+theme = ExtResource( 13 )
+text = "Do your job"
+script = ExtResource( 19 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AudioStreamPlayer" parent="." instance=ExtResource( 8 )]
+pause_mode = 2
+volume_db = -30.203
+[connection signal="timeout" from="SecondStage" to="." method="_on_SecondStage_timeout"]
+[connection signal="pressed" from="CanvasLayer/OnStartNotice/DoJob" to="CanvasLayer/OnStartNotice/DoJob" method="_on_DoJob_pressed"]
+[connection signal="pressed" from="CanvasLayer/OnWinNotice/NextLevel" to="CanvasLayer/OnWinNotice/NextLevel" method="_on_NextLevel_pressed"]
+[connection signal="pressed" from="CanvasLayer/OnWinNotice/ToMainMenu" to="CanvasLayer/OnWinNotice/ToMainMenu" method="_on_ToMainMenu_pressed"]
+[connection signal="pressed" from="CanvasLayer/OnFailNotice/Retry" to="CanvasLayer/OnFailNotice/Retry" method="_on_Retry_pressed"]
+[connection signal="pressed" from="CanvasLayer/OnNun/HolyExpell" to="CanvasLayer/OnNun/HolyExpell" method="_on_HolyExpell_pressed"]

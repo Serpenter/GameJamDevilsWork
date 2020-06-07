@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-var max_move_speed = 20.0
+var max_move_speed = 100.0
 var speed_deacceleration = 25.0
 var min_move_speed = 20.0
 
@@ -13,6 +13,9 @@ var DEBUG = true
 
 onready var nav_2d = get_tree().get_root().get_node("MainGame/world/Navigation2D")
 onready var debug_line = get_tree().get_root().get_node("MainGame/world/DebugLine")
+onready var halo = $Halo
+
+signal prayer_point(point_position)
 
 var path = []
 
@@ -61,12 +64,57 @@ var pot_time_min = 5.0
 
 var stun_time = 0.0
 
+var holy_area = null
+
+
+onready var sprite = $Sprite
+
+var radians_to_frame = {
+    [- PI - 0.01, -0.875 * PI] : 6,
+    [-0.875 * PI, -0.625 * PI] : 7,
+    [-0.625 * PI, -0.375 * PI] : 0,
+    [-0.375 * PI, -0.125 * PI] : 1,
+    [-0.125 * PI, 0.125 * PI]: 2,
+    [0.125 * PI, 0.375 * PI] : 3,
+    [0.375  * PI, 0.625 * PI] : 4,
+    [0.625 * PI, 0.875 * PI] : 5,
+    [0.875 * PI, PI + 0.01] : 6
+   }
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
     set_state("idle")
     animation_player.play("idle")
     $Sprite/AscensionParticles.emitting = false
+    halo.visible = false
+    sprite.set_frame(randi()%2+4)
     
+    set_state("idle")
+    animation_player.play("idle")
+    $Sprite/AscensionParticles.emitting = false
+    halo.visible = false
+    connect("prayer_point", get_tree().get_root().get_node("MainGame"), "_on_prayer_point")
+
+
+func get_frame_from_vector(direction_vector):
+    var direction_radians = direction_vector.angle()
+    for radians in radians_to_frame.keys():
+        if  radians[0] <= direction_radians and direction_radians <= radians[1]:
+            return radians_to_frame[radians]
+            
+    print("ERROR frame not found")
+    print(direction_vector)
+    print(direction_radians)
+    #returning front sprite
+    return 2
+    
+func update_body_frame(move_vector):
+    if move_vector.length() == 0:
+        return
+    var frame = get_frame_from_vector(move_vector)
+    sprite.set_frame(frame)
+    
+
 func get_in_pot():
     if current_state == "go_to_pot":
         print("SINNER ENTERS THE POT")
@@ -91,6 +139,7 @@ func exit_hell():
 func push_sinner(direction):
 #    move_vector = Vector2(1,0).rotated(direction)
 #    move_vector = move_vector.normalized()
+
     if randi() % 2:
         audio_player_1.play()
     else:
@@ -99,7 +148,10 @@ func push_sinner(direction):
     if current_state == "go_to_pot":
         move_speed = max_move_speed
     
-        
+    # for Nun and Cardinal, sinners won't do it because for them it's upgradable state
+    if current_state =="go_to_exit":
+        move_speed = max_move_speed
+    
 func go_to_node_in_group(group_name):
     var group_objects = get_tree().get_nodes_in_group(group_name)
     var chosen_object = group_objects[randi() % group_objects.size()]
@@ -158,11 +210,18 @@ func set_state(new_state):
     elif current_state == "go_to_pot":
         go_to_node_in_group("pots")
         
+    halo.visible = current_state == "pray"
+    
+    if holy_area:
+        if current_state == "pray":
+            holy_area.enable()
+        else:
+            holy_area.disable()
+            
     state_change_timeout = randf()*state_range_time[current_state] + state_min_time[current_state]
     
     if is_angel_present():
         state_change_timeout *= angel_timeout_modifier
-        
 
 
 func is_angel_present():
@@ -194,8 +253,14 @@ func stun(duration):
 func enable_stun():
     animation_player.play("stun")
     
+    if holy_area:
+        holy_area.disable()
+    
 func disable_stun():
     animation_player.play("idle")
+    
+    if current_state == "pray" and holy_area:
+        holy_area.enable()
     
 
 func update_idle():
@@ -203,16 +268,25 @@ func update_idle():
             animation_player.play("idle")
     
 func update_prayer(delta):
+
     if animation_player.current_animation != "pray":
             animation_player.play("pray")
+            halo.visible = true
             
     pray_time += delta
     
     if pray_time > pray_point_time:
         pray_time -= pray_point_time
-        emit_signal("prayer_point", 1)
-
+        emit_signal("prayer_point", position)
+        current_state = "ascension"
+        #$CollisionShape2D.disabled = true
+        $AnimationPlayer.play("Ascension")
+        
+        
 func _process(delta):
+    
+    if current_state == "ascension":
+        return
     
     if stun_time > 0:
 
@@ -253,6 +327,8 @@ func _process(delta):
         move_and_collide(move_vector)
     else:
          move_and_collide(target_vector)   
+        
+    update_body_frame(move_vector)
     
 
 #
@@ -263,3 +339,7 @@ func _process(delta):
 func _on_AnimationPlayer_animation_finished(anim_name):
     if anim_name == "Ascension":
         queue_free()
+
+
+func is_holy():
+    return true

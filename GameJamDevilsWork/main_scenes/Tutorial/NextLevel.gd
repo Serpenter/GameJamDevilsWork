@@ -18,4 +18,4 @@ func _ready():
 
 func _on_NextLevel_pressed():
 	get_tree().paused = false
-	$"/root/GSceneManager".goto_scene_wloader("res://main_scenes/Tutorial/Tutorial.tscn")
+	$"/root/GSceneManager".goto_scene_wloader("res://main_scenes/Level_01/Level_01.tscn")

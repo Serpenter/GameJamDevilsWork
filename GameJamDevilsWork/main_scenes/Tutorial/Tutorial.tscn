@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://prefab_scenes/levels/LevelMap_00.tscn" type="PackedScene" id=1]
 [ext_resource path="res://prefab_scenes/Background/Background.tscn" type="PackedScene" id=2]
@@ -21,6 +21,8 @@
 [ext_resource path="res://main_scenes/Tutorial/MoveOn.gd" type="Script" id=19]
 [ext_resource path="res://main_scenes/Tutorial/NextLevel.gd" type="Script" id=20]
 [ext_resource path="res://main_scenes/Tutorial/ToMainMenu.gd" type="Script" id=21]
+[ext_resource path="res://resources/fonts/chomsky_36.tres" type="DynamicFont" id=22]
+[ext_resource path="res://resources/transparent_panel.tres" type="StyleBox" id=23]
 
 [sub_resource type="Environment" id=1]
 background_mode = 4
@@ -71,7 +73,7 @@ script = ExtResource( 9 )
 motion_scale = Vector2( 0.1, 0.1 )
 
 [node name="Background" parent="ParallaxBackground/ParallaxLayer" instance=ExtResource( 2 )]
-position = Vector2( -54.5446, -396.782 )
+position = Vector2( -53.4366, -396.047 )
 
 [node name="world" type="Node2D" parent="."]
 
@@ -99,10 +101,12 @@ __meta__ = {
 }
 
 [node name="Exit" parent="world/exits" instance=ExtResource( 4 )]
-position = Vector2( -350.826, -200.972 )
+position = Vector2( -362.714, -215.562 )
+rotation = -0.524246
 
 [node name="SecondExit" parent="world/exits" instance=ExtResource( 4 )]
-position = Vector2( 11.0354, -487.12 )
+position = Vector2( -119.037, -564.93 )
+rotation = -0.521246
 is_working = false
 
 [node name="sinners" type="YSort" parent="world"]
@@ -127,16 +131,15 @@ environment = SubResource( 1 )
 [node name="sinner_spawns" type="Node2D" parent="world"]
 
 [node name="initial_respawn" parent="world/sinner_spawns" instance=ExtResource( 11 )]
+position = Vector2( -107.875, -90.5445 )
 timeout = 4
 is_active = true
 
 [node name="respawn2" parent="world/sinner_spawns" instance=ExtResource( 11 )]
 position = Vector2( 368.364, -517.863 )
-timeout = 4
 
 [node name="respawn3" parent="world/sinner_spawns" instance=ExtResource( 11 )]
 position = Vector2( 122.815, -375.665 )
-timeout = 4
 
 [node name="obstacles" type="YSort" parent="world"]
 
@@ -178,8 +181,10 @@ stream = ExtResource( 14 )
 
 [node name="HUD" parent="CanvasLayer" instance=ExtResource( 5 )]
 pause_mode = 2
-margin_top = -1.0
-margin_bottom = -1.0
+margin_left = -0.540405
+margin_top = -0.512329
+margin_right = -0.540405
+margin_bottom = -0.512329
 
 [node name="OnStartNotice" type="Panel" parent="CanvasLayer"]
 pause_mode = 2
@@ -196,6 +201,7 @@ grow_horizontal = 2
 grow_vertical = 2
 rect_pivot_offset = Vector2( 245.28, 102.613 )
 theme = ExtResource( 10 )
+custom_styles/panel = ExtResource( 23 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -205,20 +211,21 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -226.5
-margin_top = -63.5
-margin_right = 226.5
-margin_bottom = 63.5
+margin_left = -371.0
+margin_top = -153.0
+margin_right = 419.0
+margin_bottom = 208.0
 rect_pivot_offset = Vector2( 948.115, 163.016 )
 size_flags_horizontal = 3
 theme = ExtResource( 10 )
-custom_fonts/font = ExtResource( 15 )
 text = "You are regular imp
 
-Punish 5 souls, and gain more job
+Push 5 souls into pot, and gain more job
+Use pitchfork (LMB)
 
 "
 align = 1
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -228,12 +235,11 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -65.5
-margin_top = -58.0
-margin_right = 65.5
-margin_bottom = -31.0
+margin_left = -95.5097
+margin_top = 18.9666
+margin_right = 99.4903
+margin_bottom = 70.9666
 theme = ExtResource( 10 )
-custom_fonts/font = ExtResource( 15 )
 text = "Do your job"
 script = ExtResource( 16 )
 __meta__ = {
@@ -255,6 +261,7 @@ grow_horizontal = 2
 grow_vertical = 2
 rect_pivot_offset = Vector2( 245.28, 102.613 )
 theme = ExtResource( 10 )
+custom_styles/panel = ExtResource( 23 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -264,15 +271,16 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -226.5
-margin_top = -63.5
-margin_right = 226.5
-margin_bottom = 63.5
+margin_left = -226.0
+margin_top = -74.0
+margin_right = 227.0
+margin_bottom = 138.0
 rect_pivot_offset = Vector2( 948.115, 163.016 )
 size_flags_horizontal = 3
 theme = ExtResource( 10 )
-custom_fonts/font = ExtResource( 15 )
+custom_fonts/font = ExtResource( 22 )
 text = "Well done!
+
 
 "
 align = 1
@@ -286,12 +294,11 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -65.5
-margin_top = -84.0
-margin_right = 65.5
-margin_bottom = -57.0
+margin_left = -83.0
+margin_top = -101.0
+margin_right = 83.0
+margin_bottom = -49.0
 theme = ExtResource( 10 )
-custom_fonts/font = ExtResource( 15 )
 text = "Next level"
 script = ExtResource( 20 )
 __meta__ = {
@@ -303,12 +310,11 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -65.5
-margin_top = -43.7351
-margin_right = 65.5
-margin_bottom = -16.7351
+margin_left = -97.0
+margin_top = -35.0
+margin_right = 97.0
+margin_bottom = 17.0
 theme = ExtResource( 10 )
-custom_fonts/font = ExtResource( 15 )
 text = "Main menu"
 script = ExtResource( 21 )
 __meta__ = {
@@ -330,6 +336,7 @@ grow_horizontal = 2
 grow_vertical = 2
 rect_pivot_offset = Vector2( 245.28, 102.613 )
 theme = ExtResource( 10 )
+custom_styles/panel = ExtResource( 23 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -339,20 +346,21 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -226.5
-margin_top = -63.5
-margin_right = 226.5
-margin_bottom = 63.5
+margin_left = -264.0
+margin_top = -96.0
+margin_right = 273.0
+margin_bottom = 134.0
 rect_pivot_offset = Vector2( 948.115, 163.016 )
 size_flags_horizontal = 3
 theme = ExtResource( 10 )
-custom_fonts/font = ExtResource( 15 )
+custom_fonts/font = ExtResource( 22 )
 text = "So uncapable imp
 
-You will locked here forever
+You will be locked here forever
 
 "
 align = 1
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -363,11 +371,10 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 margin_left = -65.5
-margin_top = -58.0
+margin_top = -32.79
 margin_right = 65.5
-margin_bottom = -31.0
+margin_bottom = -5.78998
 theme = ExtResource( 10 )
-custom_fonts/font = ExtResource( 15 )
 text = "Retry"
 script = ExtResource( 18 )
 __meta__ = {
@@ -382,9 +389,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -250.0
-margin_top = -107.5
+margin_top = -135.5
 margin_right = 250.0
-margin_bottom = 107.5
+margin_bottom = 135.5
 grow_horizontal = 2
 grow_vertical = 2
 rect_pivot_offset = Vector2( 245.28, 102.613 )
@@ -409,6 +416,8 @@ text = "Well done!
 Rise up number of punished souls to 25
 
 Don't let escape more than 5 souls, or else
+
+Use whip-tail to stun (RMB)
 
 "
 align = 1

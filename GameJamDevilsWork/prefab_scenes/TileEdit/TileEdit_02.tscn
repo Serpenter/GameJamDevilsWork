@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=2]
+[gd_scene load_steps=56 format=2]
 
 [ext_resource path="res://prefab_scenes/TileEdit/TileEdit_02.gd" type="Script" id=1]
 [ext_resource path="res://assets/images/tiles_v2/ground01Cracked0001.png" type="Texture" id=2]
@@ -50,6 +50,11 @@
 [ext_resource path="res://assets/images/white.png" type="Texture" id=48]
 [ext_resource path="res://assets/images/icon.png" type="Texture" id=49]
 [ext_resource path="res://assets/images/tiles_v2/ground01_0001_0000.png" type="Texture" id=50]
+[ext_resource path="res://assets/images/tiles_v2/ground-half-1-2.png" type="Texture" id=51]
+[ext_resource path="res://assets/images/tiles_v2/ground-half-2-1.png" type="Texture" id=52]
+[ext_resource path="res://assets/images/tiles_v2/ground-half-1-1.png" type="Texture" id=53]
+[ext_resource path="res://assets/images/tiles_v2/ground-half-2-2.png" type="Texture" id=54]
+[ext_resource path="res://assets/images/tiles_v2/ground01_0101.png" type="Texture" id=55]
 
 [node name="TileEdit_02" type="Node2D"]
 script = ExtResource( 1 )
@@ -110,6 +115,7 @@ offset = Vector2( 0, 12 )
 [node name="NavigationPolygonInstance" parent="ground01_0007" instance=ExtResource( 47 )]
 
 [node name="ground02Cracked0001" type="Sprite" parent="."]
+self_modulate = Color( 0.490196, 0.101961, 0.101961, 1 )
 position = Vector2( 450, 150 )
 texture = ExtResource( 14 )
 offset = Vector2( 0, 12 )
@@ -117,6 +123,7 @@ offset = Vector2( 0, 12 )
 [node name="NavigationPolygonInstance" parent="ground02Cracked0001" instance=ExtResource( 47 )]
 
 [node name="ground02Cracked0003" type="Sprite" parent="."]
+self_modulate = Color( 0.490196, 0.101961, 0.101961, 1 )
 position = Vector2( 600, 150 )
 texture = ExtResource( 28 )
 offset = Vector2( 0, 12 )
@@ -124,6 +131,7 @@ offset = Vector2( 0, 12 )
 [node name="NavigationPolygonInstance" parent="ground02Cracked0003" instance=ExtResource( 47 )]
 
 [node name="ground02Cracked0005" type="Sprite" parent="."]
+self_modulate = Color( 0.490196, 0.101961, 0.101961, 1 )
 position = Vector2( 0, 300 )
 texture = ExtResource( 10 )
 offset = Vector2( 0, 12 )
@@ -131,6 +139,7 @@ offset = Vector2( 0, 12 )
 [node name="NavigationPolygonInstance" parent="ground02Cracked0005" instance=ExtResource( 47 )]
 
 [node name="ground02Cracked0007" type="Sprite" parent="."]
+self_modulate = Color( 0.490196, 0.101961, 0.101961, 1 )
 position = Vector2( 150, 300 )
 texture = ExtResource( 21 )
 offset = Vector2( 0, 12 )
@@ -138,6 +147,7 @@ offset = Vector2( 0, 12 )
 [node name="NavigationPolygonInstance" parent="ground02Cracked0007" instance=ExtResource( 47 )]
 
 [node name="ground02_0001" type="Sprite" parent="."]
+self_modulate = Color( 0.490196, 0.101961, 0.101961, 1 )
 position = Vector2( 300, 300 )
 texture = ExtResource( 33 )
 offset = Vector2( 0, 12 )
@@ -145,6 +155,7 @@ offset = Vector2( 0, 12 )
 [node name="NavigationPolygonInstance" parent="ground02_0001" instance=ExtResource( 47 )]
 
 [node name="ground02_0003" type="Sprite" parent="."]
+self_modulate = Color( 0.490196, 0.101961, 0.101961, 1 )
 position = Vector2( 450, 300 )
 texture = ExtResource( 29 )
 offset = Vector2( 0, 12 )
@@ -152,6 +163,7 @@ offset = Vector2( 0, 12 )
 [node name="NavigationPolygonInstance" parent="ground02_0003" instance=ExtResource( 47 )]
 
 [node name="ground02_0005" type="Sprite" parent="."]
+self_modulate = Color( 0.490196, 0.101961, 0.101961, 1 )
 position = Vector2( 600, 300 )
 texture = ExtResource( 32 )
 offset = Vector2( 0, 12 )
@@ -159,6 +171,7 @@ offset = Vector2( 0, 12 )
 [node name="NavigationPolygonInstance" parent="ground02_0005" instance=ExtResource( 47 )]
 
 [node name="ground02_0007" type="Sprite" parent="."]
+self_modulate = Color( 0.490196, 0.101961, 0.101961, 1 )
 position = Vector2( 0, 450 )
 texture = ExtResource( 16 )
 offset = Vector2( 0, 12 )
@@ -460,7 +473,7 @@ collision_mask = 16
 polygon = PoolVector2Array( -62.5, 0, 0, 35, 62.5, 0, 0, -35 )
 
 [node name="wallWindow0008" type="Sprite" parent="."]
-modulate = Color( 1, 1, 1, 0 )
+modulate = Color( 1, 1, 1, 0.533333 )
 position = Vector2( 619, 1200 )
 texture = ExtResource( 49 )
 
@@ -477,8 +490,43 @@ scale = Vector2( 0.759082, 0.759082 )
 texture = ExtResource( 48 )
 
 [node name="ground01_0001_0000" type="Sprite" parent="."]
-position = Vector2( 618.95, 1311.82 )
+position = Vector2( -6.48248, 1304.6 )
 texture = ExtResource( 50 )
 offset = Vector2( 0, 9 )
 
 [node name="NavigationPolygonInstance2" parent="ground01_0001_0000" instance=ExtResource( 47 )]
+
+[node name="ground-half-1-1" type="Sprite" parent="."]
+position = Vector2( 163.219, 1316.7 )
+texture = ExtResource( 53 )
+offset = Vector2( 0, 9 )
+
+[node name="NavigationPolygonInstance3" parent="ground-half-1-1" instance=ExtResource( 47 )]
+
+[node name="ground-half-1-2" type="Sprite" parent="."]
+position = Vector2( 324.767, 1323.92 )
+texture = ExtResource( 51 )
+offset = Vector2( 0, 9 )
+
+[node name="NavigationPolygonInstance4" parent="ground-half-1-2" instance=ExtResource( 47 )]
+
+[node name="ground-half-2-1" type="Sprite" parent="."]
+position = Vector2( 481.802, 1321.21 )
+texture = ExtResource( 52 )
+offset = Vector2( 0, 9 )
+
+[node name="NavigationPolygonInstance5" parent="ground-half-2-1" instance=ExtResource( 47 )]
+
+[node name="ground-half-2-2" type="Sprite" parent="."]
+position = Vector2( 640.642, 1319.41 )
+texture = ExtResource( 54 )
+offset = Vector2( 0, 9 )
+
+[node name="NavigationPolygonInstance6" parent="ground-half-2-2" instance=ExtResource( 47 )]
+
+[node name="ground01_0101" type="Sprite" parent="."]
+position = Vector2( 167.17, 1431.57 )
+texture = ExtResource( 55 )
+offset = Vector2( 0, 11 )
+
+[node name="NavigationPolygonInstance7" parent="ground01_0101" instance=ExtResource( 47 )]

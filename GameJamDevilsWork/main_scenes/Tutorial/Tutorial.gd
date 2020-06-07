@@ -2,6 +2,8 @@ extends Node2D
 
 var current_stage = 0
 var stage_one_condition = 5
+var stage_one_fail_condition = 5
+
 var stage_two_condition = 25
 var stage_two_fail_condition = 5
 
@@ -16,7 +18,7 @@ var sinner_prefab = preload("res://prefab_scenes/Sinner/Sinner.tscn")
 onready var respawns = $world/sinner_spawns
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$CanvasLayer/HUD.max_sinners_escaped = "infinity"
+	$CanvasLayer/HUD.max_sinners_escaped = stage_one_fail_condition
 	$CanvasLayer/HUD.target_sinners_punished = 5
 	if current_stage == 0:
 		$CanvasLayer/OnStartNotice.visible = true
@@ -68,25 +70,30 @@ func _on_spawn_ready(spawn_position):
 
 func check_stage_conditions():
 
-	if current_stage == 1 and total_sinners_punished >= stage_one_condition:
-		$world/obstacles/first.on_destroy()
-		current_stage = 2
-		total_sinners_escaped = 0
-		$CanvasLayer/HUD.total_sinners_escaped = 0
-		$CanvasLayer/HUD.max_sinners_escaped = 5
-		$CanvasLayer/HUD._on_sinner_escaped(0)
-		
-		$CanvasLayer/HUD.target_sinners_punished = stage_two_condition
-		
-		$world/sinner_spawns/respawn2.activate_spawn()
-		$world/sinner_spawns/respawn3.activate_spawn()
-		
-		$world/pots/second.is_working = true
-		$world/exits/SecondExit.is_working = true
-		
-		$CanvasLayer/OnSecondStageNotice.visible = true
-		max_sinners_in_game = 6
-		get_tree().paused = true
+	if current_stage == 1:
+		if total_sinners_escaped >= stage_one_fail_condition:
+			$CanvasLayer/OnFailNotice.visible = true
+			get_tree().paused = true
+			return
+		if total_sinners_punished >= stage_one_condition:
+			$world/obstacles/first.on_destroy()
+			current_stage = 2
+			total_sinners_escaped = 0
+			$CanvasLayer/HUD.total_sinners_escaped = 0
+			$CanvasLayer/HUD.max_sinners_escaped = 5
+			$CanvasLayer/HUD._on_sinner_escaped(0)
+			
+			$CanvasLayer/HUD.target_sinners_punished = stage_two_condition
+			
+			$world/sinner_spawns/respawn2.activate_spawn()
+			$world/sinner_spawns/respawn3.activate_spawn()
+			
+			$world/pots/second.is_working = true
+			$world/exits/SecondExit.is_working = true
+			
+			$CanvasLayer/OnSecondStageNotice.visible = true
+			max_sinners_in_game = 4
+			get_tree().paused = true
 
 	if current_stage == 2:
 		
