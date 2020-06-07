@@ -1,7 +1,7 @@
 [gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://prefab_scenes/Sinner/Sinner.gd" type="Script" id=1]
-[ext_resource path="res://assets/images/char04_0000.png" type="Texture" id=2]
+[ext_resource path="res://assets/images/char_assets/sinner-1-all.png" type="Texture" id=2]
 [ext_resource path="res://assets/sounds/hurt2.wav" type="AudioStream" id=3]
 [ext_resource path="res://assets/sounds/hurt1.wav" type="AudioStream" id=4]
 [ext_resource path="res://assets/images/lights/HollyParticles.png" type="Texture" id=5]
@@ -171,6 +171,7 @@ script = ExtResource( 1 )
 rotation = 0.00148935
 texture = ExtResource( 2 )
 offset = Vector2( 0, -25 )
+hframes = 8
 
 [node name="AscensionParticles" type="Particles2D" parent="Sprite"]
 rotation = -0.00148935
