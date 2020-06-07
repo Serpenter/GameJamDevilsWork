@@ -25,7 +25,7 @@ func _on_go_to_game_pressed():
         return
     screen_fader.fade_out()
     yield(screen_fader, "animation_finished")
-    $"/root/GSceneManager".goto_scene_wloader("res://main_scenes/MainGame/MainGame.tscn")
+    $"/root/GSceneManager".goto_scene_wloader("res://main_scenes/Level_01/Level_01.tscn")
 
 
 func _on_Tutorial_pressed():
