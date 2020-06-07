@@ -221,7 +221,7 @@ tracks/4/keys = {
 }
 
 [sub_resource type="CircleShape2D" id=11]
-radius = 107.699
+radius = 100.0
 
 [sub_resource type="Curve" id=12]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.364773 ), 0.0, 0.0, 0, 0 ]
@@ -314,7 +314,7 @@ shape = SubResource( 11 )
 [node name="HolyParticles" type="Particles2D" parent="HolyArea"]
 scale = Vector2( 0.5, 0.5 )
 z_index = 5
-amount = 50
+amount = 100
 lifetime = 5.0
 visibility_rect = Rect2( -300, -300, 600, 600 )
 process_material = SubResource( 14 )
@@ -327,7 +327,7 @@ volume_db = 16.156
 [node name="Light2D" type="Light2D" parent="HolyArea"]
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 11 )
-texture_scale = 2.0
+texture_scale = 3.0
 color = Color( 0.992157, 0.992157, 0.188235, 1 )
 energy = 0.5
 
