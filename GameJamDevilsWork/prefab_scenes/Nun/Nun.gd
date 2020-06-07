@@ -1,8 +1,8 @@
 extends KinematicBody2D
 
-var max_move_speed = 100.0
-var speed_deacceleration = 25.0
-var min_move_speed = 20.0
+var max_move_speed = 20.0
+var speed_deacceleration = 2.0
+var min_move_speed = 10.0
 
 
 var move_speed = 20.0
@@ -32,7 +32,7 @@ var angel_timeout_modifier = 0.5
 var timeout_modifier = 1.0
 
 var pray_time = 0.0
-var pray_point_time = 5.0
+var pray_point_time = 15.0
 
 var states = ["idle", "go_to_exit", "pray", "ascension"]
 
@@ -86,6 +86,10 @@ var radians_to_frame = {
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+    timeout_modifier = 0.1
+    holy_area = $HolyArea
+    holy_area.disable()
+    
     set_state("idle")
     animation_player.play("idle")
     $Sprite/AscensionParticles.emitting = false
@@ -94,6 +98,7 @@ func _ready():
     
     set_state("idle")
     animation_player.play("idle")
+    state_change_timeout = 1.0
     $Sprite/AscensionParticles.emitting = false
     halo.visible = false
     connect("prayer_point", get_tree().get_root().get_node("MainGame"), "_on_prayer_point")
@@ -157,7 +162,28 @@ func push_sinner(direction):
     
 func go_to_node_in_group(group_name):
     var group_objects = get_tree().get_nodes_in_group(group_name)
-    var chosen_object = group_objects[randi() % group_objects.size()]
+    
+    if len(group_objects) == 0:
+        return
+
+    var chosen_object = null
+    var distance_to_object = float(INF)
+
+    for object in group_objects:
+        if object.is_working:
+            
+            if chosen_object == null:
+                chosen_object = object
+                distance_to_object = (object.position - self.position).length_squared()
+            else:
+                var distance_to_new_object = (object.position - self.position).length_squared()
+                if distance_to_new_object < distance_to_object:
+                    distance_to_object = distance_to_new_object
+                    chosen_object = object
+    
+    if chosen_object == null:
+        return
+    
     var end_position = chosen_object.get_global_position()
     var start_position = self.get_global_position()
     path = nav_2d.get_simple_path(start_position, end_position)
