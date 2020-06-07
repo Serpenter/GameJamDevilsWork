@@ -8,7 +8,7 @@ onready var holy_particles = $HolyParticles
 var is_enabled = false
 var is_active = false
 
-var reactivation_timeout = 10.0
+var reactivation_timeout = 3.0
 var reactivation_time = reactivation_timeout
 
 var stun_time = 1.0
