@@ -44,7 +44,7 @@ margin_top = 218.0
 margin_right = 338.0
 margin_bottom = 270.0
 theme = ExtResource( 3 )
-text = "Rise KPI"
+text = "Do job"
 
 [node name="Tutorial" type="Button" parent="CanvasLayer/MarginContainer/HBoxContainer/MenuButtons"]
 margin_top = 274.0
