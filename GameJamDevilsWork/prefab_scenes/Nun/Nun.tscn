@@ -1,6 +1,6 @@
 [gd_scene load_steps=21 format=2]
 
-[ext_resource path="res://assets/images/nun/nun0003.png" type="Texture" id=1]
+[ext_resource path="res://assets/images/char_assets/Nun_all.png" type="Texture" id=1]
 [ext_resource path="res://prefab_scenes/Nun/Nun.gd" type="Script" id=2]
 [ext_resource path="res://assets/sounds/hurt2.wav" type="AudioStream" id=3]
 [ext_resource path="res://assets/sounds/hurt1.wav" type="AudioStream" id=4]
@@ -8,33 +8,33 @@
 [ext_resource path="res://assets/images/Angel/nimb3.png" type="Texture" id=6]
 [ext_resource path="res://assets/images/lights/star.png" type="Texture" id=7]
 
-[sub_resource type="Gradient" id=7]
+[sub_resource type="Gradient" id=1]
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture" id=8]
-gradient = SubResource( 7 )
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
 
-[sub_resource type="Curve" id=9]
+[sub_resource type="Curve" id=3]
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.484127, 0.853409 ), 0.763636, 0.763636, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=10]
-curve = SubResource( 9 )
+[sub_resource type="CurveTexture" id=4]
+curve = SubResource( 3 )
 
-[sub_resource type="ParticlesMaterial" id=11]
+[sub_resource type="ParticlesMaterial" id=5]
 emission_shape = 1
 emission_sphere_radius = 20.0
 flag_disable_z = true
 gravity = Vector3( 0, -30, 0 )
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
-scale_curve = SubResource( 10 )
-color_ramp = SubResource( 8 )
+scale_curve = SubResource( 4 )
+color_ramp = SubResource( 2 )
 
-[sub_resource type="CapsuleShape2D" id=12]
+[sub_resource type="CapsuleShape2D" id=6]
 radius = 26.1802
 height = 2.84817
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=7]
 length = 3.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite/AscensionParticles:emitting")
@@ -85,7 +85,7 @@ tracks/3/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=8]
 length = 0.6
 loop = true
 tracks/0/type = "value"
@@ -125,7 +125,7 @@ tracks/2/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=9]
 length = 0.6
 loop = true
 tracks/0/type = "value"
@@ -153,7 +153,7 @@ tracks/1/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=16]
+[sub_resource type="Animation" id=10]
 length = 0.6
 tracks/0/type = "value"
 tracks/0/path = NodePath("CollisionShape2D:position")
@@ -216,13 +216,13 @@ tracks/4/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Curve" id=4]
+[sub_resource type="Curve" id=11]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.364773 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=5]
-curve = SubResource( 4 )
+[sub_resource type="CurveTexture" id=12]
+curve = SubResource( 11 )
 
-[sub_resource type="ParticlesMaterial" id=6]
+[sub_resource type="ParticlesMaterial" id=13]
 emission_shape = 1
 emission_sphere_radius = 55.91
 flag_disable_z = true
@@ -232,7 +232,7 @@ gravity = Vector3( 0, -20, 0 )
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 0.3
-scale_curve = SubResource( 5 )
+scale_curve = SubResource( 12 )
 color = Color( 1, 0.905882, 0, 0.505882 )
 
 [node name="Nun" type="KinematicBody2D" groups=[
@@ -246,23 +246,24 @@ script = ExtResource( 2 )
 rotation = 0.00148935
 texture = ExtResource( 1 )
 offset = Vector2( 0, -25 )
+hframes = 8
 
 [node name="AscensionParticles" type="Particles2D" parent="Sprite"]
 rotation = -0.00148935
 lifetime = 2.0
 local_coords = false
-process_material = SubResource( 11 )
+process_material = SubResource( 5 )
 texture = ExtResource( 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = -0.00084038
-shape = SubResource( 12 )
+shape = SubResource( 6 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Ascension = SubResource( 13 )
-anims/idle = SubResource( 14 )
-anims/pray = SubResource( 15 )
-anims/stun = SubResource( 16 )
+anims/Ascension = SubResource( 7 )
+anims/idle = SubResource( 8 )
+anims/pray = SubResource( 9 )
+anims/stun = SubResource( 10 )
 
 [node name="AudioStreamPlayer1" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 4 )
@@ -285,6 +286,6 @@ amount = 10
 lifetime = 3.0
 speed_scale = 3.0
 visibility_rect = Rect2( -300, -300, 600, 600 )
-process_material = SubResource( 6 )
+process_material = SubResource( 13 )
 texture = ExtResource( 7 )
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

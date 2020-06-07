@@ -66,12 +66,48 @@ var stun_time = 0.0
 
 var holy_area = null
 
+
+onready var sprite = $Sprite
+
+var radians_to_frame = {
+    [- PI - 0.01, -0.875 * PI] : 6,
+    [-0.875 * PI, -0.625 * PI] : 7,
+    [-0.625 * PI, -0.375 * PI] : 0,
+    [-0.375 * PI, -0.125 * PI] : 1,
+    [-0.125 * PI, 0.125 * PI]: 2,
+    [0.125 * PI, 0.375 * PI] : 3,
+    [0.375  * PI, 0.625 * PI] : 4,
+    [0.625 * PI, 0.875 * PI] : 5,
+    [0.875 * PI, PI + 0.01] : 6
+   }
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
     set_state("idle")
     animation_player.play("idle")
     $Sprite/AscensionParticles.emitting = false
     halo.visible = false
+    sprite.set_frame(randi()%2+4)
+    
+
+
+func get_frame_from_vector(direction_vector):
+    var direction_radians = direction_vector.angle()
+    for radians in radians_to_frame.keys():
+        if  radians[0] <= direction_radians and direction_radians <= radians[1]:
+            return radians_to_frame[radians]
+            
+    print("ERROR frame not found")
+    print(direction_vector)
+    print(direction_radians)
+    #returning front sprite
+    return 2
+    
+func update_body_frame(move_vector):
+    if move_vector.length() == 0:
+        return
+    var frame = get_frame_from_vector(move_vector)
+    sprite.set_frame(frame)
     
 
 func get_in_pot():
@@ -282,6 +318,8 @@ func _process(delta):
         move_and_collide(move_vector)
     else:
          move_and_collide(target_vector)   
+        
+    update_body_frame(move_vector)
     
 
 #

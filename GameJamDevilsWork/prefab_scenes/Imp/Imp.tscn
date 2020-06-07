@@ -1,19 +1,33 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://prefab_scenes/Imp/Imp.gd" type="Script" id=1]
-[ext_resource path="res://assets/images/imp.png" type="Texture" id=2]
+[ext_resource path="res://assets/images/imp/imp0001.png" type="Texture" id=2]
 [ext_resource path="res://prefab_scenes/Fork/Fork.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/images/lights/devil_transparency.png" type="Texture" id=4]
 [ext_resource path="res://prefab_scenes/Whip/Whip.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/images/lights/star.png" type="Texture" id=6]
 [ext_resource path="res://assets/sounds/LaughMale.wav" type="AudioStream" id=7]
+[ext_resource path="res://assets/images/imp/imp0002.png" type="Texture" id=8]
+[ext_resource path="res://assets/images/imp/imp0003.png" type="Texture" id=9]
+[ext_resource path="res://assets/images/imp/imp0004.png" type="Texture" id=10]
+[ext_resource path="res://assets/images/imp/imp0005.png" type="Texture" id=11]
+[ext_resource path="res://assets/images/imp/imp0006.png" type="Texture" id=12]
+[ext_resource path="res://assets/images/imp/imp0007.png" type="Texture" id=13]
+[ext_resource path="res://assets/images/imp/imp0000.png" type="Texture" id=14]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 14.4821
 height = 1.23684
 
-[sub_resource type="Animation" id=2]
-resource_name = "idle"
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 14 ), ExtResource( 2 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ) ],
+"loop": true,
+"name": "default",
+"speed": 0.0
+} ]
+
+[sub_resource type="Animation" id=3]
 length = 0.6
 loop = true
 tracks/0/type = "value"
@@ -65,8 +79,7 @@ tracks/3/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "stun"
+[sub_resource type="Animation" id=4]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("StunParticles:visible")
@@ -81,13 +94,13 @@ tracks/0/keys = {
 "values": [ true, true ]
 }
 
-[sub_resource type="Curve" id=4]
+[sub_resource type="Curve" id=5]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.364773 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=5]
-curve = SubResource( 4 )
+[sub_resource type="CurveTexture" id=6]
+curve = SubResource( 5 )
 
-[sub_resource type="ParticlesMaterial" id=6]
+[sub_resource type="ParticlesMaterial" id=7]
 emission_shape = 1
 emission_sphere_radius = 55.91
 flag_disable_z = true
@@ -97,7 +110,7 @@ gravity = Vector3( 0, -20, 0 )
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 0.3
-scale_curve = SubResource( 5 )
+scale_curve = SubResource( 6 )
 color = Color( 1, 0.905882, 0, 0.505882 )
 
 [node name="Imp" type="KinematicBody2D"]
@@ -111,20 +124,17 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Sprite" type="Sprite" parent="."]
-scale = Vector2( 0.2, 0.2 )
-texture = ExtResource( 2 )
-__meta__ = {
-"_edit_lock_": true
-}
+[node name="Sprite" type="AnimatedSprite" parent="."]
+scale = Vector2( 0.5, 0.5 )
+frames = SubResource( 2 )
 
 [node name="Fork" parent="." instance=ExtResource( 3 )]
 position = Vector2( 0, 8 )
 scale = Vector2( 4, 3 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/idle = SubResource( 2 )
-anims/stun = SubResource( 3 )
+anims/idle = SubResource( 3 )
+anims/stun = SubResource( 4 )
 
 [node name="Light2D" type="Light2D" parent="."]
 light_mask = 0
@@ -136,7 +146,7 @@ __meta__ = {
 }
 
 [node name="Whip" parent="." instance=ExtResource( 5 )]
-position = Vector2( 0, 8 )
+position = Vector2( 0, 12 )
 
 [node name="StunParticles" type="Particles2D" parent="."]
 position = Vector2( 0, -32 )
@@ -146,7 +156,7 @@ amount = 10
 lifetime = 3.0
 speed_scale = 3.0
 visibility_rect = Rect2( -300, -300, 600, 600 )
-process_material = SubResource( 6 )
+process_material = SubResource( 7 )
 texture = ExtResource( 6 )
 
 [node name="AOEStunSound" type="AudioStreamPlayer2D" parent="."]

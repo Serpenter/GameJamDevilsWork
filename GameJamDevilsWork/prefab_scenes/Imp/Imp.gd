@@ -6,6 +6,7 @@ var look_vector = Vector2()
 
 onready var fork = $Fork
 onready var whip = $Whip
+onready var sprite = $Sprite
 onready var animation_player = $AnimationPlayer
 onready var aoe_stun_sound = $AOEStunSound
 
@@ -16,9 +17,48 @@ var stun_time = 0.0
 
 var can_aoe_stun = true
 
+var radians_to_frame = {
+    [- PI - 0.01, -0.875 * PI] : 1,
+    [-0.875 * PI, -0.625 * PI] : 0,
+    [-0.625 * PI, -0.375 * PI] : 7,
+    [-0.375 * PI, -0.125 * PI] : 6,
+    [-0.125 * PI, 0.125 * PI]: 5,
+    [0.125 * PI, 0.375 * PI] : 4,
+    [0.375  * PI, 0.625 * PI] : 3,
+    [0.625 * PI, 0.875 * PI] : 2,
+    [0.875 * PI, PI + 0.01] : 1
+   }
+
 
 func _ready():
+    sprite.set_frame(3)
     animation_player.play("idle")
+    
+
+func get_frame_from_vector(direction_vector):
+    var direction_radians = direction_vector.angle()
+    for radians in radians_to_frame.keys():
+        if  radians[0] <= direction_radians and direction_radians <= radians[1]:
+            return radians_to_frame[radians]
+            
+    print("ERROR frame not found")
+    print(direction_vector)
+    print(direction_radians)
+    #returning front sprite
+    return 2
+    
+func update_body_frame():
+    if move_vector.length() == 0:
+        return
+    var frame = get_frame_from_vector(move_vector)
+    sprite.set_frame(frame)
+    
+    if frame >= 2 and frame <= 5:
+        fork.show_behind_parent = false
+        whip.show_behind_parent = false
+    else:
+        fork.show_behind_parent = true
+        whip.show_behind_parent = true
     
 
 func stun_imp(duration):
@@ -90,3 +130,7 @@ func _process(delta):
     if move_vector.length_squared() > 0:
         is_moving = true
         move_and_collide(move_vector * move_speed * delta)
+        
+    update_body_frame()
+        
+        

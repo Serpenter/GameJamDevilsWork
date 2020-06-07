@@ -57,12 +57,14 @@ __meta__ = {
 }
 
 [node name="Exit1" parent="world/exits" instance=ExtResource( 7 )]
-position = Vector2( 543.315, -278.027 )
+position = Vector2( 322.654, 291.074 )
 
 [node name="Navigation2D" type="Navigation2D" parent="world"]
+visible = false
 
 [node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="world/Navigation2D"]
-position = Vector2( -6.82385, 9.40771 )
+visible = false
+position = Vector2( -5.06579, 9.40771 )
 navpoly = SubResource( 1 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -85,7 +87,7 @@ __meta__ = {
 }
 
 [node name="Imp" parent="." instance=ExtResource( 4 )]
-position = Vector2( 894.954, -37.5528 )
+position = Vector2( 893.594, -37.5528 )
 
 [node name="Camera2D" type="Camera2D" parent="Imp"]
 current = true
@@ -96,7 +98,7 @@ __meta__ = {
 }
 
 [node name="Cardinal" parent="Sinners" instance=ExtResource( 11 )]
-position = Vector2( 742.198, -11.6881 )
+position = Vector2( 444.902, -112.687 )
 
 [node name="Nun" parent="Sinners" instance=ExtResource( 5 )]
 position = Vector2( 537.181, -103.478 )
@@ -108,7 +110,7 @@ position = Vector2( 337.26, -11.4505 )
 position = Vector2( 848.171, 193.231 )
 
 [node name="AudioStreamPlayer" parent="." instance=ExtResource( 8 )]
-volume_db = -80.0
+volume_db = -14.369
 
 [node name="Angels" type="Node2D" parent="."]
 
