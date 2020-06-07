@@ -8,6 +8,7 @@ extends "Nun.gd"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+    timeout_modifier = 0.75
     holy_area = $HolyArea
     holy_area.disable()
     pass # Replace with function body.

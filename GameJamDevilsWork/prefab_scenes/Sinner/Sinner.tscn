@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://prefab_scenes/Sinner/Sinner.gd" type="Script" id=1]
 [ext_resource path="res://assets/images/char_assets/sinner-1-all.png" type="Texture" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://assets/sounds/hurt1.wav" type="AudioStream" id=4]
 [ext_resource path="res://assets/images/lights/HollyParticles.png" type="Texture" id=5]
 [ext_resource path="res://assets/images/lights/star.png" type="Texture" id=6]
+[ext_resource path="res://prefab_scenes/IsometricTransparency/Isolight.tscn" type="PackedScene" id=7]
+[ext_resource path="res://prefab_scenes/Dust/Dust.tscn" type="PackedScene" id=8]
 
 [sub_resource type="Gradient" id=1]
 colors = PoolColorArray( 5, 5, 2, 1, 5, 5, 1, 0 )
@@ -115,6 +117,18 @@ tracks/1/keys = {
 "update": 1,
 "values": [ false ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("Dust:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
 [sub_resource type="Animation" id=9]
 tracks/0/type = "value"
@@ -160,6 +174,20 @@ orbit_velocity_random = 0.0
 scale = 0.3
 scale_curve = SubResource( 11 )
 color = Color( 1, 0.905882, 0, 0.505882 )
+
+[sub_resource type="ParticlesMaterial" id=13]
+flag_disable_z = true
+direction = Vector3( 0, 0, 0 )
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 100.0
+initial_velocity_random = 0.3
+angular_velocity = 120.0
+angular_velocity_random = 0.2
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = -100.0
+color = Color( 0.513726, 0.490196, 0.490196, 1 )
 
 [node name="Sinner" type="KinematicBody2D" groups=[
 "aoe_stunnable",
@@ -210,4 +238,9 @@ speed_scale = 3.0
 visibility_rect = Rect2( -300, -300, 600, 600 )
 process_material = SubResource( 12 )
 texture = ExtResource( 6 )
+
+[node name="Light2D" parent="." instance=ExtResource( 7 )]
+
+[node name="Dust" parent="." instance=ExtResource( 8 )]
+process_material = SubResource( 13 )
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

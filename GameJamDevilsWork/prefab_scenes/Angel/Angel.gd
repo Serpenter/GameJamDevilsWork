@@ -9,6 +9,8 @@ onready var exit_area = $ExitArea
 onready var dissapear_audio_player = $DissapearAudioPlayer
 onready var sinner_exit_audio_player = $SinnerExitAudioPlayer
 onready var animation_player = $AnimationPlayer
+onready var appear_audio = $AppearAudioPlayer2
+onready var hit_audio = $HitAudio
 var sinners_exited = 0
 
 var is_dissapearing = false
@@ -28,7 +30,7 @@ func _ready():
     connect("sinner_escaped", get_tree().get_root().get_node("MainGame/CanvasLayer/HUD"), "_on_sinner_escaped")
     connect("sinner_escaped", get_tree().get_root().get_node("MainGame"), "_on_sinner_escaped")
     animation_player.play("Descension")
-    sinner_exit_audio_player.play()
+    appear_audio.play()
 
 
 func stun(duration):
@@ -80,6 +82,7 @@ func damage_angel(damage):
         return
 
     health -= damage
+    hit_audio.play()
     
     if health <= 0:
         disable_stun()

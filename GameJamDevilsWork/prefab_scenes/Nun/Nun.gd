@@ -11,6 +11,8 @@ var needed_point_proximity = 5.0
 
 var DEBUG = true
 
+var is_pope = false
+
 onready var nav_2d = get_tree().get_root().get_node("MainGame/world/Navigation2D")
 onready var debug_line = get_tree().get_root().get_node("MainGame/world/DebugLine")
 onready var halo = $Halo
@@ -27,9 +29,10 @@ onready var audio_player_2 = $AudioStreamPlayer2
 var state_change_time = 10.0
 var state_change_timeout = state_change_time
 var angel_timeout_modifier = 0.5
+var timeout_modifier = 1.0
 
 var pray_time = 0.0
-var pray_point_time = 3.0
+var pray_point_time = 5.0
 
 var states = ["idle", "go_to_exit", "pray", "ascension"]
 
@@ -177,7 +180,7 @@ func update_state(delta):
    
      
 func upgrade_state():
-    state_change_timeout = state_change_time
+    state_change_timeout = state_change_time * timeout_modifier
     
     if not current_state in state_upgrades.keys():
         return

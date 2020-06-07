@@ -51,7 +51,6 @@ shape = SubResource( 5 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 light_mask = 17
 frames = SubResource( 3 )
-frame = 3
 playing = true
 __meta__ = {
 "_edit_lock_": true

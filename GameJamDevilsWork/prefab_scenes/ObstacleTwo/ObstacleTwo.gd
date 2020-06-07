@@ -8,7 +8,7 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+    pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -17,12 +17,12 @@ func _ready():
 
 
 func _on_Area2D_area_entered(area):
-	if area.name == "ForkArea":
-		if area.get_parent().get_node("ForkAnimationPlayer").current_animation == "push":
-			
-			$AnimationPlayer.play("Destroying")
+    if area.name == "ForkArea":
+        if area.get_parent().get_node("ForkAnimationPlayer").current_animation == "push":
+            
+            $AnimationPlayer.play("Destroying")
 
 
 func _on_AnimationPlayer_animation_finished(anim_name):
-	if anim_name == "Destroying":
-		queue_free()
+    if anim_name == "Destroying":
+        queue_free()

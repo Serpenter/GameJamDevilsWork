@@ -1,9 +1,12 @@
-extends Button
+extends Node2D
 
 
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
+
+onready var scream_audio_player = $ScreamAudioStreamPlayer
+onready var splash_audio_player = $SplashAudioStreamPlayer
 
 
 # Called when the node enters the scene tree for the first time.
@@ -12,11 +15,6 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
-
-func _on_Retry_pressed():
-    get_parent().visible = false
-    get_tree().paused = false
-    $"/root/GSceneManager".goto_scene_wloader("res://main_scenes/Level_01/Level_01.tscn")
+func _process(delta):
+    if  not scream_audio_player.playing and not splash_audio_player.playing:
+        queue_free()
