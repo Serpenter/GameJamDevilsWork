@@ -16,6 +16,7 @@ func _ready():
 #	pass
 
 
-func _on_NextLevel_pressed():
+func _on_Retry_pressed():
+	get_parent().visible = false
 	get_tree().paused = false
 	$"/root/GSceneManager".goto_scene_wloader("res://main_scenes/Level_01/Level_01.tscn")

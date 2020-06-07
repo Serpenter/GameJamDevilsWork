@@ -1,25 +1,35 @@
 extends Node2D
 
 var current_stage = 0
-var stage_one_condition = 25
+var stage_one_condition = 50
 var stage_one_fail_condition = 5
 
-var stage_two_condition = 25
+var stage_two_condition = 50
+var stage_two_holy_condition = 5
 var stage_two_fail_condition = 5
+
+var stage_two_nun_factor = 5
+var sinners_left_before_nun = stage_two_nun_factor
+var total_holy_expelled = 0
+
 
 var total_sinners_punished = 0
 var total_sinners_escaped = 0
 
 var total_sinners_in_game = 0
-export var max_sinners_in_game = 3
+export var max_sinners_in_game = 6
 
 var sinner_prefab = preload("res://prefab_scenes/Sinner/Sinner.tscn")
+var nun_prefab = preload("res://prefab_scenes/Nun/Nun.tscn")
+var prayer_point_prefab = preload("res://prefab_scenes/Exit/Exit.tscn")
+
 
 onready var respawns = $world/sinner_spawns
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$CanvasLayer/HUD.max_sinners_escaped = stage_one_fail_condition
-	$CanvasLayer/HUD.target_sinners_punished = "50"
+	$CanvasLayer/HUD.target_sinners_punished = stage_one_condition
+	$CanvasLayer/HUD.target_holy_expelled = stage_two_holy_condition
 	if current_stage == 0:
 		$CanvasLayer/OnStartNotice.visible = true
 		current_stage = 1
@@ -63,9 +73,27 @@ func _on_spawn_ready(spawn_position):
 	
 	if total_sinners_in_game < max_sinners_in_game:
 		
-		var new_siner = sinner_prefab.instance()
-		new_siner.position = spawn_position
-		$world/sinners.add_child(new_siner)
+		if current_stage == 1:
+			
+			var new_siner = sinner_prefab.instance()
+			new_siner.position = spawn_position
+			$world/sinners.add_child(new_siner)
+			
+		elif current_stage == 2:
+			
+			var new_siner
+			if sinners_left_before_nun <= 0:
+				
+				new_siner = nun_prefab.instance()
+				sinners_left_before_nun = stage_two_nun_factor
+				
+			else:
+				
+				new_siner = sinner_prefab.instance()
+				sinners_left_before_nun -= 1
+				
+			new_siner.position = spawn_position
+			$world/sinners.add_child(new_siner)
 
 
 func check_stage_conditions():
@@ -75,7 +103,13 @@ func check_stage_conditions():
 			$CanvasLayer/OnFailNotice.visible = true
 			get_tree().paused = true
 			return
-		if total_sinners_punished >= stage_one_condition:
+
+	if current_stage == 2:
+		if total_sinners_escaped >= stage_two_fail_condition:
+			$CanvasLayer/OnFailNotice.visible = true
+			get_tree().paused = true
+			return
+		if total_sinners_punished >= stage_two_condition and total_holy_expelled >= stage_two_holy_condition:
 			
 			$CanvasLayer/OnWinNotice.visible = true
 			get_tree().paused = true
@@ -84,4 +118,19 @@ func check_stage_conditions():
 func _on_SecondStage_timeout():
 	$world/sinner_spawns/respawn2.activate_spawn()
 	$world/sinner_spawns/respawn3.activate_spawn()
+	current_stage = 2
+
+
+func _on_prayer_point(prayer_position):
+	var new_prayer_point = prayer_point_prefab.instance()
+	new_prayer_point.position = prayer_position
+	new_prayer_point.is_working = true
+	$world/exits.add_child(new_prayer_point)
+
+
+func _on_holy_escape():
 	
+	if total_holy_expelled == 0:
+		$CanvasLayer/OnNun.visible = true
+		get_tree().paused = true
+	total_holy_expelled += 1

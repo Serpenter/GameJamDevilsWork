@@ -18,62 +18,62 @@ var can_aoe_stun = true
 
 
 func _ready():
-    animation_player.play("idle")
-    
+	animation_player.play("idle")
+	
 
 func stun_imp(duration):
-    stun_time = max(stun_time, duration)
-    enable_stun()
+	stun_time = max(stun_time, duration)
+	enable_stun()
 
 
 	
 func rotate_fork():   
 
-    fork.rotation = (get_global_mouse_position() - get_global_position()).angle()
-    
+	fork.rotation = (get_global_mouse_position() - get_global_position()).angle()
+	
 
 func enable_stun():
-    animation_player.play("stun")
-    fork.animation_player.play("stun")
-    
-    
+	animation_player.play("stun")
+	fork.animation_player.play("stun")
+	
+	
 func disable_stun():
-    animation_player.play("idle")
-    fork.animation_player.play("idle")
-    
+	animation_player.play("idle")
+	fork.animation_player.play("idle")
+	
 
 func stun_everyone():
-    aoe_stun_sound.play()
+	aoe_stun_sound.play()
 
-    var group_members = get_tree().get_nodes_in_group("aoe_stunnable")
-    
-    for member in group_members:
-        if member.has_method("stun"):
-            member.stun(aoe_stun_time)
+	var group_members = get_tree().get_nodes_in_group("aoe_stunnable")
+	
+	for member in group_members:
+		if member.has_method("stun"):
+			member.stun(aoe_stun_time)
  
 func _process(delta):
-    
-    
-    
-    if stun_time > 0:
+	
+	
+	
+	if stun_time > 0:
 
-        stun_time -= delta
-        
-        if stun_time <= 0:
-            disable_stun()
-    
-        return
-    
-    rotate_fork()
-    
-    if Input.is_action_pressed("main_action") and fork.animation_player.current_animation == "idle":
-        fork.push()
-        
-    if Input.is_action_just_pressed("secondary_action"):
-        whip.use_whip(get_global_mouse_position())
-        
-    if Input.is_action_just_pressed("space"):
-        stun_everyone()
+		stun_time -= delta
+		
+		if stun_time <= 0:
+			disable_stun()
+	
+		return
+	
+	rotate_fork()
+	
+	if Input.is_action_pressed("main_action") and fork.animation_player.current_animation == "idle":
+		fork.push()
+		
+	if Input.is_action_just_pressed("secondary_action"):
+		whip.use_whip(get_global_mouse_position())
+		
+	if Input.is_action_just_pressed("space"):
+		stun_everyone()
 
 	move_vector = Vector2()
 	var is_moving = false
