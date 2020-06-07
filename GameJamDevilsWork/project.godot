@@ -23,12 +23,6 @@ config/icon="res://icon.png"
 
 GSceneManager="*res://global_scripts/g_scene_manager.gd"
 
-[display]
-
-window/size/width=1920
-window/size/height=1080
-window/size/borderless=true
-
 [input]
 
 move_up={
