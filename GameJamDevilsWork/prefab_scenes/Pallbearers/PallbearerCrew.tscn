@@ -101,14 +101,14 @@ collision_layer = 16385
 collision_mask = 16385
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 7.1817 )
+position = Vector2( 0, 7.48233 )
 shape = SubResource( 1 )
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
-position = Vector2( 0, 7.1817 )
+position = Vector2( 0, 7.48233 )
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 2 )
 frame = 2
